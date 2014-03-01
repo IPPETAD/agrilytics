@@ -21,7 +21,7 @@
         {% if crop %}
             {% for crop_type in crop_types %}
                 {% if crop == crop_type.crop %}
-                    {{ crop_type.label }}
+                    {{ crop_type.crop }}
                 {% endif %}
             {% endfor %}
         {% else %}
@@ -31,7 +31,7 @@
     </button>
     <ul class="dropdown-menu">
         {% for crop_type in crop_types %}
-            <li><a href="#" onclick="$('#search_type').val('{{ crop_type.crop }}'); $('#searchForm').submit();">{{ crop_type.label }}</a></li>
+            <li><a href="#" onclick="$('#search_type').val('{{ crop_type.crop }}'); $('#searchForm').submit();">{{ crop_type.crop }}</a></li>
         {% endfor %}        
     </ul>
 </form>
