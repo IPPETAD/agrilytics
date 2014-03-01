@@ -1,6 +1,6 @@
 from farm import app
 from farm import forms
-from flask import render_template, request
+from flask import render_template, request, url_for, redirect
 from flask_wtf.csrf import CsrfProtect
 
 from flask.ext.pymongo import PyMongo
@@ -25,7 +25,7 @@ def bins():
     bins = mongo.db.bins.find()
     return render_template('bins.html', bins = bins)
 
-@app.route('/field/<field_id>')
+@app.route('/field/<field_id>/')
 def field(field_id):
     field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
     return render_template('field.html', field = field)
@@ -41,9 +41,27 @@ def marketplace():
 def field_add():
     form = forms.FieldForm()
     if request.method == 'POST':
-        return render_template('field_add.html', form=form)
+        if form.validate_on_submit():
+            post = {"name": form.name.data, "size": form.size.data, "geo": form.geo_data.data, "section": []}
+            field_id = mongo.db.fields.insert(post)
+            return redirect(url_for('.field', field_id=field_id))
     else:
         return render_template('field_add.html', form=form)
+
+@app.route('/field/<field_id>/section/add', methods=['GET','POST'])
+def section_add(field_id):
+    form = forms.SectionForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
+            if 'section' not in field.keys():
+                field['section'] = []
+            field['section'].append({'name': form.name.data, 'crop': form.crop.data, 'acres': form.acres.data})
+            field_id = mongo.db.fields.save(field)
+            return redirect(url_for('field', field_id=field_id))
+    else:
+        return render_template('section_add.html', form=form, field_id=field_id)
+        
 
 @app.route('/bin/<bin_id>')
 def bin(bin_id):
