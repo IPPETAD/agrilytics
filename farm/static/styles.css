@@ -24,6 +24,7 @@ h1{
 	color: #ff0;
 }
 
-.navbar a:hover{
+.nav>li>a:hover{
 	background: #ff0;
+	color: #000;
 }
