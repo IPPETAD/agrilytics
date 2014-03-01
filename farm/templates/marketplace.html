@@ -16,10 +16,19 @@
 
 <br />
 
+<!-- New Listing Button -->
 <button type="button" class="btn btn-default" onclick="document.location.href = '/market/new';">
-    <span class="glyphicon glyphicon-plus"></span> Post Listing
+    <span class="glyphicon glyphicon-plus"></span>Post Listing
 </button>
 
+<!-- Edit Listings Button -->
+{% if edits > 0 %}
+    <button type="button" class="btn btn-default" onclick="document.location.href = '/market/user';">
+        <span class="glyphicon glyphicon-pencil"></span>Your Listings
+    </button>
+{% endif %}
+
+<!-- Search Dropdown -->
 <form id="searchForm" class="btn-group">
     <input class="span2" id="search_page" name="page" type="hidden" value="1"/>
     <input class="span2" id="search_type" name="crop" type="hidden">

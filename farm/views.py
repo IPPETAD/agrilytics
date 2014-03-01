@@ -46,12 +46,15 @@ def marketplace():
     offer_count = mongo.db.offers.count()
     crop_types = list(mongo.db.crop_types.find())
 
+    # TODO: Filter by user name
+    edits = mongo.db.offers.count()
+
     if page is None:
         offers = list(mongo.db.offers.find({"crop": crop}))
-        return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types, offer_count = offer_count)
+        return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types, offer_count = offer_count, edits = edits)
     else:
         offers = list(mongo.db.offers.find({"crop": crop}).limit(10).skip(10*(int(page)-1)))
-        return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types, offer_count = offer_count, page = int(page))
+        return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types, offer_count = offer_count, page = int(page), edits = edits)
     
 
 @app.route('/market/new', methods=['GET', 'POST'])
