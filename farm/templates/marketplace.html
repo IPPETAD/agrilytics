@@ -6,8 +6,6 @@
 
 <h1>Welcome to the MarketPlace!</h1>
 
-{{if crop}}
-
 <form action="market" id="description">
     <p>Choose a crop and browse the open products in the marketplace!</p>
     <select class="market_dropdown" name="crop">
@@ -22,7 +20,7 @@
 
 {% for listing in listings %}
 	<p>Fart</p>
-{$ endfor %}
+{% endfor %}
 
 
 <script src="/static/marketplace.js"></script>
