@@ -1,0 +1,10 @@
+# Created by http://www.gitignore.io
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+
+# Virtual Environment
+venv/
