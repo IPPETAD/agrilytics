@@ -5,7 +5,7 @@ Farm thingy.
 
 ## Initial installation
 
-	git clone git@github.com:ranek/farmspot.git
+	git clone git@github.com:IPPETAD/agrilytics.git
 	cd farmspot
 
 	virtualenv venv
