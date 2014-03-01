@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}New Field{% endblock %}
+
+{% block content %}
+<h1>Section <small>New</small></h1>
+
+<form method="post" action="/field/{{ field_id }}/section/add" role="form">
+	{{ form.hidden_tag() }}
+    <div class="form_group">
+        {{ form.name.label }}
+        {{ form.name(class_='form-control') }}
+	<div class="form-group">
+		{{ form.crop.label }}
+		{{ form.crop(class_='form-control') }}
+	</div>
+	<div class="form-group">
+		{{ form.acres.label }}
+		{{ form.acres(class_='form-control') }}
+	</div>
+	<button type="submit" value="confirm" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

@@ -1,14 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Farm Thingy.{% endblock %}
+{% block title %}Field{% endblock %}
 
 {% block content %}
 
-<h1>This field contains {{ field.crop }}!</h1>
+<h1>Field <small>Details</small></h1>
 
 
+{% if field.section %}
+<p>This field contains the following sections:</p>
+<ul>
+    {% for section in field.section %}
+    <li><a href="section/{{section['name']}}">{{ section['name'] }}</a>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There are no sections. <a href="section/add">Add one</a></p>
+{% endif %}
 
 {% endblock %}
-
 
 
