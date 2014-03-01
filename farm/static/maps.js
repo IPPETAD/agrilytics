@@ -1,7 +1,8 @@
 
 
 $( document ).ready(function() {
-	$( "#map_input" ).parent().after('<div id="mapview" style="height:400px"></div>');
+	if ($( "#map_input" ).length ) {
+	$( "#map_input" ).parent().after('<div id="mapeditorview" style="height:400px"></div>');
 	
 	
 	var drawnItems = new L.FeatureGroup();
@@ -22,7 +23,7 @@ $( document ).ready(function() {
 	});
 	
 	// create a map in the "map" div, set the view to a given place and zoom
-	var map = L.map('mapview').setView([53, -100], 4);
+	var map = L.map('mapeditorview').setView([53, -100], 4);
 
 	// add an OpenStreetMap tile layer
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -42,7 +43,7 @@ $( document ).ready(function() {
 					
 					$( "#map_input" ).val( JSON.stringify( layer.toGeoJSON() ) );
 			});		
-			
+		}
 			
 });
 
