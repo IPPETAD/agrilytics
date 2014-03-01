@@ -17,6 +17,11 @@ def index():
 def fields():
     fields = mongo.db.fields.find()
     return render_template('fields.html', fields = fields)
+	
+@app.route('/bins')
+def bins():
+    bins = mongo.db.bins.find()
+    return render_template('bins.html', bins = bins)
     
 @app.route('/field/<field_id>')
 def field(field_id):
@@ -31,14 +36,10 @@ def field_add():
         form = forms.FieldForm()
         return render_template('field_add.html', form=form)
 
-
-
-
-
-
-
-
-
+@app.route('/bin/<bin_id>')
+def bin(bin_id):
+    bin = mongo.db.bins.find_one({"_id": ObjectId(bin_id) })
+    return render_template('bin.html', bin = bin)
 
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'
