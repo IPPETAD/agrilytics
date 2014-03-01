@@ -14,4 +14,4 @@ class SectionForm(Form):
 class BinForm(Form):
     name = fields.StringField('Name', [validators.required()])
     crop = fields.SelectField('Crop', choices=[('rye', 'Rye'), ('oats', 'Oats'), ('canola', 'Canola')])
-    size = fields.DecimalField('Size in Tonnes', places=2)
+    size = fields.FloatField('Size in Tonnes')

@@ -14,7 +14,7 @@
 <h1>See yo bins!</h1>
 
 {% for bin in bins %}
-    <li><a href="/bin/{{ bin._id }}">{{ bin.name }}</a></li>
+    <li><a href="/bin/{{ bin._id }}">{{ bin.name }}</a> - {{ bin.crop }}, {{ bin.size }} tonnes - <a href="/bin/edit/{{ bin._id }}">edit</a></li>
 {% endfor %}
 
 {% endblock %}

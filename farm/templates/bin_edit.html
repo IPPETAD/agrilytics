@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h1>Bin {{ form.name }} <small>Edit</small></h1>
+<h1>Bin {{ form.name.data }} <small>Edit</small></h1>
 
 <form method="post" role="form" action="/bin/edit/{{ bin_id }}">
     {{ form.hidden_tag() }}
