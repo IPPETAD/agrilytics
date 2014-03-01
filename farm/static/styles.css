@@ -28,3 +28,7 @@ h1{
 	background: #ff0;
 	color: #000;
 }
+
+.banner {
+    max-width: 100%;
+}
