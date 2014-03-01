@@ -11,9 +11,12 @@
 
 {% block content %}
 
-<h1>Welcome to the MarketPlace!</h1>
+<h2>Welcome to the MarketPlace!</h2>
+<p>Browse available produce on the marketplace. Specify a crop type and we'll do the rest.</p>
 
-<div class="btn-group">
+
+<form id="searchForm" class="btn-group">
+    <input class="span2" id="search_type" name="crop" type="hidden">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         {% if crop %}
             {% for crop_type in crop_types %}
@@ -28,10 +31,10 @@
     </button>
     <ul class="dropdown-menu">
         {% for crop_type in crop_types %}
-            <li><a href="{{ crop_type.crop }}">{{ crop_type.label }}</a></li>
+            <li><a href="#" onclick="$('#search_type').val('{{ crop_type.crop }}'); $('#searchForm').submit();">{{ crop_type.label }}</a></li>
         {% endfor %}        
     </ul>
-</div>
+</form>
 
 <br /><br />
 
