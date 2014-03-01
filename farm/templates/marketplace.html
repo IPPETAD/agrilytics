@@ -43,7 +43,12 @@
 
 {% for offer in offers %}
     <div class="panel panel-primary">
-        <h4>{{offer.label}}</h4>
+        {% for crop_type in crop_types %}
+        {% if crop_type.name == offer.crop %}
+        <h3>{{ crop_type.label }}</h3>
+        {% endif %}
+        {% endfor %}
+        
         <p>Tonnes: {{offer.tonnes}}</p>
         <p>User: {{offer.user}}</p>
         <p>Price: {{offer.price}}</p>
