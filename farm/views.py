@@ -28,7 +28,11 @@ def bins():
 @app.route('/field/<field_id>/')
 def field(field_id):
     field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
-    return render_template('field.html', field = field)
+    crops = []
+    for section in field['section']:
+        if section['crop'] not in crops:
+            crops.append(section['crop'].title())
+    return render_template('field.html', field = field, crops=crops)
 
 @app.route('/market')
 @app.route('/market/')
@@ -62,6 +66,15 @@ def section_add(field_id):
             return redirect(url_for('field', field_id=field_id))
     else:
         return render_template('section_add.html', form=form, field_id=field_id)
+
+@app.route('/field/<field_id>/section/<name>')
+def section(field_id, name):
+    field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
+    for section in field['section']:
+        if section['name'] == name:
+            sec = section
+            break
+    return render_template('section.html', field_id=field_id, section=section)
         
 
 @app.route('/bin/<bin_id>')

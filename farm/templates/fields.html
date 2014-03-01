@@ -14,7 +14,7 @@
 <h1>See yo fields!</h1>
 
 {% for field in fields %}
-    <li><a href="/field/{{ field._id }}">{{ field.crop }}</a></li>
+    <li><a href="/field/{{ field._id }}">{{ field.name}}</a></li>
 {% endfor %}
 
 {% endblock %}

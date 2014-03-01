@@ -11,7 +11,14 @@
 <p>This field contains the following sections:</p>
 <ul>
     {% for section in field.section %}
-    <li><a href="section/{{section['name']}}">{{ section['name'] }}</a>
+    <li><a href="section/{{section.name}}">{{ section.name }}</a>
+    {% endfor %}
+</ul>
+
+<p>and the following crops:</p>
+<ul>
+    {% for crop in crops %}
+        <li>{{ crop }}</li>
     {% endfor %}
 </ul>
 {% else %}

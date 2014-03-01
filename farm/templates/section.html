@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Section {{ section.name }}{% endblock %}
+
+{% block content %}
+<div class='page-header'>
+    <h1>Section {{ section.name }} <small>Details</small></h1>
+</div>
+
+<ul>
+    <li>Crop: {{ section.crop }}</li>
+    <li>Acres: {{ section.acres }}</li>
+</ul>
+
+{% endblock %}
