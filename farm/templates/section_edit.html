@@ -12,11 +12,15 @@
         {{ form.name(class_='form-control') }}
     </div>
     <div class="form-group">
-        {{ form.size.label }}
-        {{ form.size(class_='form-control') }}
+        {{ form.crop.label }}
+        {{ form.crop(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.acres.label }}
+        {{ form.acres(class_='form-control') }}
     </div>
     <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
 </form>
-<p><a href='/field/{{ field_id }}'>Go Back</a></p>
+<p><a href='/field/{{ field_id }}/section/{{ name }}'>Go Back</a></p>
 
 {% endblock %}

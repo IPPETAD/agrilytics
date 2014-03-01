@@ -7,7 +7,7 @@ class FieldForm(Form):
     geo_data = fields.HiddenField(id='map_input')
 
 class SectionForm(Form):
-    name = fields.StringField('Name'), [validators.required()]
+    name = fields.StringField('Name', [validators.required()])
     crop = fields.SelectField('Crop', choices=[('rye', 'Rye'), ('oats', 'Oats'), ('canola', 'Canola')])
     acres = fields.FloatField('Acres of crop')
 
