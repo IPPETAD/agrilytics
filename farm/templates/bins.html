@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Farm Thingy.{% endblock %}
+
+{% block content %}
+
+<h1>See yo bins!</h1>
+
+{% for bin in bins %}
+    <li><a href="/bin/{{ bin._id }}">{{ bin.name }}</a></li>
+{% endfor %}
+
+{% endblock %}
+
+
+
