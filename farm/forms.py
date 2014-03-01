@@ -6,3 +6,7 @@ class FieldForm(Form):
     size = fields.FloatField('Size in Acres')
     geo_data = fields.HiddenField(id='map_input')
 
+class SectionForm(Form):
+    name = fields.StringField('Name')
+    crop = fields.SelectField('Crop', choices=[('rye', 'Rye'), ('oats', 'Oats'), ('canola', 'Canola')])
+    acres = fields.FloatField('Acres of crop')

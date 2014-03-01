@@ -39,6 +39,21 @@ def field_add():
     else:
         return render_template('field_add.html', form=form)
 
+@app.route('/field/<field_id>/section/add', methods=['GET','POST'])
+def section_add(field_id):
+    form = forms.SectionForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
+            if 'section' not in field.keys():
+                field['section'] = []
+            field['section'].append({'name': form.name.data, 'crop': form.crop.data, 'acres': form.acres.data})
+            field_id = mongo.db.fields.save(field)
+            return redirect(url_for('field', field_id=field_id))
+    else:
+        return render_template('section_add.html', form=form, field_id=field_id)
+        
+
 @app.route('/bin/<bin_id>')
 def bin(bin_id):
     bin = mongo.db.bins.find_one({"_id": ObjectId(bin_id) })
