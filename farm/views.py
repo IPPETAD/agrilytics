@@ -68,5 +68,29 @@ def bin(bin_id):
     bin = mongo.db.bins.find_one({"_id": ObjectId(bin_id) })
     return render_template('bin.html', bin = bin)
 
+@app.route('/bin/add', methods=['GET', 'POST'])
+def bin_add():
+    form = forms.BinForm()
+    if request.method == 'POST':
+        post = { "name": form.name.data, "crop": form.crop.data, "size": form.size.data }
+        bin_id = mongo.db.bins.insert(post)
+        return redirect(url_for('bin', bin_id =  bin_id))
+    else:
+        return render_template('bin_add.html', form=form)
+
+@app.route('/bin/edit/<bin_id>', methods=['GET', 'POST'])
+def bin_edit(bin_id):
+    form = forms.BinForm()
+    if request.method == 'POST':
+        post = { "_id": ObjectId(bin_id), "name": form.name.data, "crop": form.crop.data, "size": form.size.data }
+        if mongo.db.bins.save(post):
+            return redirect(url_for('bin', bin_id=  bin_id))
+    else:
+        bin = mongo.db.bins.find_one({ "_id": ObjectId(bin_id) })
+        form.name.data = bin['name']
+        form.size.data = bin['size']
+        form.crop.data = bin['crop']
+        return render_template('bin_edit.html', form=form)
+
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'
