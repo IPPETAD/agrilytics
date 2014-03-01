@@ -20,8 +20,8 @@
     <span class="glyphicon glyphicon-plus"></span> Post Listing
 </button>
 
-
 <form id="searchForm" class="btn-group">
+    <input class="span2" id="search_page" name="page" type="hidden" value="1"/>
     <input class="span2" id="search_type" name="crop" type="hidden">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         <span class="glyphicon glyphicon-search"></span>
@@ -46,6 +46,29 @@
 
 <br /><br />
 
+<!-- Prev / Next  -->
+<div class="prev_next">
+    {% if page and page > 1 and offer_count > 10 %}
+    <form id="prevForm" method="get">
+        <input class="span2" id="search_type" name="crop" type="hidden" value="{{crop}}">
+        <input class="span2" id="search_page" name="page" type="hidden" value="{{page-1}}" />
+        <button type="submit" class="btn btn-default">
+            <span class="glyphicon glyphicon-chevron-left"></span>Prev
+        </button>
+    </form>
+    {% endif %}
+    {% if page and page <= offer_count - (page*10) and offer_count > 10 %}
+    <form id="nextForm" method="get">
+        <input class="span2" id="search_type" name="crop" type="hidden" value="{{crop}}">
+        <input class="span2" id="search_page" name="page" type="hidden" value="{{page+1}}" />
+        <button type="submit" class="btn btn-default">
+            Next<span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+    </form>
+    {% endif %}
+</div>
+
+<!-- List Offers -->
 {% for offer in offers %}
     <div class="panel panel-primary">
         {% for crop_type in crop_types %}
