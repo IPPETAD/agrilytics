@@ -10,3 +10,11 @@ class SectionForm(Form):
     name = fields.StringField('Name')
     crop = fields.SelectField('Crop', choices=[('rye', 'Rye'), ('oats', 'Oats'), ('canola', 'Canola')])
     acres = fields.FloatField('Acres of crop')
+
+class BinForm(Form):
+    name = fields.StringField('Name', [validators.required()])
+    crop = fields.SelectField('Crop', choices=[('rye', 'Rye'), ('oats', 'Oats'), ('canola', 'Canola')])
+    size = fields.FloatField('Size in Tonnes')
+
+class DeleteForm(Form):
+    delete = fields.HiddenField(id='delete', default='delete')
