@@ -27,12 +27,17 @@ def bins():
 
 @app.route('/field/<field_id>/')
 def field(field_id):
-    field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
-    crops = []
-    for section in field['section']:
-        if section['crop'] not in crops:
-            crops.append(section['crop'].title())
-    return render_template('field.html', field = field, crops=crops)
+    form = forms.DeleteForm()
+    if request.method == 'POST':
+        if mongo.db.fields.remove({'_id': ObjectId(field_id)}):
+            return redirect(url_for('fields'))
+    else:
+        field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
+        crops = []
+        for section in field['section']:
+            if section['crop'] not in crops:
+                crops.append(section['crop'].title())
+        return render_template('field.html', field = field, crops=crops, form=form)
 
 @app.route('/market')
 def marketplace():
@@ -69,6 +74,23 @@ def field_add():
             return redirect(url_for('.field', field_id=field_id))
     else:
         return render_template('field_add.html', form=form)
+
+@app.route('/field/<field_id>/edit', methods=['GET', 'POST'])
+def field_edit(field_id):
+    form = forms.FieldForm()
+    field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            field['name'] = form.name.data
+            field['size'] = form.size.data
+            field['geo'] = form.geo_data.data
+            field_id = mongo.db.fields.save(field)
+            return redirect(url_for('field', field_id=field_id))
+    else:
+        form.name.data = field['name']
+        form.size.data = field['size']
+        form.geo_data.data = field['geo']
+        return render_template('field_edit.html', form=form)
 
 @app.route('/field/<field_id>/section/add', methods=['GET','POST'])
 def section_add(field_id):
