@@ -6,6 +6,8 @@ from flask_wtf.csrf import CsrfProtect
 from flask.ext.pymongo import PyMongo
 from bson.objectid import ObjectId
 
+import json
+
 app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
 
 mongo = PyMongo(app)
@@ -181,6 +183,16 @@ def bin_edit(bin_id):
         form.crop.data = bin['crop']
         return render_template('bin_edit.html', form=form)
 
+@app.route('/market/price_history')
+def price_history():
+	province = request.args["province"]
+	crop = request.args["crop"]
+	history = []
+	history = list ( mongo.db.gov_prices.find({"province": province, "crop": crop}, { "date": 1, "value": 1, "_id":0 }) )
+	for month in history:
+		month["month"] = month.pop("date")
+		month["price"] = month.pop("value")
+	return json.dumps(history)
 
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'
