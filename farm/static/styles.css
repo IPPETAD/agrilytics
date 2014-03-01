@@ -10,8 +10,13 @@ h1{
   padding: 40px 15px;
   text-align: center;
 }
-
-.navbar{
+.market_item {
+    padding:2px;
+}
+.market_head {
+    background-color: #faf59c;
+}
+.navbar {
 	background: #030;
 }
 

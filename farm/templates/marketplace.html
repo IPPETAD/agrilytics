@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Farm Thingy.{% endblock %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li><a href="/fields">Fields</a></li>
+<li><a href="/bins">Bins</a></li>
+<li class="active"><a href="/market">Market</a></li>
+{% endblock %}
+
+{% block content %}
+
+<h1>Welcome to the MarketPlace!</h1>
+
+        
+<form action="market" id="description">
+    <p>Choose a crop and browse the open products in the marketplace!</p>
+    <select class="market_dropdown" name="crop">
+        {% if not crop %}
+        <option value="DEFAULT" selected="selected">Choose crop..</option>
+        {% endif %}
+        {% for crop_type in crop_types %}
+            {% if crop_type.crop == crop %}
+                <option value="{{ crop_type.crop }}" selected="selected">{{ crop_type.label }}</option>
+            {% else %}
+                <option value="{{ crop_type.crop }}">{{ crop_type.label }}</option>
+            {% endif %}
+        {% endfor %}}
+    </select>
+	<input type="submit" value="Search">
+</form>
+
+
+{% for offer in offers %}
+    <div class="panel panel-primary">
+        <h4>{{offer.label}}</h4>
+        <p>Tonnes: {{offer.tonnes}}</p>
+        <p>User: {{offer.user}}</p>
+        <p>Price: {{offer.price}}</p>
+    </div>
+{% endfor %}
+
+
+
+{% endblock %}
+
+
+
