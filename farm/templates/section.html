@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Field{% endblock %}
+{% block title %}Section {{ section.name }}{% endblock %}
 
 {% block content %}
-
-<h1>Field <small>Details</small></h1>
-
-
+<div class='page-header'>
+    <h1>Section {{ section.name }} <small>Details</small></h1>
+</div>
 <div id="mapview" style="height: 400px;"></div>
 
 <script>
@@ -29,24 +28,9 @@ if (geo) {
 }
 
 </script>
-{% if field.section %}
-<p>This field contains the following sections:</p>
 <ul>
-    {% for section in field.section %}
-    <li><a href="section/{{section.name}}">{{ section.name }}</a>
-    {% endfor %}
+    <li>Crop: {{ section.crop.title() }}</li>
+    <li>Acres: {{ section.acres }}</li>
 </ul>
-
-<p>and the following crops:</p>
-<ul>
-    {% for crop in crops %}
-        <li>{{ crop }}</li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>There are no sections. <a href="section/add">Add one</a></p>
-{% endif %}
-
+<a href="/field/{{ field._id }}">Back to your field</a>
 {% endblock %}
-
-
