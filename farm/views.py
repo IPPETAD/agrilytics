@@ -73,7 +73,7 @@ def section(field_id, name):
         if section['name'] == name:
             sec = section
             break
-    return render_template('section.html', field_id=field_id, section=section)
+    return render_template('section.html', field=field, section=section)
         
 
 @app.route('/bin/<bin_id>')
