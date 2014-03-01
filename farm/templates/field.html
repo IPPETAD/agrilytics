@@ -33,7 +33,7 @@ if (geo) {
 <p>This field contains the following sections:</p>
 <ul>
     {% for section in field.section %}
-    <li><a href="section/{{section.name}}">{{ section.name }}</a>
+    <li><a href="section/{{field.section.index(section)}}">{{ section.name }}</a>
     {% endfor %}
 </ul>
 

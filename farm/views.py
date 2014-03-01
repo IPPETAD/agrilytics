@@ -90,7 +90,7 @@ def field_edit(field_id):
         form.name.data = field['name']
         form.size.data = field['size']
         form.geo_data.data = field['geo']
-        return render_template('field_edit.html', form=form)
+        return render_template('field_edit.html', form=form, field_id=field_id)
 
 @app.route('/field/<field_id>/section/add', methods=['GET','POST'])
 def section_add(field_id):
@@ -106,15 +106,35 @@ def section_add(field_id):
     else:
         return render_template('section_add.html', form=form, field_id=field_id)
 
-@app.route('/field/<field_id>/section/<name>')
-def section(field_id, name):
+@app.route('/field/<field_id>/section/<index>/')
+def section(field_id, index):
     field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
-    for section in field['section']:
-        if section['name'] == name:
-            sec = section
-            break
-    return render_template('section.html', field=field, section=section)
-        
+    form = forms.DeleteForm()
+    section = field['section'][int(index)]
+    if request.method == 'POST':
+        form['section'].remove(section)
+        mongo.db.fields.save(form)
+        return redirect(url_for('field', field_id=field_id))
+    else:
+        return render_template('section.html', field=field, section=section, form=form)
+
+@app.route('/field/<field_id>/section/<index>/edit', methods=['GET', 'POST'])
+def section_edit(field_id, index):
+    form = forms.SectionForm()
+    field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
+    section = field['section'][index]
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            section['name'] = form.name.data
+            section['crop'] = form.crop.data
+            section['acres'] = form.acres.data
+            mongo.db.fields.save(field)
+            return redirect(url_for('section', field_id=field_id, name=name))
+    else:
+        form.name.data = section['name']
+        form.acres.data = section['acres']
+        form.crop.data = section['crop']
+        return render_template('section_edit.html', form=form, field_id=field_id, name=name)
 
 @app.route('/bin/<bin_id>', methods=['GET', 'POST'])
 def bin(bin_id):
