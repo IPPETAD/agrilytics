@@ -63,10 +63,15 @@ def section_add(field_id):
         return render_template('section_add.html', form=form, field_id=field_id)
         
 
-@app.route('/bin/<bin_id>')
+@app.route('/bin/<bin_id>', methods=['GET', 'POST'])
 def bin(bin_id):
+    form = forms.DeleteForm()
+    if request.method == 'POST' and 'delete' in request.form.keys():
+        if mongo.db.bins.remove({ "_id": ObjectId(bin_id) }):
+            return redirect(url_for('bins'))
+
     bin = mongo.db.bins.find_one({"_id": ObjectId(bin_id) })
-    return render_template('bin.html', bin = bin)
+    return render_template('bin.html', bin = bin, form = form)
 
 @app.route('/bin/add', methods=['GET', 'POST'])
 def bin_add():
@@ -91,6 +96,7 @@ def bin_edit(bin_id):
         form.size.data = bin['size']
         form.crop.data = bin['crop']
         return render_template('bin_edit.html', form=form)
+
 
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'

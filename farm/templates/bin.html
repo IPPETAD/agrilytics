@@ -6,7 +6,11 @@
 
 <h1>This is Bin: {{ bin.name }}!</h1>
 <h2>{{ bin.size }} tonnes of {{ bin.crop }}</h2>
-
+<h4><a href="/bin/edit/{{ bin_id }}">Edit</a></h4>
+<form method="post" role="form">
+    {{ form.hidden_tag() }}
+    <button type="submit" value="confirm" class="btn btn-primary">Delete</button>
+</form>
 
 
 {% endblock %}
