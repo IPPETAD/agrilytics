@@ -20,3 +20,6 @@ def field(field_id):
     field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
     return render_template('field.html', field = field)
     
+@app.route('/market')
+def marketplace():
+    return render_template('marketplace.html')
