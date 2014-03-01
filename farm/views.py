@@ -41,6 +41,10 @@ def marketplace():
     crop_types = list(mongo.db.crop_types.find())
     return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types)
 
+@app.route('/market/new')
+def marketplace_add():
+    return render_template('marketplace_add.html');
+
 @app.route('/field/add', methods=['GET', 'POST'])
 def field_add():
     form = forms.FieldForm()

@@ -12,9 +12,12 @@
 {% block content %}
 
 <h2>Welcome to the MarketPlace!</h2>
+<button type="button" class="btn btn-default" onclick="document.location.href = '/market/new';">
+    <span class="glyphicon glyphicon-plus"></span> Post Listing
+</button>
+
+<br/><br/>
 <p>Browse available produce on the marketplace. Specify a crop type and we'll do the rest.</p>
-
-
 <form id="searchForm" class="btn-group">
     <input class="span2" id="search_type" name="crop" type="hidden">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
