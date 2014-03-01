@@ -5,6 +5,7 @@ from flask_wtf.csrf import CsrfProtect
 
 from flask.ext.pymongo import PyMongo
 from bson.objectid import ObjectId
+import json
 
 app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
 
@@ -109,6 +110,22 @@ def bin_edit(bin_id):
         form.size.data = bin['size']
         form.crop.data = bin['crop']
         return render_template('bin_edit.html', form=form)
+
+@app.route('/harvests')
+def harvests():
+    harvests = mongo.db.harvests.find()
+    return render_template('harvests.html', harvests=harvests)
+
+@app.route('/harvest/add', methods=['GET', 'POST'])
+def harvest_add():
+    form = forms.HarvestForm()
+    fields = mongo.db.fields.find()
+    field_choices = []
+    for f in fields:
+        field_choices.append((f['name'], [(json.dumps({ 'i': i, '_id': str(f['_id']) }), s['name']) for i,s in enumerate(f['section'])]))
+
+    form.section_from.choices = field_choices
+    return render_template('harvest_add.html', form=form)
 
 
 # For debugging, not production

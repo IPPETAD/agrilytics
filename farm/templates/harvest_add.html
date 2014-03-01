@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}New Harvest{% endblock %}
+
+{% block content %}
+<h1>Harvest <small>New</small></h1>
+
+<form method="post" role="form">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.date.label }}
+        {{ form.date(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.section_from.label }}
+        {{ form.section_from(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.amount.label }}
+        {{ form.amount(class_='form-control') }}
+    </div>
+    <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

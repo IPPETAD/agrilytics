@@ -1,5 +1,7 @@
 from flask_wtf import Form
 from wtforms import fields, validators
+from farm import wtforms_extended_selectfield as extfields
+import time
 
 class FieldForm(Form):
     name = fields.StringField('Name')
@@ -14,7 +16,13 @@ class SectionForm(Form):
 class BinForm(Form):
     name = fields.StringField('Name', [validators.required()])
     crop = fields.SelectField('Crop', choices=[('rye', 'Rye'), ('oats', 'Oats'), ('canola', 'Canola')])
-    size = fields.FloatField('Size in Tonnes')
+    size = fields.FloatField('Size in tonnes')
 
 class DeleteForm(Form):
     delete = fields.HiddenField(id='delete', default='delete')
+
+class HarvestForm(Form):
+    date = fields.DateTimeField('Date', format='%Y-%m-%d', validators=[validators.required()])
+    section_from = extfields.ExtendedSelectField('From Field Section', validators=[validators.required()])
+    bin_to = fields.SelectField('To Bin', validators=[validators.required()])
+    amount = fields.FloatField('Size in tonnes', validators=[validators.required()])
