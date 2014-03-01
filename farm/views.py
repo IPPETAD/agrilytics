@@ -78,22 +78,18 @@ def bin_add():
     else:
         return render_template('bin_add.html', form=form)
 
-@app.route('/bin/edit/<bin_id>')
+@app.route('/bin/edit/<bin_id>', methods=['GET', 'POST'])
 def bin_edit(bin_id):
-    bin = mongo.db.bins.find_one({ "_id": ObjectId(bin_id) })
-    print bin
     form = forms.BinForm()
-    form.name.data = bin['name']
-    form.size.data = bin['size']
-    form.crop.data = bin['crop']
-
     if request.method == 'POST':
-        bin['name'] = form.name.data
-        bin['size'] = form.size.data
-        bin['crop'] = form.crop.data
-        mongo.db.bins.save(bin)
-        return redirect(url_for('bin', bin_id =  bin_id))
+        post = { "_id": ObjectId(bin_id), "name": form.name.data, "crop": form.crop.data, "size": form.size.data }
+        if mongo.db.bins.save(post):
+            return redirect(url_for('bin', bin_id=  bin_id))
     else:
+        bin = mongo.db.bins.find_one({ "_id": ObjectId(bin_id) })
+        form.name.data = bin['name']
+        form.size.data = bin['size']
+        form.crop.data = bin['crop']
         return render_template('bin_edit.html', form=form)
 
 # For debugging, not production
