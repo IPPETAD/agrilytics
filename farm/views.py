@@ -55,14 +55,24 @@ def bin(bin_id):
 def bin_add():
     form = forms.BinForm()
     if request.method == 'POST':
-        return render_template('bin_add.html', form=form)
+        post = { "name": form.name, "crop": form.crop, "size": form.size }
+        bin_id = mongo.db.bins.insert(post)
+        return redirect(url_for('bin', bin_id =  bin_id))
     else:
         return render_template('bin_add.html', form=form)
 
-@app.route('bin/edt/<bin_id>')
+@app.route('/bin/edt/<bin_id>')
 def bin_edit(bin_id):
     bin = mongo.db.bins.find_one({ "_id": ObjectId(bin_id) })
-    return render_template('bin_edit.html', bin = bin)
+    form = forms.BinForm(obj=bin)
+    if request.method == 'POST':
+        bin.name = form.name
+        bin.size = form.size
+        bin.crop = form.crop
+        mongo.db.bins.save(bin)
+        return redirect(url_for('bin', bin_id =  bin_id))
+    else:
+        return render_template('bin_add.html', form=form)
 
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'

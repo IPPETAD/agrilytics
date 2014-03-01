@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h1>Bin <small>New</small></h1>
+<h1>Bin {{ form.name }} <small>Edit</small></h1>
 
 <form method="post" role="form" action="/bin/add">
     {{ form.hidden_tag() }}
@@ -20,6 +20,7 @@
         {{ form.size.label }}
         {{ form.size(class_='form-control') }}
     </div>
+    <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
 </form>
 
 
