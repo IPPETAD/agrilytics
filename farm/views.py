@@ -6,6 +6,8 @@ from flask_wtf.csrf import CsrfProtect
 from flask.ext.pymongo import PyMongo
 from bson.objectid import ObjectId
 
+app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
+
 mongo = PyMongo(app)
 csrf = CsrfProtect(app)
 
@@ -27,6 +29,14 @@ def bins():
 def field(field_id):
     field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
     return render_template('field.html', field = field)
+
+@app.route('/market')
+@app.route('/market/')
+@app.route('/market/<crop>')
+def marketplace(crop=None):
+    offers = list(mongo.db.offers.find({"crop": crop}))
+    crop_types = list(mongo.db.crop_types.find())
+    return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types)
 
 @app.route('/field/add', methods=['GET', 'POST'])
 def field_add():
