@@ -50,5 +50,18 @@ def bin(bin_id):
     bin = mongo.db.bins.find_one({"_id": ObjectId(bin_id) })
     return render_template('bin.html', bin = bin)
 
+@app.route('/bin/add', methods=['GET', 'POST'])
+def bin_add():
+    form = forms.BinForm()
+    if request.method == 'POST':
+        return render_template('bin_add.html', form=form)
+    else:
+        return render_template('bin_add.html', form=form)
+
+@app.route('bin/edt/<bin_id>')
+def bin_edit(bin_id):
+    bin = mongo.db.bins.find_one({ "_id": ObjectId(bin_id) })
+    return render_template('bin_edit.html', bin = bin)
+
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'
