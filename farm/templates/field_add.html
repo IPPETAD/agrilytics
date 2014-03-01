@@ -5,13 +5,17 @@
 {% block content %}
 <h1>Field <small>New</small></h1>
 
-<form method=post action="/fields/add">
-    <dl>
-        {% for field in form %}
-			{{ field }}
-        {% endfor %}
-    </dl>
-    <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
+<form method="post" action="/field/add" role="form">
+	{{ form.hidden_tag() }}
+	<div class="form-group">
+		{{ form.crop.label }}
+		{{ form.crop(class_='form-control') }}
+	</div>
+	<div class="form-group">
+		{{ form.size.label }}
+		{{ form.size(class_='form-control') }}
+	</div>
+	<button type="submit" value="confirm" class="btn btn-primary">Submit</button>
 </form>
 
 {% endblock %}

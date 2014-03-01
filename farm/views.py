@@ -12,7 +12,7 @@ csrf = CsrfProtect(app)
 @app.route('/')
 def index():
     return render_template('home.html')
-    
+
 @app.route('/fields')
 def fields():
     fields = mongo.db.fields.find()
@@ -22,12 +22,11 @@ def fields():
 def bins():
     bins = mongo.db.bins.find()
     return render_template('bins.html', bins = bins)
-    
+
 @app.route('/field/<field_id>')
 def field(field_id):
     field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
     return render_template('field.html', field = field)
-    
 
 @app.route('/market')
 def marketplace():
@@ -38,10 +37,10 @@ def marketplace():
 
 @app.route('/field/add', methods=['GET', 'POST'])
 def field_add():
+    form = forms.FieldForm()
     if request.method == 'POST':
         return render_template('field_add.html', form=form)
     else:
-        form = forms.FieldForm()
         return render_template('field_add.html', form=form)
 
 @app.route('/bin/<bin_id>')
