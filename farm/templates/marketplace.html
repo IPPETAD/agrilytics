@@ -15,9 +15,9 @@
         {% endif %}
         {% for crop_type in crop_types %}
             {% if crop_type.crop == crop %}
-                <option value="{{ crop_type.crop }}" selected="selected">{{ crop_type.crop }}</option>
+                <option value="{{ crop_type.crop }}" selected="selected">{{ crop_type.label }}</option>
             {% else %}
-                <option value="{{ crop_type.crop }}">{{ crop_type.crop }}</option>
+                <option value="{{ crop_type.crop }}">{{ crop_type.label }}</option>
             {% endif %}
         {% endfor %}}
     </select>
@@ -26,14 +26,14 @@
 
 
 {% for offer in offers %}
-    <div class="market_item">
-        <p>{{offer.crop}}</p>
+    <div class="panel panel-primary">
+        <h4>{{offer.label}}</h4>
+        <p>Tonnes: {{offer.tonnes}}</p>
+        <p>User: {{offer.user}}</p>
+        <p>Price: {{offer.price}}</p>
     </div>
 {% endfor %}
 
-
-
-<script src="/static/marketplace.js"></script>
 
 
 {% endblock %}
