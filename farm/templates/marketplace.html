@@ -6,21 +6,31 @@
 
 <h1>Welcome to the MarketPlace!</h1>
 
+        
 <form action="market" id="description">
     <p>Choose a crop and browse the open products in the marketplace!</p>
     <select class="market_dropdown" name="crop">
+        {% if not crop %}
         <option value="DEFAULT" selected="selected">Choose crop..</option>
-        <option value="celery">Celery</option>
-        <option value="hay">Hay</option>
-        <option value="wheat">Wheat</option>
+        {% endif %}
+        {% for crop_type in crop_types %}
+            {% if crop_type.crop == crop %}
+                <option value="{{ crop_type.crop }}" selected="selected">{{ crop_type.crop }}</option>
+            {% else %}
+                <option value="{{ crop_type.crop }}">{{ crop_type.crop }}</option>
+            {% endif %}
+        {% endfor %}}
     </select>
 	<input type="submit" value="Search">
 </form>
 
 
-{% for listing in listings %}
-	<p>Fart</p>
+{% for offer in offers %}
+    <div class="market_item">
+        <p>{{offer.crop}}</p>
+    </div>
 {% endfor %}
+
 
 
 <script src="/static/marketplace.js"></script>

@@ -32,8 +32,9 @@ def field(field_id):
 @app.route('/market')
 def marketplace():
     crop = request.args.get("crop")
-    listings = mongo.db.offers.find({"crop": crop})
-    return render_template('marketplace.html', offers = listings)
+    offers = mongo.db.offers.find({"crop": crop})
+    crop_types = mongo.db.crop_types.find()
+    return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types)
 
 @app.route('/field/add', methods=['GET', 'POST'])
 def field_add():
