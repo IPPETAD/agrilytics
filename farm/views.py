@@ -52,6 +52,23 @@ def field_add():
     else:
         return render_template('field_add.html', form=form)
 
+@app.route('/field/<field_id>/edit', methods=['GET', 'POST'])
+def field_edit(field_id):
+    form = forms.FieldForm()
+    field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            field['name'] = form.name.data
+            field['size'] = form.size.data
+            field['geo'] = form.geo_data.data
+            field_id = mongo.db.fields.save(field)
+            return redirect(url_for('field', field_id=field_id))
+    else:
+        form.name.data = field['name']
+        form.size.data = field['size']
+        form.geo_data.data = field['geo']
+        return render_template('field_edit.html', form=form)
+
 @app.route('/field/<field_id>/section/add', methods=['GET','POST'])
 def section_add(field_id):
     form = forms.SectionForm()
