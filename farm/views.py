@@ -6,6 +6,8 @@ from flask_wtf.csrf import CsrfProtect
 from flask.ext.pymongo import PyMongo
 from bson.objectid import ObjectId
 
+app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
+
 mongo = PyMongo(app)
 csrf = CsrfProtect(app)
 
