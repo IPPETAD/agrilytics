@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}New Field{% endblock %}
+
+{% block content %}
+<h1>Field <small>New</small></h1>
+
+<form method=post action="/fields/add">
+    <dl>
+        {% for field in form %}
+			{{ field }}
+        {% endfor %}
+    </dl>
+    <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}
