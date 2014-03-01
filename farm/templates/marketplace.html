@@ -5,13 +5,27 @@
 {% block content %}
 
 <h1>Welcome to the MarketPlace!</h1>
-<p>Choose a crop and browse the open products in the marketplace!</p>
-<select class="market_dropdown">
-	<option value="default" selected="selected">Choose crop..</option>
-	<option value="celery">Celery</option>
-	<option value="hay">Hay</option>
-	<option value="wheat">Wheat</option>
-</select>
+
+{{if crop}}
+
+<form action="market" id="description">
+    <p>Choose a crop and browse the open products in the marketplace!</p>
+    <select class="market_dropdown" name="crop">
+        <option value="DEFAULT" selected="selected">Choose crop..</option>
+        <option value="celery">Celery</option>
+        <option value="hay">Hay</option>
+        <option value="wheat">Wheat</option>
+    </select>
+	<input type="submit" value="Search">
+</form>
+
+
+{% for listing in listings %}
+	<p>Fart</p>
+{$ endfor %}
+
+
+<script src="/static/marketplace.js"></script>
 
 
 {% endblock %}

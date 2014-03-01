@@ -22,4 +22,6 @@ def field(field_id):
     
 @app.route('/market')
 def marketplace():
-    return render_template('marketplace.html')
+    crop = request.args.get("crop")
+    listings = mongo.db.offers.find({"crop": crop})
+    return render_template('marketplace.html', offers = listings)
