@@ -31,10 +31,11 @@ def field(field_id):
     return render_template('field.html', field = field)
 
 @app.route('/market')
-def marketplace():
-    crop = request.args.get("crop")
-    offers = mongo.db.offers.find({"crop": crop})
-    crop_types = mongo.db.crop_types.find()
+@app.route('/market/')
+@app.route('/market/<crop>')
+def marketplace(crop=None):
+    offers = list(mongo.db.offers.find({"crop": crop}))
+    crop_types = list(mongo.db.crop_types.find())
     return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types)
 
 @app.route('/field/add', methods=['GET', 'POST'])
