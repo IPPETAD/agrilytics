@@ -9,7 +9,7 @@ $( document ).ready(function() {
 
 	var drawnItems = new L.FeatureGroup();
 	if ($( "#map_input" ).val()) {
-			drawnItems = L.geoJson( $( "#map_input" ).val() ).addTo(map);
+			drawnItems = L.geoJson( jQuery.parseJSON( $( "#map_input" ).val() ) );
 		}
 
 	

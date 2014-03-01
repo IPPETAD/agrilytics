@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Farm Thingy.{% endblock %}
+{% block title %}FarmSpot - CODE 2014{% endblock %}
 
 {% block navbar %}
 <li><a href="/">Home</a></li>
@@ -12,35 +12,48 @@
 {% block content %}
 
 <h2>Welcome to the MarketPlace!</h2>
-<p>Browse available produce on the marketplace. Specify a crop type and we'll do the rest.</p>
+<p>Browse available produce on the marketplace or post your own! The market is waiting for you.</p>
+
+<br />
+
+<button type="button" class="btn btn-default" onclick="document.location.href = '/market/new';">
+    <span class="glyphicon glyphicon-plus"></span> Post Listing
+</button>
 
 
 <form id="searchForm" class="btn-group">
     <input class="span2" id="search_type" name="crop" type="hidden">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-search"></span>
         {% if crop %}
-            {% for crop_type in crop_types %}
-                {% if crop == crop_type.crop %}
-                    {{ crop_type.crop }}
-                {% endif %}
-            {% endfor %}
+        {% for crop_type in crop_types %}
+        {% if crop == crop_type.name %}
+        {{ crop_type.label }}
+        {% endif %}
+        {% endfor %}
         {% else %}
-            Choose crop..
+        Search Public Listings
         {% endif %}
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
         {% for crop_type in crop_types %}
-            <li><a href="#" onclick="$('#search_type').val('{{ crop_type.crop }}'); $('#searchForm').submit();">{{ crop_type.crop }}</a></li>
-        {% endfor %}        
+        <li><a href="#" onclick="$('#search_type').val('{{ crop_type.name }}'); $('#searchForm').submit();">{{ crop_type.label }}</a></li>
+        {% endfor %}
     </ul>
 </form>
+
 
 <br /><br />
 
 {% for offer in offers %}
     <div class="panel panel-primary">
-        <h4>{{offer.label}}</h4>
+        {% for crop_type in crop_types %}
+        {% if crop_type.name == offer.crop %}
+        <h3>{{ crop_type.label }}</h3>
+        {% endif %}
+        {% endfor %}
+        
         <p>Tonnes: {{offer.tonnes}}</p>
         <p>User: {{offer.user}}</p>
         <p>Price: {{offer.price}}</p>
