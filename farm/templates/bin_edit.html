@@ -6,7 +6,7 @@
 
 <h1>Bin {{ form.name }} <small>Edit</small></h1>
 
-<form method="post" role="form" action="/bin/add">
+<form method="post" role="form" action="/bin/edit/{{ bin_id }}">
     {{ form.hidden_tag() }}
     <div class="form-group">
         {{ form.name.label }}
