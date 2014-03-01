@@ -23,4 +23,4 @@ class OfferForm(Form):
     crop = fields.SelectField('Crop', choices=[])
     tonnes = fields.FloatField('Size in Tonnes')
     user = fields.StringField('User')
-    price = fields.StringField('Price')
+    price = fields.FloatField('Price')
