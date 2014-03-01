@@ -1,10 +1,14 @@
 Flask==0.10.1
+Flask-BrowserID==0.0.4
+Flask-Login==0.2.9
 Flask-PyMongo==0.3.0
+Flask-WTF==0.9.3
 Jinja2==2.7.2
 MarkupSafe==0.18
+WTForms==1.0.5
 Werkzeug==0.9.4
 itsdangerous==0.23
 pymongo==2.6.3
+requests==2.2.1
 wsgiref==0.1.2
-flask-wtf==0.9.3
-WTForms==1.0.5
+
