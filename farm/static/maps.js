@@ -5,7 +5,16 @@ $( document ).ready(function() {
 	$( "#map_input" ).parent().after('<div id="mapeditorview" style="height:400px"></div>');
 	
 	
+
+
 	var drawnItems = new L.FeatureGroup();
+	if ($( "#map_input" ).val()) {
+			drawnItems = L.geoJson( $( "#map_input" ).val() ).addTo(map);
+		}
+
+	
+	
+	
 	
 	
 	var drawControl = new L.Control.Draw({
