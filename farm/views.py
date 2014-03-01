@@ -5,6 +5,7 @@ from flask_wtf.csrf import CsrfProtect
 
 from flask.ext.pymongo import PyMongo
 from bson.objectid import ObjectId
+
 import json
 
 app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
@@ -43,9 +44,20 @@ def field(field_id):
 @app.route('/market')
 def marketplace():
     crop = request.args.get("crop");
-    offers = list(mongo.db.offers.find({"crop": crop}))
+    page = request.args.get("page");
+    offer_count = mongo.db.offers.count()
     crop_types = list(mongo.db.crop_types.find())
-    return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types)
+
+    # TODO: Filter by user name
+    edits = mongo.db.offers.count()
+
+    if page is None:
+        offers = list(mongo.db.offers.find({"crop": crop}))
+        return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types, offer_count = offer_count, edits = edits)
+    else:
+        offers = list(mongo.db.offers.find({"crop": crop}).limit(10).skip(10*(int(page)-1)))
+        return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types, offer_count = offer_count, page = int(page), edits = edits)
+    
 
 @app.route('/market/new', methods=['GET', 'POST'])
 def marketplace_add():
@@ -171,6 +183,16 @@ def bin_edit(bin_id):
         form.crop.data = bin['crop']
         return render_template('bin_edit.html', form=form)
 
+@app.route('/market/price_history')
+def price_history():
+	province = request.args["province"]
+	crop = request.args["crop"]
+	history = []
+	history = list ( mongo.db.gov_prices.find({"province": province, "crop": crop}, { "date": 1, "value": 1, "_id":0 }) )
+	for month in history:
+		month["month"] = month.pop("date")
+		month["price"] = month.pop("value")
+	return json.dumps(history)
 @app.route('/harvests')
 def harvests():
     harvests = mongo.db.harvests.find()
