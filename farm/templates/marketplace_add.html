@@ -13,6 +13,27 @@
 
 <h2>Welcome to the MarketPlace!</h2>
 
+<form method="post" role="form">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.crop.label }}
+        {{ form.crop(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.tonnes.label }}
+        {{ form.tonnes(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.user.label }}
+        {{ form.user(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.price.label }}
+        {{ form.price(class_='form-control') }}
+    </div>
+    <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
+</form>
+
 
 
 

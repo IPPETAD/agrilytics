@@ -41,9 +41,23 @@ def marketplace():
     crop_types = list(mongo.db.crop_types.find())
     return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types)
 
-@app.route('/market/new')
+@app.route('/market/new', methods=['GET', 'POST'])
 def marketplace_add():
-    return render_template('marketplace_add.html');
+    form = forms.OfferForm()
+        
+    if request.method == 'POST':
+        post = { "crop" : form.crop.data, "tonnes" : form.tonnes.data, "user" : form.user.data, "price" : form.price.data }
+        post_id = mongo.db.offers.insert(post) 
+        return redirect(url_for('marketplace'))
+    else:
+        crop_types = list(mongo.db.crop_types.find())
+        choices = [(x['name'],x['label']) for x in crop_types]
+        form.crop.choices = choices
+
+        return render_template('marketplace_add.html', form=form);
+
+
+
 
 @app.route('/field/add', methods=['GET', 'POST'])
 def field_add():

@@ -18,3 +18,9 @@ class BinForm(Form):
 
 class DeleteForm(Form):
     delete = fields.HiddenField(id='delete', default='delete')
+
+class OfferForm(Form):
+    crop = fields.SelectField('Crop', choices=[])
+    tonnes = fields.FloatField('Size in Tonnes')
+    user = fields.StringField('User')
+    price = fields.StringField('Price')

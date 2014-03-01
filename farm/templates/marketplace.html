@@ -23,8 +23,8 @@
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         {% if crop %}
             {% for crop_type in crop_types %}
-                {% if crop == crop_type.crop %}
-                    {{ crop_type.crop }}
+                {% if crop == crop_type.name %}
+                    {{ crop_type.label }}
                 {% endif %}
             {% endfor %}
         {% else %}
@@ -34,7 +34,7 @@
     </button>
     <ul class="dropdown-menu">
         {% for crop_type in crop_types %}
-            <li><a href="#" onclick="$('#search_type').val('{{ crop_type.crop }}'); $('#searchForm').submit();">{{ crop_type.crop }}</a></li>
+            <li><a href="#" onclick="$('#search_type').val('{{ crop_type.name }}'); $('#searchForm').submit();">{{ crop_type.label }}</a></li>
         {% endfor %}        
     </ul>
 </form>
