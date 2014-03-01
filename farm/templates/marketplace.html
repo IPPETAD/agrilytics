@@ -13,24 +13,27 @@
 
 <h1>Welcome to the MarketPlace!</h1>
 
-        
-<form action="market" id="description">
-    <p>Choose a crop and browse the open products in the marketplace!</p>
-    <select class="market_dropdown" name="crop">
-        {% if not crop %}
-        <option value="DEFAULT" selected="selected">Choose crop..</option>
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        {% if crop %}
+            {% for crop_type in crop_types %}
+                {% if crop == crop_type.crop %}
+                    {{ crop_type.label }}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            Choose crop..
         {% endif %}
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
         {% for crop_type in crop_types %}
-            {% if crop_type.crop == crop %}
-                <option value="{{ crop_type.crop }}" selected="selected">{{ crop_type.label }}</option>
-            {% else %}
-                <option value="{{ crop_type.crop }}">{{ crop_type.label }}</option>
-            {% endif %}
-        {% endfor %}}
-    </select>
-	<input type="submit" value="Search">
-</form>
+            <li><a href="{{ crop_type.crop }}">{{ crop_type.label }}</a></li>
+        {% endfor %}        
+    </ul>
+</div>
 
+<br /><br />
 
 {% for offer in offers %}
     <div class="panel panel-primary">
