@@ -27,12 +27,17 @@ def bins():
 
 @app.route('/field/<field_id>/')
 def field(field_id):
-    field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
-    crops = []
-    for section in field['section']:
-        if section['crop'] not in crops:
-            crops.append(section['crop'].title())
-    return render_template('field.html', field = field, crops=crops)
+    form = forms.DeleteForm()
+    if request.method == 'POST':
+        if mongo.db.fields.remove({'_id': ObjectId(field_id)}):
+            return redirect(url_for('fields'))
+    else:
+        field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
+        crops = []
+        for section in field['section']:
+            if section['crop'] not in crops:
+                crops.append(section['crop'].title())
+        return render_template('field.html', field = field, crops=crops, form=form)
 
 @app.route('/market')
 def marketplace():

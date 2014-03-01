@@ -5,7 +5,7 @@
 {% block content %}
 
 <h1>Field {{field.name}} <small>Details</small></h1>
-
+<a href='edit'><h3>Edit</h4></a>
 
 <div id="mapview" style="height: 400px;"></div>
 
@@ -46,7 +46,10 @@ if (geo) {
 {% else %}
 <p>There are no sections. <a href="section/add">Add one</a></p>
 {% endif %}
-
+<form method="post" role="form" onsubmit="return confim('Are you sure you want to delete this field? It cannot be undone.')">
+    {{ form.hidden_tag() }}
+    <button type="submit" value="confirm" class="btn btn-primary">Delete</button>
+</form>
 {% endblock %}
 
 
