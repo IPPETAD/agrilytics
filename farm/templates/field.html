@@ -49,7 +49,7 @@ loadStaticMap(geo);
 
 <!-- Section data -->
 {% if field.section %}
-<h3>Related Sections</h3>
+<h3>Related Sections   <button class="btn btn-default btn-success" onclick="document.location.href='section/add';">New</button></h3>
 
 {% for section in field.section %}
 <div class="col-lg-6" style="padding-left:0px;">
@@ -66,26 +66,11 @@ loadStaticMap(geo);
 </div>
 {% endfor %}
 
-
-
-<!--<ul>
-    {% for section in field.section %}
-    <li><a href="section/{{field.section.index(section)}}">{{ section.name }} -- </a>
-        {% for crop_type in crop_types %}
-            {% if section.crop == crop_type.name %}
-                {{ crop_type.label }}
-            {% endif %}
-        {% endfor %}
-    {% endfor %}</li>
-</ul>-->
 <div class="clearfix"></div>
 
 
-
-
-<a href="section/add">Add another section</a>
 {% else %}
-<p>There are no sections. <a href="section/add">Add one</a></p>
+<p>There are no sections. <a href="section/add">Add one!</a></p>
 {% endif %}
 
 
