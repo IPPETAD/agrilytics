@@ -298,7 +298,10 @@ def harvest_update():
 @app.route('/api/_marketprice')
 def current_crop_price():
     crop_type = request.args.get('crop')
-    # TODO : Not this
+    amount = request.args.get('amount')
+
+
+
     return render_template('harvests.html')
 
 @app.route('/login/')

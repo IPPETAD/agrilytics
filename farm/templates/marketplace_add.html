@@ -30,11 +30,24 @@
     </div>
     <div class="form-group">
         {{ form.price.label }}
+        <h5 class="market_price">Market price is: </h5>
         {{ form.price(class_='form-control') }}
     </div>
     <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
 </form>
 
+<script>
+    $("#tonnes").bind("change", function () {
+        $.getJSON($SCRIPT_ROOT + "/api/_marketprice", {
+            crop: $('#crop').val(),
+            amount: $('#tonnes').val(),
+            province: 'Alberta' //TODO ::  Not just Alberta
+        }, function (data) {
+            console.log(data);
+        });
+        return false;
+    });
+</script>
 
 
 
