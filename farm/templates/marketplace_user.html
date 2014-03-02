@@ -43,19 +43,26 @@
 
 <!-- List Offers -->
 {% for offer in offers %}
-<div id="{{ offer._id }}" class="panel panel-primary">
-    {% for crop_type in crop_types %}
-    {% if crop_type.name == offer.crop %}
-    <h3>{{ crop_type.label }}</h3>
-    {% endif %}
-    {% endfor %}
 
-    <p>Tonnes: {{offer.tonnes}}</p>
-    <p>User: {{offer.user}}</p>
-    <p>Price: {{offer.price}}</p>
-    
-    <button class="btn btn-danger" onclick="deleteOffer('{{ offer._id }}')">Delete</button>
+<div class="col-lg-6" style="padding-left:0px;">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+        <b>
+            {% for crop_type in crop_types %}
+            {% if crop_type.name == offer.crop %}
+                <p><b>Crop:</b> {{ crop_type.label }}</p>
+            {% endif %}
+            {% endfor %}
+        </b></div>
+        <div class="panel-body">
+            <button style="float:right;" class="btn btn-danger" onclick="deleteOffer('{{ offer._id }}')">Delete</button>
+            <p><b>Tonnes:</b> {{offer.tonnes}}</p>
+            <p><b>Price:</b> {{offer.price}}</p>
+        </div>
+    </div>
 </div>
+
+
 {% endfor %}
 
 {% endblock %}
