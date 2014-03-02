@@ -4,7 +4,7 @@ $( document ).ready(function() {
 	if ($( "#map_input" ).length ) {
 	$( "#map_input" ).parent().after('<div id="mapeditorview" style="height:400px"></div>');
 	
-    $( "#p_acres" ).text($("#map_acres").val());
+    $( "#p_acres" ).text(Math.round($("#map_acres").val()));
 
 	
 	var drawnItems = new L.FeatureGroup();
@@ -51,21 +51,24 @@ $( document ).ready(function() {
 
 			    		drawnItems.addLayer(layer);
 							
-					    var geojson = layer.toGeoJSON();
+			    		var geojson = layer.toGeoJSON();
+			    		var acres = calculateArea(geojson.features[0]);
 							
-							$("#map_acres").val(calculateArea(geojson.features[0]));
-							$( "#map_input" ).val( JSON.stringify( geojson ) );
-                            $( "#p_acres" ).text(calculateArea(geojson.features[0]));
+						$("#map_acres").val(acres);
+						$( "#map_input" ).val( JSON.stringify( geojson ) );
+                        $( "#p_acres" ).text(Math.round(acres));
 					
 			});	
 			
 			map.on('draw:editstop', function () {
 				$( "#map_input" ).val( JSON.stringify( drawnItems.toGeoJSON() ) );
 
-			    var geojson = drawnItems.toGeoJSON();
-			    $("#map_acres").val(calculateArea(geojson.features[0]));
+				var geojson = drawnItems.toGeoJSON();
+				var acres = calculateArea(geojson.features[0]);
+
+			    $("#map_acres").val(acres);
                 $("#map_input").val( JSON.stringify( geojson ) );
-                $( "#p_acres" ).text(calculateArea(geojson.features[0]));
+                $( "#p_acres" ).text(Math.round(acres));
 			});	
 			
 				
