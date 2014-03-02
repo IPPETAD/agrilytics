@@ -40,10 +40,18 @@ def farmer_required(f):
         return f(*args, **kwargs)
     return func
 
+@babel.localeselector
+def get_locale():
+    locale = getattr(g, 'locale', None)
+    if locale is not None:
+        return locale
+    return request.accept_languages.best_match(['en', 'fr'])
+
 @app.before_request
 def load_user():
     g.user = request.cookies.get('user')
     g.province = request.cookies.get('province')
+    g.locale = request.cookies.get('locale')
 
 @app.route('/')
 def index():

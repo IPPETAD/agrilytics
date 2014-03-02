@@ -39,7 +39,6 @@
     <title>{% block title %}{% endblock %}</title>
 	
 
-			
     {% endblock %}
 </head>
 <body>
@@ -64,17 +63,29 @@
 	          </ul>
 			  
 			  
-			  	<ul class="nav navbar-nav navbar-right">
-	          {% if g.user %}
-              <li><a href="/logout/">Logout</a></li>
-	          {% else %}        
-              <li><a href="/login/">Login</a></li>
-	          {% endif %}
-			  
-                    </ul>
+			    <ul class="nav navbar-nav navbar-right">
+	              {% if g.user %}
+                  <li><a href="/logout/">Logout</a></li>
+	              {% else %}        
+                  <li><a href="/login/">Login</a></li>
+	              {% endif %}
+                    <li><a href="#" onclick="setLocale('en');">en</a></li>
+                    <li> | </li>
+                    <li><a href="#" onclick="setLocale('fr');">fr</a></li>
+                </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
 	    </div>
+
+    <!-- Set Locale -->
+    <script type="text/javascript">
+        function setLocale(locale) {
+            document.cookie = 'locale=' + locale;
+            location.reload(true);
+        }
+    </script>
+    <!-- End Set Locale -->
+
 
 <div class="container">
 		
@@ -110,7 +121,7 @@
 			and more.
 		
         {% endblock %}
-		
+
 		<!-- Piwik -->
 		<script type="text/javascript">
 		  var _paq = _paq || [];
