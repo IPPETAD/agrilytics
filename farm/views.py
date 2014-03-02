@@ -240,7 +240,8 @@ def bin_edit(bin_id):
 @farmer_required
 def contracts():
     contracts = mongo.db.contracts.find({'province': g.province})
-    return render_template('contracts.html', contracts=contracts)
+    crop_types = list(mongo.db.crop_types.find())
+    return render_template('contracts.html', contracts=contracts, crop_types=crop_types)
     
 
 @app.route('/contract/<contract_id>/', methods=['GET', 'POST'])
