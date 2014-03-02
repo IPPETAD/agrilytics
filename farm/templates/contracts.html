@@ -15,7 +15,6 @@
 
 <link href="/static/editable-table/index.css" rel="stylesheet">
 <script src="/static/editable-table/mindmup-editabletable.js"></script>
-<script src="/static/editable-table/numeric-input-example.js"></script>
 
 <!-- Title -->
 <h2>Your Contracts</h2>
@@ -24,11 +23,21 @@
 
 <!-- Spread Sheet -->
 <table id="mainTable" class="table table-striped">
-    <thead id="headTable"><tr><th>Crop</th><th>Company</th><th>Tonnes</th><th>Fixed</th><th>Price per Tonne</th><th>Contract Value</th></tr></thead>
+    <thead id="headTable"><tr><th class="symbol"</th><th>Crop</th><th>Company</th><th>Tonnes</th><th>Fixed</th><th>Price per Tonne</th><th>Contract Value</th></tr></thead>
     <tbody>
         {% for contract in contracts %}
             <tr>
-                <td>{{ contract.crop }}</td>
+                <td class="icon"><span class="glyphicon glyphicon-remove"></span></td>
+              <!--  <td class="dropdown">
+                    <ul class="dropdown-menu">
+                        {% for crop_type in crop_types %}
+                        <li><a href="#" onclick="$('#search_type').val('{{ crop_type.name }}'); $('#searchForm').submit();">{{ crop_type.label }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </td>
+-->
+
+                <td class="dropdown">{{ contract.crop }}</td>
                 <td>{{ contract.company }}</td>
                 <td>{{ contract.tonnes }}</td>
                 <td>{{ contract.fixed }}</td>
@@ -38,10 +47,13 @@
         {% endfor %}
     </tbody>
 </table>
-
-
 <script>
     $('#mainTable').editableTableWidget();
+    $('.icon').each(function (index) {
+        $(this).on('click', function () {
+            $(this).parent().remove();
+        });
+    });
 </script>
 
 
