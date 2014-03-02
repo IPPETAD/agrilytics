@@ -335,7 +335,7 @@ def harvest_add():
     form = forms.HarvestForm()
     fields = mongo.db.fields.find({'province': g.province})
     if request.method == 'POST':
-        post = { 'section_from': json.loads(form.section_from.data), 'bin_to': form.bin_to.data, 'date': form.date.data, 'amount': form.amount.data }
+        post = { 'section_from': json.loads(form.section_from.data), 'bin_to': form.bin_to.data, 'date': form.date.data, 'amount': form.amount.data , 'province': g.province }
         harvest_id = mongo.db.harvests.insert(post)
         return redirect(url_for('bin', bin_id = form.bin_to.data))
     
