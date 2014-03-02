@@ -34,13 +34,13 @@ def index():
 @app.route('/fields')
 @farmer_required
 def fields():
-    fields = mongo.db.fields.find()
+    fields = mongo.db.fields.find({'province': g.province})
     return render_template('fields.html', fields = fields)
 
 @app.route('/bins')
 @farmer_required
 def bins():
-    bins = mongo.db.bins.find()
+    bins = mongo.db.bins.find({'province': g.province})
     return render_template('bins.html', bins = bins)
 
 @app.route('/field/<field_id>/')
@@ -82,7 +82,7 @@ def marketplace_add():
     form = forms.OfferForm()
         
     if request.method == 'POST':
-        post = { "crop" : form.crop.data, "tonnes" : form.tonnes.data, "user" : form.user.data, "price" : form.price.data }
+        post = { "province": g.province, "crop" : form.crop.data, "tonnes" : form.tonnes.data, "user" : form.user.data, "price" : form.price.data }
         post_id = mongo.db.offers.insert(post) 
         return redirect(url_for('marketplace'))
     else:
@@ -95,7 +95,7 @@ def marketplace_add():
 @app.route('/market/user', methods=['GET', 'POST'])
 @farmer_required
 def marketplace_user():
-    offers = mongo.db.offers.find()
+    offers = mongo.db.offers.find({'province': g.province})
     crop_types = list(mongo.db.crop_types.find())
     return render_template('marketplace_user.html', offers = offers, crop_types = crop_types)    
 
@@ -111,7 +111,7 @@ def field_add():
     form = forms.FieldForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            post = {"name": form.name.data, "size": form.size.data, "geo": form.geo_data.data, "section": []}
+            post = {"province": g.province, "name": form.name.data, "size": form.size.data, "geo": form.geo_data.data, "section": []}
             field_id = mongo.db.fields.insert(post)
             return redirect(url_for('.field', field_id=field_id))
     else:
@@ -127,6 +127,7 @@ def field_edit(field_id):
             field['name'] = form.name.data
             field['size'] = form.size.data
             field['geo'] = form.geo_data.data
+            field['province'] = g.province
             field_id = mongo.db.fields.save(field)
             return redirect(url_for('field', field_id=field_id))
     else:
@@ -198,7 +199,7 @@ def bin(bin_id):
 def bin_add():
     form = forms.BinForm()
     if request.method == 'POST':
-        post = { "name": form.name.data, "crop": form.crop.data, "size": form.size.data }
+        post = {"province": g.province, "name": form.name.data, "crop": form.crop.data, "size": form.size.data }
         bin_id = mongo.db.bins.insert(post)
         return redirect(url_for('bin', bin_id =  bin_id))
     else:
@@ -209,7 +210,7 @@ def bin_add():
 def bin_edit(bin_id):
     form = forms.BinForm()
     if request.method == 'POST':
-        post = { "_id": ObjectId(bin_id), "name": form.name.data, "crop": form.crop.data, "size": form.size.data }
+        post = {'province': province, "_id": ObjectId(bin_id), "name": form.name.data, "crop": form.crop.data, "size": form.size.data }
         if mongo.db.bins.save(post):
             return redirect(url_for('bin', bin_id=  bin_id))
     else:
@@ -222,7 +223,7 @@ def bin_edit(bin_id):
 @app.route('/contract/')
 @farmer_required
 def contracts():
-    contracts = mongo.db.contracts.find()
+    contracts = mongo.db.contracts.find({'province': g.province})
     return render_template('contracts.html', contracts=contracts)
     
 
@@ -248,7 +249,7 @@ def contract_add():
         print('Posted')
         if form.validate_on_submit():
             print('validated')
-            post = {'crop': form.crop.data, 'company': form.company.data, 'tonnes': form.tonnes.data,
+            post = {'province': g.province, 'crop': form.crop.data, 'company': form.company.data, 'tonnes': form.tonnes.data,
                     'fixed': form.fixed.data, 'price': form.price_per_tonne.data, 'value': form.contract_value.data}
             contract_id = mongo.db.contracts.insert(post)
             return redirect(url_for('contract', contract_id=contract_id))
@@ -298,14 +299,14 @@ def price_history():
 @app.route('/harvests')
 @farmer_required
 def harvests():
-    harvests = mongo.db.harvests.find()
+    harvests = mongo.db.harvests.find({'province': g.province})
     return render_template('harvests.html', harvests=harvests)
 
 @app.route('/harvest/add', methods=['GET', 'POST'])
 @farmer_required
 def harvest_add():
     form = forms.HarvestForm()
-    fields = mongo.db.fields.find()
+    fields = mongo.db.fields.find({'province': g.province})
     field_choices = [(-1, 'Choose one...')]
     for f in fields:
         field_choices.append((f['name'], [(json.dumps({ 'i': i, '_id': str(f['_id']) }), s['name']) for i,s in enumerate(f['section'])]))
@@ -321,7 +322,7 @@ def harvest_update():
     field = list(mongo.db.fields.find({"_id": ObjectId(field_id)}))
     crop_type = field[0]['section'][0]['crop']
 
-    bins = list(mongo.db.bins.find({"crop" : crop_type}))
+    bins = list(mongo.db.bins.find({'province': g.province, "crop" : crop_type}))
     for bin in bins:
         bin['_id'] = str(bin['_id'])
     
