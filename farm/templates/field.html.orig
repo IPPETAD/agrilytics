@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Field{% endblock %}
+
+{% block content %}
+
+<script>$("#nav-fields").addClass("active");</script>
+
+<<<<<<< HEAD
+<h1>Field {{field.name}} <small>{% trans %}Details{% endtrans %}</small></h1>
+<a href='edit'><h3>{% trans %}Edit{% endtrans %}</h3></a>
+=======
+<!-- Delete Button -->
+<form method="post" role="form" onsubmit="return confim('Are you sure you want to delete this field? It cannot be undone.')">
+    {{ form_delete.hidden_tag() }}
+    <button type="submit" value="delete" class="btn btn-primary btn-danger" style="float:right;">Delete</button>
+</form>
+>>>>>>> 18e8fe63f65393436118f8f205bffdaf2faa15b2
+
+<h2>Field {{field.name}}</h2>
+
+<script>
+var geo = {{field.geo|safe or []}};
+
+if (geo) {
+loadStaticMap(geo);
+	
+}
+
+</script>
+
+<!-- Field Data -->
+<form method="post" role="form" class="form-horizontal">
+    {{ form_field.hidden_tag() }}
+    <br />
+    <div class="form-group">
+        {{ form_field.name.label(class_='col-sm-3 control-label') }}
+        <div class="col-sm-6">
+            {{ form_field.name(class_='form-control') }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_field.size.label(class_='col-sm-3 control-label') }}
+        <div class="col-sm-6">
+            {{ form_field.size(class_='form-control') }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-9">
+            <button type="submit" value="confirm" class="btn btn-primary" style="float:right">Submit</button>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</form>
+
+<!-- Section data -->
+{% if field.section %}
+<<<<<<< HEAD
+<p>{% trans %}This field contains the following sections{% endtrans %}:</p>
+<ul>
+    {% for section in field.section %}
+    <li><a href="section/{{field.section.index(section)}}">{{ section.name }}</a>
+    {% endfor %}
+</ul>
+
+<p>{% trans %}and the following crops{% endtrans %}:</p>
+<ul>
+    {% for crop in crops %}
+        <li>{{ crop }}</li>
+    {% endfor %}
+</ul>
+<a href="section/add">{% trans %}Add another section{% endtrans %}</a>
+{% else %}
+<p>{% trans %}There are no sections{% endtrans %}. <a href="section/add">{% trans %}Add one{% endtrans %}</a></p>
+{% endif %}
+<form method="post" role="form" onsubmit="return confim('Are you sure you want to delete this field? It cannot be undone.')">
+    {{ form.hidden_tag() }}
+    <button type="submit" value="confirm" class="btn btn-primary">{% trans %}Delete{% endtrans %}</button>
+</form>
+=======
+<h3>Related Sections   <button class="btn btn-default btn-success" onclick="document.location.href='section/add';">New</button></h3>
+
+{% for section in field.section %}
+<div class="col-lg-6" style="padding-left:0px;">
+    <div class="panel panel-success">
+        <div class="panel-heading"><b>{{ section.name }}</b><button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='section/{{field.section.index(section)}}/edit';">Edit</button></div>
+        <div class="panel-body">
+            {% for crop_type in crop_types %}
+            {% if section.crop == crop_type.name %}
+            <p><b>Crop:</b> {{crop_type.label}}</p>
+            {% endif %}
+            {% endfor %}
+            <p><b>Acres:</b> {{section.acres}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="clearfix"></div>
+
+
+{% else %}
+<p>There are no sections. <a href="section/add">Add one!</a></p>
+{% endif %}
+
+
+
+
+
+
+>>>>>>> 18e8fe63f65393436118f8f205bffdaf2faa15b2
+{% endblock %}
+
+

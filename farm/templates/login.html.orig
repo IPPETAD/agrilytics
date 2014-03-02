@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>{% trans %}Select a Beta Account{% endtrans %}</h2>
+<p>{% trans %}Log in using one of our beta accounts to navigate the site. This service uses Open Data resources to provide information specific to your area. You can still add and edit the existing data -- these accounts just help you get started on the right foot{% endtrans %}!</p>
+
+
+
+{% if next %}
+<<<<<<< HEAD
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab?next={{ next }}';">{% trans %}Albertan Farmer{% endtrans %}</button></div>
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on?next={{ next }}';">{% trans %}Ontario Farmer{% endtrans %}</button></div>
+{% else %}
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab';">{% trans %}Albertan Farmer{% endtrans %}</button></div>
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on';">{% trans %}Ontario Farmer{% endtrans %}</button></div>
+=======
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab?next={{ next }}';">Albertan Farmer</button>
+    <button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on?next={{ next }}';">Ontario Farmer</button></div>
+{% else %}
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab';">Albertan Farmer</button>
+    <button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on';">Ontario Farmer</button></div>
+>>>>>>> 18e8fe63f65393436118f8f205bffdaf2faa15b2
+{% endif %}
+  
+
+{% endblock %}

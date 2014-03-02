@@ -3,11 +3,11 @@ from farm import forms
 from functools import wraps
 from flask import render_template, request, url_for, redirect, abort, jsonify, make_response, g
 from flask_wtf.csrf import CsrfProtect
-
+from xml.etree import ElementTree as emtree
 from flask.ext.pymongo import PyMongo
 from flask.ext.babel import Babel
 from bson.objectid import ObjectId
-
+import requests
 import json
 from datetime import date
 
@@ -16,6 +16,10 @@ app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/F
 mongo = PyMongo(app)
 babel = Babel(app)
 csrf = CsrfProtect(app)
+
+TORONTO_WEATHER_DATA = r'http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=xml&stationID=30247&Year=2013&Month=3&Day=1&timeframe=2&submit=Download+Data'
+
+SMOKY_LAKE_WEATHER_DATA = r'http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=xml&stationID=32456&Year=2013&Month=3&Day=1&timeframe=2&submit=Download+Data'
 
 def farmer_required(f):
     @wraps(f)
@@ -40,7 +44,19 @@ def fields():
     fields = list(mongo.db.fields.find({'province': g.province}))
     bins = list(mongo.db.bins.find({'province' : g.province}))
     harvests = list(mongo.db.harvests.find({'province': g.province}))
-
+    weather_link = SMOKY_LAKE_WEATHER_DATA if g.province == 'Alberta' else TORONTO_WEATHER_DATA
+    weather_xml = requests.get(weather_link)
+    weather_xml.encoding = 'utf-8'
+    today = date.today()
+    root = emtree.fromstring(weather_xml.content)
+    station_data = {}
+    for child in root:
+        if child.attrib.get('month') == str(today.month) and child.attrib.get('day') == str(today.day):
+            station_data = child
+            break
+    max_temp = filter(lambda x: x.tag == "maxtemp", station_data)[0]
+    min_temp = filter(lambda x: x.tag == "mintemp", station_data)[0]
+    total_precip = filter(lambda x: x.tag == "totalprecipitation", station_data)[0]
     # Jacob was using these for harvests. Just copying his code.
     # What works in Rome... comes out of Rome when it's refactored? No.. that's not how it goes. Hmm
     field_ids = [ObjectId(h['section_from']['_id']) for h in harvests]
@@ -59,22 +75,8 @@ def fields():
                 h['bin'] = b
                 break
 
-    return render_template('fields.html', fields = fields, bins = bins, harvests = harvests)
-
-@app.route('/field/<field_id>/')
-@farmer_required
-def field(field_id):
-    form = forms.DeleteForm()
-    if request.method == 'POST':
-        if mongo.db.fields.remove({'_id': ObjectId(field_id)}):
-            return redirect(url_for('fields'))
-    else:
-        field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
-        crops = []
-        for section in field['section']:
-            if section['crop'] not in crops:
-                crops.append(section['crop'].title())
-        return render_template('field.html', field = field, crops=crops, form=form)
+    return render_template('fields.html', fields = fields, bins = bins, harvests = harvests, max_temp=max_temp,
+                           min_temp=min_temp, total_precip=total_precip)
 
 @app.route('/market')
 def marketplace():
@@ -137,6 +139,23 @@ def field_add():
     else:
         return render_template('field_add.html', form=form)
 
+
+#@app.route('/field/<field_id>/')
+#@farmer_required
+#def field(field_id):
+##    form = forms.DeleteForm()
+ #   if request.method == 'POST':
+ #       if mongo.db.fields.remove({'_id': ObjectId(field_id)}):
+ ##           return redirect(url_for('fields'))
+#    else:
+#        field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
+#        crops = []
+#        for section in field['section']:
+#            if section['crop'] not in crops:
+#                crops.append(section['crop'].title())
+#        return render_template('field.html', field = field, crops=crops, form=form)
+
+
 @app.route('/field/<field_id>/edit', methods=['GET', 'POST'])
 @farmer_required
 def field_edit(field_id):
@@ -156,10 +175,45 @@ def field_edit(field_id):
         form.geo_data.data = field['geo']
         return render_template('field_edit.html', form=form, field_id=field_id)
 
+@app.route('/field/<field_id>/', methods=['GET', 'POST'])
+@farmer_required
+def field(field_id):
+    form_delete = forms.DeleteForm()
+    form_field = forms.FieldForm()
+    field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
+    crop_types = list(mongo.db.crop_types.find())
+    form_field.name.data = field["name"]
+
+    # Delete field
+    if request.method == 'POST' and 'delete' in request.form.keys():
+        if mongo.db.fields.remove({"_id": ObjectId(field_id)}):
+            return redirect(url_for('fields'))
+    # Save field
+    if request.method == 'POST':
+        if form_field.validate_on_submit():
+            field['name'] = form_field.name.data
+            field['size'] = form_field.size.data
+            field['geo'] = form_field.geo_data.data
+            field['province'] = g.province
+            field_id = mongo.db.fields.save(field)
+            return redirect(url_for('field', field_id=field_id))
+    # Set field
+    form_field.name.data = field['name']
+    form_field.size.data = field['size']
+    form_field.geo_data.data = field['geo']
+
+    return render_template('field.html', field = field, form_field=form_field, form_delete=form_delete, crop_types=crop_types)
+
+
 @app.route('/field/<field_id>/section/add', methods=['GET','POST'])
 @farmer_required
 def section_add(field_id):
     form = forms.SectionForm()
+
+    crop_types = list(mongo.db.crop_types.find())
+    choices = [(x['name'],x['label']) for x in crop_types]
+    form.crop.choices = choices
+
     if request.method == 'POST':
         if form.validate_on_submit():
             field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
@@ -188,20 +242,28 @@ def section(field_id, index):
 @farmer_required
 def section_edit(field_id, index):
     form = forms.SectionForm()
+    delete_form = forms.DeleteForm()
+    crop_types = list(mongo.db.crop_types.find())
+    choices = [(x['name'],x['label']) for x in crop_types]
+    form.crop.choices = choices
     field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
     section = field['section'][int(index)]
     if request.method == 'POST':
+        if 'delete' in request.form.keys():
+            field['section'].remove(section)
+            mongo.db.fields.save(field)
+            return redirect(url_for('field', field_id=field_id))
         if form.validate_on_submit():
             section['name'] = form.name.data
             section['crop'] = form.crop.data
             section['acres'] = form.acres.data
             mongo.db.fields.save(field)
-            return redirect(url_for('section', field_id=field_id, index=index))
+            return redirect(url_for('field', field_id=field_id))
     else:
         form.name.data = section['name']
         form.acres.data = section['acres']
         form.crop.data = section['crop']
-        return render_template('section_edit.html', form=form, field_id=field_id, index=index)
+        return render_template('section_edit.html', form=form, form_delete=delete_form,  field_id=field_id, index=index)
 
 @app.route('/bin/<bin_id>', methods=['GET', 'POST'])
 @farmer_required
@@ -326,7 +388,7 @@ def price_history():
 	province = request.args["province"]
 	crop = request.args["crop"]
 	history = []
-	history = list ( mongo.db.gov_prices.find({"province": province, "crop": crop}, { "date": 1, "value": 1, "_id":0 }) )
+	history = list ( mongo.db.gov_prices.find({"province": province, "crop": crop}, { "date": 1, "value": 1, "_id":0 }).sort("date", 1) )
 	for month in history:
 		month["month"] = month.pop("date")
 		month["price"] = month.pop("value")

@@ -6,15 +6,32 @@
 
 <script>$("#nav-history").addClass("active");</script>
 
+<<<<<<< HEAD
 <h2>{% trans %}Price History{% endtrans %}</h2>
-<p>{% trans %}Select a province and commodity to see historical prices. Please be aware that price data is not available for all province / crop combinations{% endtrans %}.</p>
+<p>{% trans %}Select a province and commodity to see historical prices{% endtrans %}.</p>
+=======
+<h2>Price History</h2>
+<p>Select a province and commodity to see historical prices. Please be aware that price data is not available for all province / crop combinations.</p>
+>>>>>>> 18e8fe63f65393436118f8f205bffdaf2faa15b2
 
 <!-- Search Dropdown -->
 <div class="dropdown">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dd1">
         <span class="glyphicon glyphicon-search"></span>
 		<span id="current_crop">
-			{% trans %}Rye{% endtrans %}
+<<<<<<< HEAD
+        {% if crop %}
+        {% for crop_type in crop_types %}
+        {% if crop == crop_type.name %}
+        {{ crop_type.label }}
+        {% endif %}
+        {% endfor %}
+        {% else %}
+            {% trans %}Search Public Listings{% endtrans %}
+        {% endif %}
+=======
+			Rye
+>>>>>>> 18e8fe63f65393436118f8f205bffdaf2faa15b2
 		</span>
         <span class="caret"></span>
     </button>
