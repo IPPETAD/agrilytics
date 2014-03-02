@@ -295,6 +295,31 @@ def price_history():
 		month["month"] = month.pop("date")
 		month["price"] = month.pop("value")
 	return json.dumps(history)
+	
+@app.route('/harvests')
+def harvests():
+    harvests = mongo.db.harvests.find()
+    return render_template('harvests.html', harvests=harvests)
+
+@app.route('/harvest/add', methods=['GET', 'POST'])
+def harvest_add():
+    form = forms.HarvestForm()
+    fields = mongo.db.fields.find()
+    field_choices = []
+    for f in fields:
+        field_choices.append((f['name'], [(json.dumps({ 'i': i, '_id': str(f['_id']) }), s['name']) for i,s in enumerate(f['section'])]))
+
+    form.section_from.choices = field_choices
+    return render_template('harvest_add.html', form=form)
+	
+@app.route('/history')
+def history():
+    crop = request.args.get("crop");
+    page = request.args.get("page");
+    crop_types = list(mongo.db.crop_types.find({"gov_label":{"$exists":"true"}}))
+    provinces = ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Nova Scotia", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan"]
+    return render_template('history.html', crop = crop, crop_types = crop_types, provinces = provinces)
+
 
 @app.route('/harvests')
 @farmer_required
