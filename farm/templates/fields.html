@@ -20,11 +20,7 @@
     <div class="panel panel-success">
         <div class="panel-heading"><b>{{ field.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{field._id}}';">{% trans %}Edit{% endtrans %}</button></b></div>
         <div class="panel-body">
-            {% if field.section %}
-            <p><b>{% trans %}Acres{% endtrans %}:</b> {{ field.section[0].acres }}</p>
-            {% else %}
-            <p><b>{% trans %}Acres{% endtrans %}:</b> {% trans %}No sections set{% endtrans %}</p>
-            {% endif %}
+            <p><b>{% trans %}Acres{% endtrans %}:</b> {{ field.size|float|round(2) }}</p>
             <hr />
             <h4>{% trans %}Farmer's Almanac{% endtrans %}</h4>
             <p><b>{% trans %}High{% endtrans %} (2013):</b> {{max_temp.text}} {{max_temp.attrib.units}}</p>
