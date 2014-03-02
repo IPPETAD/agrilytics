@@ -5,7 +5,6 @@
 {% block navbar %}
 <li><a href="/">Home</a></li>
 <li class="active"><a href="/fields">Fields</a></li>
-<li><a href="/bins">Bins</a></li>
 <li><a href="/market">Market</a></li>
 <li><a href="/contract">Contract</a></li>
 <li><a href="/history">Price History</a></li>
@@ -13,12 +12,45 @@
 
 {% block content %}
 
-<h1>See yo fields!</h1>
+<!-- Title -->
+<h2>Your Fields and Bins</h2>
+<p>Managing your fields and bins has never been easier! Start off by drawing a new field of your own or browse some of the existing fields.</p>
 
+<!-- Fields -->
+<h3>Fields</h3>
+<button type="button" class="btn btn-warning btn-sml" onclick="document.location.href = '/field/add';"><span class="glyphicon glyphicon-plus"></span>  Add</button>
+
+<div class="clearfix"></div>
 {% for field in fields %}
-    <li><a href="/field/{{ field._id }}">{{ field.name}}</a></li>
+<div class="col-lg-6" style="padding-left:0px;">
+    <div class="panel panel-success">
+        <div class="panel-heading"><b>{{ field.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{ field._id}}';">Edit</button></b></div>
+        <div class="panel-body">
+            <p>Acres: {{ field.section[0].acres }}</p>
+        </div>
+    </div>
+</div>
 {% endfor %}
-<a href="/field/add">Add a new field</a>
+
+<div class="clearfix"></div>
+
+<!-- Bins -->
+<h3>Bins</h3>
+<button type="button" class="btn btn-warning btn-sml" onclick="document.location.href='/bin/add';"><span class="glyphicon glyphicon-plus"></span>  Add</button>
+
+<div class="clearfix"></div>
+{% for bin in bins %}
+<div class="col-lg-6" style="padding-left:0px;">
+    <div class="panel panel-success">
+        <div class="panel-heading"><b>{{ bin.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='/bin/edit/{{ bin._id}}';">Edit</button></b></div>
+        <div class="panel-body">
+            <p>Crop: {{ bin.crop }}</p>
+            <p>Size: {{ bin.size }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock %}
 
 

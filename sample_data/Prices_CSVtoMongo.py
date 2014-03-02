@@ -19,7 +19,7 @@ db = client.FarmSpot
 with open(s_in) as fin:
         r = csv.reader(fin)
         for row in r:
-            if not row[5] == '..' && not row[5] == '#VALUE':
+            if not row[5] == '..' and not row[5] == '#VALUE':
                 post = {"date": row[0],
                         "province": row[1],
                         "crop": row[2],

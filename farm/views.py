@@ -35,13 +35,8 @@ def index():
 @farmer_required
 def fields():
     fields = mongo.db.fields.find({'province': g.province})
-    return render_template('fields.html', fields = fields)
-
-@app.route('/bins')
-@farmer_required
-def bins():
-    bins = mongo.db.bins.find({'province': g.province})
-    return render_template('bins.html', bins = bins)
+    bins = mongo.db.bins.find({'province' : g.province})
+    return render_template('fields.html', fields = fields, bins = bins)
 
 @app.route('/field/<field_id>/')
 @farmer_required
@@ -62,11 +57,11 @@ def field(field_id):
 def marketplace():
     crop = request.args.get("crop");
     page = request.args.get("page");
-    offer_count = mongo.db.offers.count()
+    offer_count = mongo.db.offers.find({"crop": crop}).count()
     crop_types = list(mongo.db.crop_types.find())
 
-    # TODO: Filter by user name
-    edits = mongo.db.offers.count()
+    # TODO: Filter by user name, location
+    edits = mongo.db.offers.find().count()
 
     if page is None:
         offers = list(mongo.db.offers.find({"crop": crop}))
@@ -189,7 +184,7 @@ def bin(bin_id):
     form = forms.DeleteForm()
     if request.method == 'POST' and 'delete' in request.form.keys():
         if mongo.db.bins.remove({ "_id": ObjectId(bin_id) }):
-            return redirect(url_for('bins'))
+            return redirect(url_for('fields'))
 
     bin = mongo.db.bins.find_one({"_id": ObjectId(bin_id) })
     return render_template('bin.html', bin = bin, form = form)

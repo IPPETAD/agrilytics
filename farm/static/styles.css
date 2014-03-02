@@ -11,7 +11,7 @@ h5 {
     color:red;
 }
 p {
-    font-size: 18px;
+    font-size: 16px;
 }
 .starter-template {
   padding: 40px 15px;
@@ -56,4 +56,11 @@ p {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
+}
+.clearfix:after {
+	content:".";
+	visibility:hidden;
+	display:block;
+	height:0;
+	clear:both;
 }
