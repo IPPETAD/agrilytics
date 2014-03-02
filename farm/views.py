@@ -295,22 +295,7 @@ def price_history():
 		month["month"] = month.pop("date")
 		month["price"] = month.pop("value")
 	return json.dumps(history)
-	
-@app.route('/harvests')
-def harvests():
-    harvests = mongo.db.harvests.find()
-    return render_template('harvests.html', harvests=harvests)
 
-@app.route('/harvest/add', methods=['GET', 'POST'])
-def harvest_add():
-    form = forms.HarvestForm()
-    fields = mongo.db.fields.find()
-    field_choices = []
-    for f in fields:
-        field_choices.append((f['name'], [(json.dumps({ 'i': i, '_id': str(f['_id']) }), s['name']) for i,s in enumerate(f['section'])]))
-
-    form.section_from.choices = field_choices
-    return render_template('harvest_add.html', form=form)
 	
 @app.route('/history')
 def history():
