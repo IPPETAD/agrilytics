@@ -26,7 +26,7 @@
     <div class="panel panel-success">
         <div class="panel-heading"><b>{{ field.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{ field._id}}/edit';">Edit</button></b></div>
         <div class="panel-body">
-            <p>Acres: {{ field.section[0].acres }}</p>
+            <p><b>Acres:</b> {{ field.section[0].acres }}</p>
         </div>
     </div>
 </div>
@@ -44,8 +44,8 @@
     <div class="panel panel-success">
         <div class="panel-heading"><b>{{ bin.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='/bin/edit/{{ bin._id}}';">Edit</button></b></div>
         <div class="panel-body">
-            <p>Crop: {{ bin.crop }}</p>
-            <p>Size: {{ bin.size }}</p>
+            <p><b>Crop:</b> {{ bin.crop }}</p>
+            <p><b>Size:</b> {{ bin.size }}</p>
         </div>
     </div>
 </div>
@@ -62,11 +62,11 @@
     <div class="panel panel-success">
         <div class="panel-heading"><b>{{ harvest.date }}</b></div>
         <div class="panel-body">
-            <p>Amount: {{ harvest.amount }} tonnes</p>
-            <p>Crop: {{ harvest.bin.crop }}</p>
-            <p>From Field: {{ harvest.field.name }}</p>
-            <p>From Section: {{ harvest.field.section[harvest.section_from.i].name }}</p>
-            <p>To Bin: {{ harvest.bin.name }}</p>
+            <p><b>Amount:</b> {{ harvest.amount }} tonnes</p>
+            <p><b>Crop:</b> {{ harvest.bin.crop }}</p>
+            <p><b>From Field:</b> {{ harvest.field.name }}</p>
+            <p><b>From Section:</b> {{ harvest.field.section[harvest.section_from.i].name }}</p>
+            <p><b>To Bin:</b> {{ harvest.bin.name }}</p>
         </div>
     </div>
 </div>
