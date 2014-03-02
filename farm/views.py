@@ -19,7 +19,7 @@ def farmer_required(f):
     @wraps(f)
     def func(*args, **kwargs):
         if g.user != 'farmer':
-            return redirect(url_for('login', next=request.url))
+            return redirect(url_for('login', next=request.path))
         return f(*args, **kwargs)
     return func
 
@@ -77,18 +77,20 @@ def field(field_id):
 @app.route('/market')
 def marketplace():
     crop = request.args.get("crop");
-    page = request.args.get("page");
+    page = request.args.get("page", 0, type=int);
     offer_count = mongo.db.offers.find({"crop": crop}).count()
     crop_types = list(mongo.db.crop_types.find())
 
     # TODO: Filter by user name, location
     edits = mongo.db.offers.find().count()
 
-    if page is None:
-        offers = list(mongo.db.offers.find({"crop": crop}))
+    offers = list(mongo.db.offers.find({"crop": crop, "province" : g.province }))
+    offers += list(mongo.db.offers.find({"crop": crop, "province" : { "$ne" : g.province } }))
+    print offers
+    if page == 0:
         return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types, offer_count = offer_count, edits = edits)
     else:
-        offers = list(mongo.db.offers.find({"crop": crop}).limit(10).skip(10*(int(page)-1)))
+        offers = offers[(page-1)*10:page*10]
         return render_template('marketplace.html', offers = offers, crop = crop, crop_types = crop_types, offer_count = offer_count, page = int(page), edits = edits)
     
 
@@ -106,7 +108,7 @@ def marketplace_add():
         choices = [(x['name'],x['label']) for x in crop_types]
         form.crop.choices = choices
 
-        return render_template('marketplace_add.html', form=form)
+        return render_template('marketplace_add.html', form=form, user = g)
 
 @app.route('/market/user', methods=['GET', 'POST'])
 @farmer_required
@@ -373,18 +375,29 @@ def current_crop_price():
 
 @app.route('/login/')
 def login():
-    return render_template('login.html')
+    next = request.args.get("next");
+    return render_template('login.html', next=next)
 
 @app.route('/login/farmer_ab/')
 def login_farmer_ab():
-    response = make_response(redirect(url_for('index')))
+    next = request.args.get("next")
+    if next:
+        response = make_response(redirect(next))
+    else:
+        response = make_response(redirect(url_for('index')))
+    print response
     response.set_cookie('user', 'farmer')
     response.set_cookie('province', 'Alberta')
     return response
 
 @app.route('/login/farmer_on/')
 def login_farmer_on():
-    response = make_response(redirect(url_for('index')))
+    next = request.args.get("next")
+    if next:
+        response = make_response(redirect(next))
+    else:
+        response = make_response(redirect(url_for('index')))
+    print response
     response.set_cookie('user', 'farmer')
     response.set_cookie('province', 'Ontario')
     return response

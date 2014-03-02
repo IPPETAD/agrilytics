@@ -4,6 +4,8 @@
 
 {% block content %}
 
+<script>$("#nav-fields").addClass("active");</script>
+
 <h1>Field {{ form.name.data }} <small>Edit</small></h1>
 <form method="post" role="form" class="form-horizontal">
     {{ form.hidden_tag() }}

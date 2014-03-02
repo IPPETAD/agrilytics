@@ -2,16 +2,9 @@
 
 {% block title %}FarmSpot - CODE 2014{% endblock %}
 
-{% block navbar %}
-<li><a href="/">Home</a></li>
-<li><a href="/fields">Fields</a></li>
-<li><a href="/market">Market</a></li>
-<li class="active"><a href="/contract">Contract</a></li>
-<li><a href="/history">Price History</a></li>
-{% endblock %}
-
 {% block content %}
 
+<script>$("#nav-contract").addClass("active");</script>
 
 <link href="/static/editable-table/index.css" rel="stylesheet">
 <script src="/static/editable-table/mindmup-editabletable.js"></script>

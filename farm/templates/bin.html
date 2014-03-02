@@ -4,6 +4,8 @@
 
 {% block content %}
 
+<script>$("#nav-fields").addClass("active");</script>
+
 <h1>This is Bin: {{ bin.name }}!</h1>
 <h2>{{ bin.size }} tonnes of {{ bin.crop }}</h2>
 <h4><a href="/bin/edit/{{ bin._id }}" class="btn btn-default">Edit</a></h4>
