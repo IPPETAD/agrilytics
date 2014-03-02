@@ -11,11 +11,32 @@
 {% endblock %}
 
 {% block content %}
+<script type="text/javascript">
+
+    var csrftoken = "{{ csrf_token() }}"
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        }
+    })
+    
+    function saveTable() {
+        console.log($('#mainTable').tableToJSON())
+            $.post('/contract/',
+                    {rows: JSON.stringify($('#mainTable').tableToJSON())},
+                    function(data){alert(data)})
+    }
+</script>
 
 
 <link href="/static/editable-table/index.css" rel="stylesheet">
 <script src="/static/editable-table/mindmup-editabletable.js"></script>
 <script src="/static/editable-table/numeric-input-example.js"></script>
+
+<script src="/static/tableToJson/src/jquery.tabletojson.js"></script>
 
 <!-- Title -->
 <h2>Your Contracts</h2>
@@ -32,12 +53,13 @@
                 <td>{{ contract.company }}</td>
                 <td>{{ contract.tonnes }}</td>
                 <td>{{ contract.fixed }}</td>
-                <td>{{ contract.price_per_tonne }}</td>
+                <td>{{ contract.pricepertonne }}</td>
                 <td>{{ contract.value }}</td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
+<button onclick='saveTable(true)' class='btn btn-primary'>Save</button>
 
 
 <script>

@@ -236,11 +236,22 @@ def bin_edit(bin_id):
         form.crop.data = bin['crop']
         return render_template('bin_edit.html', form=form)
 
-@app.route('/contract/')
+@app.route('/contract/', methods=['GET', 'POST'])
 @farmer_required
 def contracts():
     contracts = mongo.db.contracts.find({'province': g.province})
     crop_types = list(mongo.db.crop_types.find())
+    if request.method == 'POST':
+        print request.form.keys()
+        json_str = json.loads(request.form['rows'])
+        print json_str
+        mongo.db.contracts.remove({'province': g.province})
+        for row in json_str:
+            post = {'crop': row.get('Crop'), 'company': row.get('Company'), 'tonnes': row.get('Tonnes'),
+                    'fixed': row.get('Fixed'), 'pricepertonne': row.get('Price per Tonne'),
+                    'value': row.get('Contract Value'), 'province': g.province}
+            mongo.db.contracts.insert(post)
+        return "Contracts Saved"
     return render_template('contracts.html', contracts=contracts, crop_types=crop_types)
     
 
