@@ -35,9 +35,29 @@ def index():
 @app.route('/fields')
 @farmer_required
 def fields():
-    fields = mongo.db.fields.find({'province': g.province})
-    bins = mongo.db.bins.find({'province' : g.province})
-    return render_template('fields.html', fields = fields, bins = bins)
+    fields = list(mongo.db.fields.find({'province': g.province}))
+    bins = list(mongo.db.bins.find({'province' : g.province}))
+    harvests = list(mongo.db.harvests.find({'province': g.province}))
+
+    # Jacob was using these for harvests. Just copying his code.
+    # What works in Rome... comes out of Rome when it's refactored? No.. that's not how it goes. Hmm
+    field_ids = [ObjectId(h['section_from']['_id']) for h in harvests]
+    bin_ids = [ObjectId(h['bin_to']) for h in harvests]
+    hbins = list(mongo.db.bins.find({ '_id': { '$in': bin_ids } }))
+    hfields = list(mongo.db.fields.find({ '_id':{ '$in': field_ids } }))
+
+    for h in harvests:
+        h['date'] = h['date'].strftime('%Y-%m-%d')
+        for f in hfields:
+            if str(f['_id']) == h['section_from']['_id']:
+                h['field'] = f
+                break
+        for b in hbins:
+            if  str(b['_id']) == h['bin_to']:
+                h['bin'] = b
+                break
+
+    return render_template('fields.html', fields = fields, bins = bins, harvests = harvests)
 
 @app.route('/field/<field_id>/')
 @farmer_required
@@ -300,29 +320,6 @@ def history():
     crop_types = list(mongo.db.crop_types.find({"gov_label":{"$exists":"true"}}))
     provinces = ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Nova Scotia", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan"]
     return render_template('history.html', crop = crop, crop_types = crop_types, provinces = provinces)
-
-
-@app.route('/harvests')
-@farmer_required
-def harvests():
-    harvests = list(mongo.db.harvests.find({'province': g.province}))
-    bin_ids = [ObjectId(h['bin_to']) for h in harvests]
-    bins = list(mongo.db.bins.find({ '_id': { '$in': bin_ids } }))
-    field_ids = [ObjectId(h['section_from']['_id']) for h in harvests]
-    fields = list(mongo.db.fields.find({ '_id':{ '$in': field_ids } }))
-    
-    for h in harvests:
-        h['date'] = h['date'].strftime('%Y-%m-%d')
-        for f in fields:
-            if str(f['_id']) == h['section_from']['_id']:
-                h['field'] = f
-                break
-        for b in bins:
-            if  str(b['_id']) == h['bin_to']:
-                h['bin'] = b
-                break
-
-    return render_template('harvests.html', harvests = harvests)
 
 @app.route('/harvest/add', methods=['GET', 'POST'])
 @farmer_required
