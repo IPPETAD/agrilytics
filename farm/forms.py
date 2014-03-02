@@ -1,7 +1,6 @@
 from flask_wtf import Form
 from wtforms import fields, validators
 from farm import wtforms_extended_selectfield as extfields
-import time
 
 class FieldForm(Form):
     name = fields.StringField('Name', [validators.required()])
@@ -37,7 +36,7 @@ class ContractForm(Form):
     price = fields.FloatField('Price')
 
 class HarvestForm(Form):
-    date = fields.DateTimeField('Date', format='%Y-%m-%d', validators=[validators.required()])
+    date = fields.DateTimeField('Date', id="date", format='%Y-%m-%d', validators=[validators.required()])
     section_from = extfields.ExtendedSelectField('From Field Section', id='section_from', validators=[validators.NoneOf(-1, message="Please select a field") , validators.required()])
     bin_to = fields.SelectField('To Bin', id='bin_to', choices=[], validators=[validators.required()])
     amount = fields.FloatField('Size in tonnes', validators=[validators.required()])

@@ -3,6 +3,38 @@
 {% block title %}New Harvest{% endblock %}
 
 {% block content %}
+
+<script type=text/javascript>
+    $(function () {
+        window.prettyPrint && prettyPrint();
+
+        $('#date').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+
+        var submit_form = function (e) {
+            if ($('#section_from').val() == -1) {
+                $("#bin_to").children().remove();
+                return;
+            }
+
+            $.getJSON($SCRIPT_ROOT + '/harvest/inc', {
+                value: $('#section_from').val()
+            }, function (data) {
+                $("#bin_to").children().remove();
+                $('#bin_to').append('<option value="-1">Choose One...</option')
+                data.forEach(function (entry) {
+                    $('#bin_to').append('<option value="' + entry['_id'] + '">' + entry['name'] + '</option')
+                });
+            });
+            return false;
+        };
+
+        $('#section_from').bind('change', submit_form);
+
+    });
+</script>
+
 <h1>Harvest <small>New</small></h1>
 
 <form method="post" role="form" class="form-horizontal">
@@ -33,32 +65,6 @@
     </div>
     <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
 </form>
-
-<script type=text/javascript>
-    $(function () {
-        var submit_form = function (e) {
-            if ($('#section_from').val() == -1) {
-                $("#bin_to").children().remove();
-                return;
-            }
-
-            $.getJSON($SCRIPT_ROOT + '/harvest/inc', {
-                value: $('#section_from').val()
-            }, function (data) {
-                $("#bin_to").children().remove();
-                $('#bin_to').append('<option value="-1">Choose One...</option')
-                data.forEach(function (entry) {
-                    $('#bin_to').append('<option value="' + entry['_id'] + '">' + entry['name'] + '</option')
-                });
-            });
-            return false;
-        };
-
-        $('#section_from').bind('change', submit_form);
-
-    });
-</script>
-
 
 
 {% endblock %}

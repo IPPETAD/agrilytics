@@ -8,6 +8,7 @@ from flask.ext.pymongo import PyMongo
 from bson.objectid import ObjectId
 
 import json
+from datetime import date
 
 app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
 
@@ -304,14 +305,37 @@ def history():
 @app.route('/harvests')
 @farmer_required
 def harvests():
-    harvests = mongo.db.harvests.find({'province': g.province})
-    return render_template('harvests.html', harvests=harvests)
+    harvests = list(mongo.db.harvests.find({'province': g.province}))
+    bin_ids = [ObjectId(h['bin_to']) for h in harvests]
+    bins = list(mongo.db.bins.find({ '_id': { '$in': bin_ids } }))
+    field_ids = [ObjectId(h['section_from']['_id']) for h in harvests]
+    fields = list(mongo.db.fields.find({ '_id':{ '$in': field_ids } }))
+    
+    for h in harvests:
+        h['date'] = h['date'].strftime('%Y-%m-%d')
+        for f in fields:
+            if str(f['_id']) == h['section_from']['_id']:
+                h['field'] = f
+                break
+        for b in bins:
+            if  str(b['_id']) == h['bin_to']:
+                h['bin'] = b
+                break
+
+    return render_template('harvests.html', harvests = harvests)
 
 @app.route('/harvest/add', methods=['GET', 'POST'])
 @farmer_required
 def harvest_add():
     form = forms.HarvestForm()
     fields = mongo.db.fields.find({'province': g.province})
+    if request.method == 'POST':
+        post = { 'section_from': json.loads(form.section_from.data), 'bin_to': form.bin_to.data, 'date': form.date.data, 'amount': form.amount.data , 'province': g.province }
+        harvest_id = mongo.db.harvests.insert(post)
+        return redirect(url_for('bin', bin_id = form.bin_to.data))
+    
+    form.date.data = date.today()
+    fields = mongo.db.fields.find()
     field_choices = [(-1, 'Choose one...')]
     for f in fields:
         field_choices.append((f['name'], [(json.dumps({ 'i': i, '_id': str(f['_id']) }), s['name']) for i,s in enumerate(f['section'])]))
@@ -331,7 +355,6 @@ def harvest_update():
         bin['_id'] = str(bin['_id'])
     
     return json.dumps(bins)
-    
 @app.route('/api/_marketprice')
 def current_crop_price():
     crop_name = request.args.get('crop')
