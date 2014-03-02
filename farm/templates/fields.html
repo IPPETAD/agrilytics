@@ -18,13 +18,14 @@
 {% for field in fields %}
 <div class="col-lg-6" style="padding-left:0px;">
     <div class="panel panel-success">
-        <div class="panel-heading"><b><a style="color: #3c763d" href="/field/{{field._id}}">{{ field.name }}</a><button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{ field._id}}/edit';">Edit</button></b></div>
+        <div class="panel-heading"><b>{{ field.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{field._id}}';">Edit</button></b></div>
         <div class="panel-body">
             {% if field.section %}
             <p><b>Acres:</b> {{ field.section[0].acres }}</p>
             {% else %}
             <p><b>Acres:</b> No sections set</p>
             {% endif %}
+            <hr />
             <h4>Farmer's Almanac</h4>
             <p><b>High (2013):</b> {{max_temp.text}} {{max_temp.attrib.units}}</p>
             <p><b>Low (2013):</b> {{min_temp.text}} {{min_temp.attrib.units}}</p>
