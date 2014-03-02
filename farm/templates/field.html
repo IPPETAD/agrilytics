@@ -9,10 +9,10 @@
 <!-- Delete Button -->
 <form method="post" role="form" onsubmit="return confim('Are you sure you want to delete this field? It cannot be undone.')">
     {{ form_delete.hidden_tag() }}
-    <button type="submit" value="delete" class="btn btn-primary btn-danger" style="float:right;">Delete</button>
+    <button type="submit" value="delete" class="btn btn-primary btn-danger" style="float:right;">{% trans %}Delete{% endtrans %}</button>
 </form>
 
-<h2>Field {{field.name}}</h2>
+<h2>{% trans %}Field{% endtrans %} {{field.name}}</h2>
 
 <script>
 var geo = {{field.geo|safe or []}};
@@ -42,7 +42,7 @@ loadStaticMap(geo);
     </div>
     <div class="form-group">
         <div class="col-sm-9">
-            <button type="submit" value="confirm" class="btn btn-primary" style="float:right">Submit</button>
+            <button type="submit" value="confirm" class="btn btn-primary" style="float:right">{% trans %}Submit{% endtrans %}</button>
         </div>
     </div>
     <div class="clearfix"></div>
@@ -50,19 +50,19 @@ loadStaticMap(geo);
 
 <!-- Section data -->
 {% if field.section %}
-<h3>Related Sections   <button class="btn btn-default btn-success" onclick="document.location.href='section/add';">New</button></h3>
+<h3>Related Sections   <button class="btn btn-default btn-success" onclick="document.location.href='section/add';">{% trans %}New{% endtrans %}</button></h3>
 
 {% for section in field.section %}
 <div class="col-lg-6" style="padding-left:0px;">
     <div class="panel panel-success">
-        <div class="panel-heading"><b>{{ section.name }}</b><button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='section/{{field.section.index(section)}}/edit';">Edit</button></div>
+        <div class="panel-heading"><b>{{ section.name }}</b><button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='section/{{field.section.index(section)}}/edit';">{% trans %}Edit{% endtrans %}</button></div>
         <div class="panel-body">
             {% for crop_type in crop_types %}
             {% if section.crop == crop_type.name %}
-            <p><b>Crop:</b> {{crop_type.label}}</p>
+            <p><b>{% trans %}Crop{% endtrans %}:</b> {{crop_type.label}}</p>
             {% endif %}
             {% endfor %}
-            <p><b>Acres:</b> {{section.acres}}</p>
+            <p><b>{% trans %}Acres{% endtrans %}:</b> {{section.acres}}</p>
         </div>
     </div>
 </div>
@@ -72,7 +72,7 @@ loadStaticMap(geo);
 
 
 {% else %}
-<p>There are no sections. <a href="section/add">Add one!</a></p>
+<p>There are no sections. <a href="section/add">{% trans %}Add one{% endtrans %}!</a></p>
 {% endif %}
 
 

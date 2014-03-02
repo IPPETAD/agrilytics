@@ -33,7 +33,8 @@
 
 </script>
 
-<h2>Your Marketplace Listings</h2>
+
+<h1>{% trans %}Your Marketplace Listings{% endtrans %}</h1>
 <p>These are the listings you have put on the MarketPlace! You can easily delete existing objects or add new ones from the marketplace.</p>
 <!-- <p>Ce sont les annonces que vous avez mis sur le MarketPlace! Vous pouvez facilement supprimer des objets existants ou en ajouter de nouvelles du marché.</p> -->
 
@@ -51,9 +52,9 @@
             {% endfor %}
         </b></div>
         <div class="panel-body">
-            <button style="float:right;" class="btn btn-danger" onclick="deleteOffer('{{ offer._id }}')">Delete</button>
-            <p><b>Tonnes:</b> {{offer.tonnes}}</p>
-            <p><b>Price:</b> {{offer.price}}</p>
+            <button style="float:right;" class="btn btn-danger" onclick="deleteOffer('{{ offer._id }}')">{% trans %}Delete{% endtrans %}</button>
+            <p><b>{% trans %}Tonnes{% endtrans %}:</b> {{offer.tonnes}}</p>
+            <p><b>{% trans %}Price{% endtrans %}:</b> {{offer.price}}</p>
         </div>
     </div>
 </div>

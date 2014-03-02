@@ -5,6 +5,7 @@ from flask import render_template, request, url_for, redirect, abort, jsonify, m
 from flask_wtf.csrf import CsrfProtect
 from xml.etree import ElementTree as emtree
 from flask.ext.pymongo import PyMongo
+from flask.ext.babel import Babel
 from bson.objectid import ObjectId
 import requests
 import json
@@ -13,6 +14,7 @@ from datetime import date
 app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
 
 mongo = PyMongo(app)
+babel = Babel(app)
 csrf = CsrfProtect(app)
 
 TORONTO_WEATHER_DATA = r'http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=xml&stationID=30247&Year=2013&Month=3&Day=1&timeframe=2&submit=Download+Data'

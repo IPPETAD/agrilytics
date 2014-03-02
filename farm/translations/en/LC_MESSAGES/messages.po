@@ -1,0 +1,345 @@
+# English translations for PROJECT.
+# Copyright (C) 2014 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2014-03-02 13:20-0700\n"
+"PO-Revision-Date: 2014-03-02 13:21-0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+
+#: templates/base.html:51
+msgid "Toggle navigation"
+msgstr ""
+
+#: templates/base.html:56
+msgid "FarmSpot"
+msgstr ""
+
+#: templates/base.html:60
+msgid "Your Farm"
+msgstr ""
+
+#: templates/base.html:61
+msgid "Market"
+msgstr ""
+
+#: templates/base.html:62
+msgid "Contracts"
+msgstr ""
+
+#: templates/base.html:63 templates/history.html:9
+msgid "Price History"
+msgstr ""
+
+#: templates/bin.html:14 templates/contract.html:23 templates/field.html:12
+#: templates/marketplace_user.html:52 templates/section.html:41
+#: templates/section_edit.html:12
+msgid "Delete"
+msgstr ""
+
+#: templates/bin_add.html:33 templates/bin_edit.html:33 templates/field.html:45
+#: templates/field_add.html:28 templates/field_edit.html:27
+#: templates/harvest_add.html:70 templates/marketplace_add.html:46
+#: templates/section_add.html:33 templates/section_edit.html:38
+msgid "Submit"
+msgstr ""
+
+#: templates/bin_edit.html:9
+msgid "Bin"
+msgstr ""
+
+#: templates/bin_edit.html:9 templates/contract.html:12 templates/field.html:58
+#: templates/field_edit.html:9 templates/fields.html:21
+#: templates/fields.html:48 templates/section_edit.html:15
+msgid "Edit"
+msgstr ""
+
+#: templates/contract.html:10
+msgid "Contract"
+msgstr ""
+
+#: templates/contract.html:10 templates/section.html:10
+msgid "Details"
+msgstr ""
+
+#: templates/contract.html:15 templates/contracts.html:39
+#: templates/field.html:62 templates/fields.html:50 templates/fields.html:69
+#: templates/section.html:36
+msgid "Crop"
+msgstr ""
+
+#: templates/contract.html:16 templates/contracts.html:39
+#: templates/marketplace.html:87 templates/marketplace_user.html:53
+msgid "Tonnes"
+msgstr ""
+
+#: templates/contract.html:17 templates/contracts.html:39
+msgid "Fixed"
+msgstr ""
+
+#: templates/contract.html:18 templates/contracts.html:39
+msgid "Price per Tonne"
+msgstr ""
+
+#: templates/contract.html:19
+msgid "Total Value"
+msgstr ""
+
+#: templates/contract.html:26
+msgid "Back to your contracts"
+msgstr ""
+
+#: templates/contracts.html:34
+msgid "Your Contracts"
+msgstr ""
+
+#: templates/contracts.html:35
+msgid ""
+"Use our Cloud Services to keep track of your contracts. This simple "
+"spreadsheet can be easily accessed from your office computer or cellular "
+"phone!"
+msgstr ""
+
+#: templates/contracts.html:39
+msgid "Company"
+msgstr ""
+
+#: templates/contracts.html:39
+msgid "Contract Value"
+msgstr ""
+
+#: templates/field.html:15 templates/field_add.html:9
+#: templates/field_edit.html:9
+msgid "Field"
+msgstr ""
+
+#: templates/field.html:53 templates/field_add.html:9
+#: templates/harvest_add.html:40 templates/section_add.html:9
+msgid "New"
+msgstr ""
+
+#: templates/field.html:65 templates/fields.html:24 templates/fields.html:26
+#: templates/section.html:37
+msgid "Acres"
+msgstr ""
+
+#: templates/field.html:75
+msgid "Add one"
+msgstr ""
+
+#: templates/field_edit.html:32 templates/section_edit.html:43
+msgid "Go Back"
+msgstr ""
+
+#: templates/fields.html:10
+msgid "Your Fields and Bins"
+msgstr ""
+
+#: templates/fields.html:11
+msgid ""
+"Managing your fields and bins has never been easier! Start off by drawing"
+" a new field of your own or browse some of the existing fields"
+msgstr ""
+
+#: templates/fields.html:14
+msgid "Fields"
+msgstr ""
+
+#: templates/fields.html:15 templates/fields.html:42 templates/fields.html:60
+msgid "Add"
+msgstr ""
+
+#: templates/fields.html:26
+msgid "No sections set"
+msgstr ""
+
+#: templates/fields.html:29
+msgid "Farmer's Almanac"
+msgstr ""
+
+#: templates/fields.html:30
+msgid "High"
+msgstr ""
+
+#: templates/fields.html:31
+msgid "Low"
+msgstr ""
+
+#: templates/fields.html:32
+msgid "Total Precipitaion"
+msgstr ""
+
+#: templates/fields.html:51
+msgid "Size"
+msgstr ""
+
+#: templates/fields.html:59
+msgid "Your Harvests"
+msgstr ""
+
+#: templates/fields.html:68
+msgid "Amount"
+msgstr ""
+
+#: templates/fields.html:70
+msgid "From Field"
+msgstr ""
+
+#: templates/fields.html:71
+msgid "From Section"
+msgstr ""
+
+#: templates/fields.html:72
+msgid "To Bin"
+msgstr ""
+
+#: templates/fields.html:82 templates/marketplace.html:101
+msgid "Reset Demo Table"
+msgstr ""
+
+#: templates/harvest_add.html:40
+msgid "Harvest"
+msgstr ""
+
+#: templates/history.html:10
+msgid ""
+"Select a province and commodity to see historical prices. Please be aware"
+" that price data is not available for all province / crop combinations"
+msgstr ""
+
+#: templates/history.html:17
+msgid "Rye"
+msgstr ""
+
+#: templates/history.html:31
+msgid "Alberta"
+msgstr ""
+
+#: templates/home.html:8
+msgid ""
+"Track profitability, monitor field rainfall, connect through the "
+"Marketplace, and so much more... "
+msgstr ""
+
+#: templates/home.html:17
+msgid "Manage"
+msgstr ""
+
+#: templates/home.html:18
+msgid ""
+"FarmSpot helps you manage your produce and contracts from anywhere. Stay "
+"informed on rainfall in your area. View the current and expected market "
+"prices locally and abroad"
+msgstr ""
+
+#: templates/home.html:26
+msgid "Sell"
+msgstr ""
+
+#: templates/home.html:27
+msgid ""
+"Sell your produce or browse for what you need. Our marketplace is easily "
+"filterable by crop type and location to help you find what you need, or "
+"to check out your competitors"
+msgstr ""
+
+#: templates/home.html:36
+msgid "Analyze"
+msgstr ""
+
+#: templates/home.html:37
+msgid ""
+"Using government open data, view past market prices on the various crops,"
+" be informed on present market prices, and predict what to expect in the "
+"future"
+msgstr ""
+
+#: templates/login.html:6
+msgid "Select a Beta Account"
+msgstr ""
+
+#: templates/login.html:7
+msgid ""
+"Log in using one of our beta accounts to navigate the site. This service "
+"uses Open Data resources to provide information specific to your area. "
+"You can still add and edit the existing data -- these accounts just help "
+"you get started on the right foot"
+msgstr ""
+
+#: templates/login.html:12 templates/login.html:15
+msgid "Albertan Farmer"
+msgstr ""
+
+#: templates/login.html:13 templates/login.html:16
+msgid "Ontario Farmer"
+msgstr ""
+
+#: templates/marketplace.html:9 templates/marketplace_add.html:9
+msgid "Welcome to the MarketPlace"
+msgstr ""
+
+#: templates/marketplace.html:10
+msgid ""
+"Browse available produce on the marketplace or post your own! The market "
+"is waiting for you"
+msgstr ""
+
+#: templates/marketplace.html:16
+msgid "Post Listing"
+msgstr ""
+
+#: templates/marketplace.html:22
+msgid "Your Listings"
+msgstr ""
+
+#: templates/marketplace.html:39
+msgid "Search Public Listings"
+msgstr ""
+
+#: templates/marketplace.html:60
+msgid "Prev"
+msgstr ""
+
+#: templates/marketplace.html:69
+msgid "Next"
+msgstr ""
+
+#: templates/marketplace.html:88
+msgid "User"
+msgstr ""
+
+#: templates/marketplace.html:89 templates/marketplace_user.html:54
+msgid "Price"
+msgstr ""
+
+#: templates/marketplace.html:90
+msgid "Province"
+msgstr ""
+
+#: templates/marketplace_add.html:24
+msgid "tonnes"
+msgstr ""
+
+#: templates/marketplace_user.html:36
+msgid "Your Marketplace Listings"
+msgstr ""
+
+#: templates/section.html:10 templates/section_add.html:9
+msgid "Section"
+msgstr ""
+
+#: templates/section.html:44
+msgid "Back to your field"
+msgstr ""
+

@@ -53,7 +53,11 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-leaf"></span> {% trans %}FarmSpot{% endtrans %}</a>
+<<<<<<< HEAD
+	          <a class="navbar-brand" href="/">{% trans %}FarmSpot{% endtrans %}</a>
+=======
+	          <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-leaf"></span> FarmSpot</a>
+>>>>>>> 18e8fe63f65393436118f8f205bffdaf2faa15b2
 	        </div>
 	        <div class="collapse navbar-collapse">
 	          <ul class="nav navbar-nav">
@@ -110,37 +114,11 @@
 			and more.
 		
         {% endblock %}
-		
-		<!-- Piwik -->
-		<script type="text/javascript">
-		  var _paq = _paq || [];
-		  _paq.push(["trackPageView"]);
-		  _paq.push(["enableLinkTracking"]);
-
-		  (function() {
-		    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://clientstats.ranek.org/";
-		    _paq.push(["setTrackerUrl", u+"piwik.php"]);
-		    _paq.push(["setSiteId", "17"]);
-		    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
-		    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
-		  })();
-		</script>
-		<!-- End Piwik Code -->
-		
     </div>
   
 </div><!-- /.container -->
 
- <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-48567843-1', 'farmspot.herokuapp.com');
-  ga('send', 'pageview');
-
-</script> 
+  
 
 	
 </body>

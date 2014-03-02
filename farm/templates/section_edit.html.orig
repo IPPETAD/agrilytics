@@ -1,14 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}New Field{% endblock %}
+{% block title %}FarmSpot - Edit {{form.name.data}}{% endblock %}
 
 {% block content %}
 
 <script>$("#nav-fields").addClass("active");</script>
 
-<h1>{% trans %}Section{% endtrans %} <small>{% trans %}New{% endtrans %}</small></h1>
+<<<<<<< HEAD
+<h1>{% trans %}Field{% endtrans %} {{ form.name.data }} <small>{% trans %}Edit{% endtrans %}</small></h1>
+=======
+<!-- Delete Button -->
+<form method="post" role="form" onsubmit="return confim('Are you sure you want to delete this field? It cannot be undone.')">
+    {{ form_delete.hidden_tag() }}
+    <button type="submit" value="delete" class="btn btn-primary btn-danger" style="float:right;">Delete</button>
+</form>
 
-<form method="post" action="/field/{{ field_id }}/section/add" role="form" class="form-horizontal">
+<h1>Section {{ form.name.data }} <small>Edit</small></h1>
+>>>>>>> 18e8fe63f65393436118f8f205bffdaf2faa15b2
+<form method="post" role="form" class="form-horizontal">
     {{ form.hidden_tag() }}
     <div class="form-group">
         {{ form.name.label(class_='col-sm-3 control-label') }}
@@ -35,5 +44,10 @@
     </div>
     <div class="clearfix"></div>
 </form>
+<<<<<<< HEAD
+<p><a href="/field/{{ field_id }}/section/{{ name }}">{% trans %}Go Back{% endtrans %}</a></p>
+=======
+<p><a href='/field/{{ field_id }}/'>Go Back</a></p>
+>>>>>>> 18e8fe63f65393436118f8f205bffdaf2faa15b2
 
 {% endblock %}

@@ -31,12 +31,12 @@
 <script src="/static/tableToJson/src/jquery.tabletojson.js"></script>
 
 <!-- Title -->
-<h2>Your Contracts</h2>
-<p>Use our Cloud Services to keep track of your contracts. This simple spreadsheet can be easily accessed from your office computer or cellular phone!</p>
+<h2>{% trans %}Your Contracts{% endtrans %}</h2>
+<p>{% trans %}Use our Cloud Services to keep track of your contracts. This simple spreadsheet can be easily accessed from your office computer or cellular phone!{% endtrans %}</p>
 
 <!-- Spread Sheet -->
 <table id="mainTable" class="table table-striped">
-    <thead id="headTable"><tr><th class="symbol"</th><th>Crop</th><th>Company</th><th>Tonnes</th><th>Fixed</th><th>Price per Tonne</th><th>Contract Value</th></tr></thead>
+    <thead id="headTable"><tr><th class="symbol"></th><th>{% trans %}Crop{% endtrans %}</th><th>{% trans %}Company{% endtrans %}</th><th>{% trans %}Tonnes{% endtrans %}</th><th>{% trans %}Fixed{% endtrans %}</th><th>{% trans %}Price per Tonne{% endtrans %}</th><th>{% trans %}Contract Value{% endtrans %}</th></tr></thead>
     <tbody>
         {% for contract in contracts %}
             <tr>
