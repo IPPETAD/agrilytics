@@ -240,20 +240,28 @@ def section(field_id, index):
 @farmer_required
 def section_edit(field_id, index):
     form = forms.SectionForm()
+    delete_form = forms.DeleteForm()
+    crop_types = list(mongo.db.crop_types.find())
+    choices = [(x['name'],x['label']) for x in crop_types]
+    form.crop.choices = choices
     field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
     section = field['section'][int(index)]
     if request.method == 'POST':
+        if 'delete' in request.form.keys():
+            field['section'].remove(section)
+            mongo.db.fields.save(field)
+            return redirect(url_for('field', field_id=field_id))
         if form.validate_on_submit():
             section['name'] = form.name.data
             section['crop'] = form.crop.data
             section['acres'] = form.acres.data
             mongo.db.fields.save(field)
-            return redirect(url_for('section', field_id=field_id, index=index))
+            return redirect(url_for('field', field_id=field_id))
     else:
         form.name.data = section['name']
         form.acres.data = section['acres']
         form.crop.data = section['crop']
-        return render_template('section_edit.html', form=form, field_id=field_id, index=index)
+        return render_template('section_edit.html', form=form, form_delete=delete_form,  field_id=field_id, index=index)
 
 @app.route('/bin/<bin_id>', methods=['GET', 'POST'])
 @farmer_required

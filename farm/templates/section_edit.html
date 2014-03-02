@@ -6,7 +6,13 @@
 
 <script>$("#nav-fields").addClass("active");</script>
 
-<h1>Field {{ form.name.data }} <small>Edit</small></h1>
+<!-- Delete Button -->
+<form method="post" role="form" onsubmit="return confim('Are you sure you want to delete this field? It cannot be undone.')">
+    {{ form_delete.hidden_tag() }}
+    <button type="submit" value="delete" class="btn btn-primary btn-danger" style="float:right;">Delete</button>
+</form>
+
+<h1>Section {{ form.name.data }} <small>Edit</small></h1>
 <form method="post" role="form" class="form-horizontal">
     {{ form.hidden_tag() }}
     <div class="form-group">
@@ -34,6 +40,6 @@
     </div>
     <div class="clearfix"></div>
 </form>
-<p><a href='/field/{{ field_id }}/section/{{ name }}'>Go Back</a></p>
+<p><a href='/field/{{ field_id }}/'>Go Back</a></p>
 
 {% endblock %}
