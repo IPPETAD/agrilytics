@@ -8,9 +8,20 @@
 {% block content %}
 
 <script type="text/javascript">
+
+    var csrftoken = "{{ csrf_token() }}"
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        }
+    })
+
     function deleteOffer(offer_id) {
         $.ajax({
-            url: '/marketplace/delete/' + offer_id,
+            url: '/marketplace/_delete/' + offer_id,
             type: 'DELETE',
             success: function (result) {
                 $('#' + offer_id).slideUp("normal", 
@@ -38,7 +49,7 @@
     <p>User: {{offer.user}}</p>
     <p>Price: {{offer.price}}</p>
     
-    <button value="confirm" class="btn btn-danger" onclick="deleteOffer({{ offer_id }})">Delete</button>
+    <button class="btn btn-danger" onclick="deleteOffer('{{ offer._id }}')">Delete</button>
 </div>
 {% endfor %}
 

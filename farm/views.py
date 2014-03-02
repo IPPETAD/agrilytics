@@ -80,10 +80,10 @@ def marketplace_user():
     crop_types = list(mongo.db.crop_types.find())
     return render_template('marketplace_user.html', offers = offers, crop_types = crop_types)    
 
-@app.route('/marketplace/delete/<offer_id>', methods=['DELETE'])
+@app.route('/marketplace/_delete/<offer_id>', methods=['DELETE'])
 def marketplace_delete(offer_id):
     if mongo.db.offers.remove({ "_id" : ObjectId(offer_id) }):
-        return 
+        return jsonify(True)
 
 @app.route('/field/add', methods=['GET', 'POST'])
 def field_add():
