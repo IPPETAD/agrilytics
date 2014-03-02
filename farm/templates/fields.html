@@ -25,6 +25,10 @@
             {% else %}
             <p><b>Acres:</b> No sections set</p>
             {% endif %}
+            <h4>Farmer's Almanac</h4>
+            <p><b>High (2013):</b> {{max_temp.text}} {{max_temp.attrib.units}}</p>
+            <p><b>Low (2013):</b> {{min_temp.text}} {{min_temp.attrib.units}}</p>
+            <p><b>Total Precipitaion (2013):</b> {{total_precip.text}} {{total_precip.attrib.units}}</p>
         </div>
     </div>
 </div>

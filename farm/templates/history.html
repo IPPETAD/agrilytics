@@ -7,22 +7,14 @@
 <script>$("#nav-history").addClass("active");</script>
 
 <h2>Price History</h2>
-<p>Select a province and commodity to see historical prices.</p>
+<p>Select a province and commodity to see historical prices. Please be aware that price data is not available for all province / crop combinations.</p>
 
 <!-- Search Dropdown -->
 <div class="dropdown">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dd1">
         <span class="glyphicon glyphicon-search"></span>
 		<span id="current_crop">
-        {% if crop %}
-        {% for crop_type in crop_types %}
-        {% if crop == crop_type.name %}
-        {{ crop_type.label }}
-        {% endif %}
-        {% endfor %}
-        {% else %}
-        Search Public Listings
-        {% endif %}
+			Rye
 		</span>
         <span class="caret"></span>
     </button>

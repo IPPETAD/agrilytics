@@ -3,10 +3,10 @@ from farm import forms
 from functools import wraps
 from flask import render_template, request, url_for, redirect, abort, jsonify, make_response, g
 from flask_wtf.csrf import CsrfProtect
-
+from xml.etree import ElementTree as emtree
 from flask.ext.pymongo import PyMongo
 from bson.objectid import ObjectId
-
+import requests
 import json
 from datetime import date
 
@@ -14,6 +14,10 @@ app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/F
 
 mongo = PyMongo(app)
 csrf = CsrfProtect(app)
+
+TORONTO_WEATHER_DATA = r'http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=xml&stationID=30247&Year=2013&Month=3&Day=1&timeframe=2&submit=Download+Data'
+
+SMOKY_LAKE_WEATHER_DATA = r'http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=xml&stationID=32456&Year=2013&Month=3&Day=1&timeframe=2&submit=Download+Data'
 
 def farmer_required(f):
     @wraps(f)
@@ -38,7 +42,19 @@ def fields():
     fields = list(mongo.db.fields.find({'province': g.province}))
     bins = list(mongo.db.bins.find({'province' : g.province}))
     harvests = list(mongo.db.harvests.find({'province': g.province}))
-
+    weather_link = SMOKY_LAKE_WEATHER_DATA if g.province == 'Alberta' else TORONTO_WEATHER_DATA
+    weather_xml = requests.get(weather_link)
+    weather_xml.encoding = 'utf-8'
+    today = date.today()
+    root = emtree.fromstring(weather_xml.content)
+    station_data = {}
+    for child in root:
+        if child.attrib.get('month') == str(today.month) and child.attrib.get('day') == str(today.day):
+            station_data = child
+            break
+    max_temp = filter(lambda x: x.tag == "maxtemp", station_data)[0]
+    min_temp = filter(lambda x: x.tag == "mintemp", station_data)[0]
+    total_precip = filter(lambda x: x.tag == "totalprecipitation", station_data)[0]
     # Jacob was using these for harvests. Just copying his code.
     # What works in Rome... comes out of Rome when it's refactored? No.. that's not how it goes. Hmm
     field_ids = [ObjectId(h['section_from']['_id']) for h in harvests]
@@ -57,7 +73,8 @@ def fields():
                 h['bin'] = b
                 break
 
-    return render_template('fields.html', fields = fields, bins = bins, harvests = harvests)
+    return render_template('fields.html', fields = fields, bins = bins, harvests = harvests, max_temp=max_temp,
+                           min_temp=min_temp, total_precip=total_precip)
 
 @app.route('/market')
 def marketplace():
@@ -360,7 +377,7 @@ def price_history():
 	province = request.args["province"]
 	crop = request.args["crop"]
 	history = []
-	history = list ( mongo.db.gov_prices.find({"province": province, "crop": crop}, { "date": 1, "value": 1, "_id":0 }) )
+	history = list ( mongo.db.gov_prices.find({"province": province, "crop": crop}, { "date": 1, "value": 1, "_id":0 }).sort("date", 1) )
 	for month in history:
 		month["month"] = month.pop("date")
 		month["price"] = month.pop("value")
