@@ -273,11 +273,21 @@ def harvest_add():
 @app.route('/harvest/inc')
 def harvest_update():
     """Add two numbers server side, ridiculous but well..."""
-    value = json.loads(request.args.get('value'))['_id']
+    field_id = json.loads(request.args.get('value'))['_id']
+    field = list(mongo.db.fields.find({"_id": ObjectId(field_id)}))
+    crop_type = field[0]['section'][0]['crop']
+
+    bins = list(mongo.db.bins.find({"crop" : crop_type}))
+    for bin in bins:
+        bin['_id'] = str(bin['_id'])
+
+    print field_id
+    print field
+    print crop_type
+    print bins
     
-    # TODO : value is ID of selected item.
+    return json.dumps(bins)
     
-    return jsonify("String that goes back")
 
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'
