@@ -306,7 +306,7 @@ def harvests():
 def harvest_add():
     form = forms.HarvestForm()
     fields = mongo.db.fields.find()
-    field_choices = []
+    field_choices = [(-1, 'Choose one...')]
     for f in fields:
         field_choices.append((f['name'], [(json.dumps({ 'i': i, '_id': str(f['_id']) }), s['name']) for i,s in enumerate(f['section'])]))
 

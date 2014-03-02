@@ -37,10 +37,16 @@
 <script type=text/javascript>
     $(function () {
         var submit_form = function (e) {
+            if ($('#section_from').val() == -1) {
+                $("#bin_to").children().remove();
+                return;
+            }
+
             $.getJSON($SCRIPT_ROOT + '/harvest/inc', {
                 value: $('#section_from').val()
             }, function (data) {
                 $("#bin_to").children().remove();
+                $('#bin_to').append('<option value="-1">Choose One...</option')
                 data.forEach(function (entry) {
                     $('#bin_to').append('<option value="' + entry['_id'] + '">' + entry['name'] + '</option')
                 });
