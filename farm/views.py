@@ -180,17 +180,18 @@ def field(field_id):
     form_field = forms.FieldForm()
     field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
     crop_types = list(mongo.db.crop_types.find())
+    form_field.name.data = field["name"]
 
     # Delete field
     if request.method == 'POST' and 'delete' in request.form.keys():
-        if mongo.db.bins.remove({"_id": ObjectId(field_id)}):
+        if mongo.db.fields.remove({"_id": ObjectId(field_id)}):
             return redirect(url_for('fields'))
     # Save field
     if request.method == 'POST':
-        if form.validate_on_submit():
-            field['name'] = form.name.data
-            field['size'] = form.size.data
-            field['geo'] = form.geo_data.data
+        if form_field.validate_on_submit():
+            field['name'] = form_field.name.data
+            field['size'] = form_field.size.data
+            field['geo'] = form_field.geo_data.data
             field['province'] = g.province
             field_id = mongo.db.fields.save(field)
             return redirect(url_for('field', field_id=field_id))

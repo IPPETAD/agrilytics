@@ -8,7 +8,8 @@
 
 <!-- Delete Button -->
 <form method="post" role="form" onsubmit="return confim('Are you sure you want to delete this field? It cannot be undone.')">
-    <button type="submit" value="confirm" class="btn btn-primary btn-danger" style="float:right;">Delete</button>
+    {{ form_delete.hidden_tag() }}
+    <button type="submit" value="delete" class="btn btn-primary btn-danger" style="float:right;">Delete</button>
 </form>
 
 <h2>Field {{field.name}}</h2>
