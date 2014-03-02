@@ -34,10 +34,8 @@
                         <li><a href="#" onclick="$('#search_type').val('{{ crop_type.name }}'); $('#searchForm').submit();">{{ crop_type.label }}</a></li>
                         {% endfor %}
                     </ul>
-                </td>
--->
-
-                <td class="dropdown">{{ contract.crop }}</td>
+                </td>-->
+                <td>{{ contract.crop }}</td>
                 <td>{{ contract.company }}</td>
                 <td>{{ contract.tonnes }}</td>
                 <td>{{ contract.fixed }}</td>
@@ -47,8 +45,24 @@
         {% endfor %}
     </tbody>
 </table>
+
+<!-- Buttons -->
+<!-- Search Dropdown -->
+<form id="saveForm">
+    <input id="search_page" name="save" type="hidden"/>
+    <button type="submit" class="btn btn-success btn-sml"><span class="glyphicon glyphicon-floppy-disk"></span>  Save Table</button>
+    <button type="button" class="btn btn-warning btn-sml" onclick="addRow();"><span class="glyphicon glyphicon-plus"></span>  Add Row</button>
+</form>
+
+
+
+
 <script>
-    $('#mainTable').editableTableWidget();
+    function addRow() {
+        $("#mainTable").find('tbody').append('<tr><td class="icon"><span class="glyphicon glyphicon-remove"></span></td><td/><td/><td/><td/><td/><td /></tr>');
+        $('#mainTable').editableTableWidget();
+    }
+    
     $('.icon').each(function (index) {
         $(this).on('click', function () {
             $(this).parent().remove();

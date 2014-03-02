@@ -9,8 +9,7 @@ $.fn.editableTableWidget = function (options) {
 			active,
 			showEditor = function (select) {
 			    active = element.find('td:focus');
-			    if (active.attr('class') == 'icon' || active.attr('class') == 'dropdown')
-			        return;
+			    if (active.attr('class') != 'icon' && active.attr('class') != 'dropdown') {
 				if (active.length) {
 					editor.val(active.text())
 						.removeClass('error')
@@ -24,6 +23,7 @@ $.fn.editableTableWidget = function (options) {
 						editor.select();
 					}
 				}
+			    }
 			},
 			setActiveText = function () {
 				var text = editor.val(),
