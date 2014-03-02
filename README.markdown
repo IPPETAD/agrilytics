@@ -75,7 +75,7 @@ Except the README. We're sort of writing this last minute.
 ## Initial installation
 
 	git clone git@github.com:IPPETAD/agrilytics.git
-	cd farmspot
+	cd agrilytics
 
 	virtualenv venv
 	source venv/bin/activate
