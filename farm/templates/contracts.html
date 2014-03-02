@@ -61,7 +61,7 @@
         $("#mainTable").find('tbody').append('<tr><td class="icon"><span class="glyphicon glyphicon-remove"></span></td><td/><td/><td/><td/><td/><td /></tr>');
         $('#mainTable').editableTableWidget();
     }
-    
+    $('#mainTable').editableTableWidget();
     $('.icon').each(function (index) {
         $(this).on('click', function () {
             $(this).parent().remove();

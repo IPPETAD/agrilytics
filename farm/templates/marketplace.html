@@ -81,21 +81,27 @@
 </div>
 
 <!-- List Offers -->
+<div class="clearfix"></div>
 {% for offer in offers %}
-    <div class="panel panel-primary">
+<div class="col-lg-6" style="padding-left:0px;">
+    <div class="panel panel-success">
         {% for crop_type in crop_types %}
         {% if crop_type.name == offer.crop %}
-        <h3>{{ crop_type.label }}</h3>
+        <div class="panel-heading"><b>{{ crop_type.label }}</b></div>
         {% endif %}
         {% endfor %}
-        
-        <p>Tonnes: {{offer.tonnes}}</p>
-        <p>User: {{offer.user}}</p>
-        <p>Price: {{offer.price}}</p>
-        <p>Province: {{offer.province}}</p>
-        <button onclick="alert('Contact User');">Contact</button>
+        <div class="panel-body">
+            <button style="float: right; padding: 1px 12px;" class="btn btn-default btn-info" onclick="alert('Contact User');">Contact</button>
+            <p>Tonnes: {{offer.tonnes}}</p>
+            <p>User: {{offer.user}}</p>
+            <p>Price: {{offer.price}}</p>
+            <p>Province: {{offer.province}}</p>
+        </div>
     </div>
+</div>
 {% endfor %}
+<div class="clearfix"></div>
+
 
 <!-- Reset Button -->
 <form id="saveForm">
