@@ -214,6 +214,10 @@ def bin(bin_id):
 @farmer_required
 def bin_add():
     form = forms.BinForm()
+    crop_types = list(mongo.db.crop_types.find())
+    choices = [(x['name'],x['label']) for x in crop_types]
+    form.crop.choices = choices
+    
     if request.method == 'POST':
         post = {"province": g.province, "name": form.name.data, "crop": form.crop.data, "size": form.size.data }
         bin_id = mongo.db.bins.insert(post)
@@ -240,7 +244,8 @@ def bin_edit(bin_id):
 @farmer_required
 def contracts():
     contracts = mongo.db.contracts.find({'province': g.province})
-    return render_template('contracts.html', contracts=contracts)
+    crop_types = list(mongo.db.crop_types.find())
+    return render_template('contracts.html', contracts=contracts, crop_types=crop_types)
     
 
 @app.route('/contract/<contract_id>/', methods=['GET', 'POST'])

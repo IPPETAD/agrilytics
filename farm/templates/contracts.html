@@ -12,13 +12,69 @@
 
 {% block content %}
 
-<h1>See yo contracts!</h1>
-<ul>
-{% for contract in contracts %}
-    <li><a href="/contract/{{ contract._id }}">{{ contract.company }}</a></li>
-{% endfor %}
-</ul>
-<a href="add/">Add a new contract</a>
+
+<link href="/static/editable-table/index.css" rel="stylesheet">
+<script src="/static/editable-table/mindmup-editabletable.js"></script>
+
+<!-- Title -->
+<h2>Your Contracts</h2>
+<p>Use our Cloud Services to keep track of your contracts. This simple spreadsheet can be easily accessed from your office computer or cellular phone!</p>
+
+<!-- Spread Sheet -->
+<table id="mainTable" class="table table-striped">
+    <thead id="headTable"><tr><th class="symbol"</th><th>Crop</th><th>Company</th><th>Tonnes</th><th>Fixed</th><th>Price per Tonne</th><th>Contract Value</th></tr></thead>
+    <tbody>
+        {% for contract in contracts %}
+            <tr>
+                <td class="icon"><span class="glyphicon glyphicon-remove"></span></td>
+              <!--  <td class="dropdown">
+                    <ul class="dropdown-menu">
+                        {% for crop_type in crop_types %}
+                        <li><a href="#" onclick="$('#search_type').val('{{ crop_type.name }}'); $('#searchForm').submit();">{{ crop_type.label }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </td>-->
+                <td>{{ contract.crop }}</td>
+                <td>{{ contract.company }}</td>
+                <td>{{ contract.tonnes }}</td>
+                <td>{{ contract.fixed }}</td>
+                <td>{{ contract.price_per_tonne }}</td>
+                <td>{{ contract.value }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Buttons -->
+<!-- Search Dropdown -->
+<form id="saveForm">
+    <input id="search_page" name="save" type="hidden"/>
+    <button type="submit" class="btn btn-success btn-sml"><span class="glyphicon glyphicon-floppy-disk"></span>  Save Table</button>
+    <button type="button" class="btn btn-warning btn-sml" onclick="addRow();"><span class="glyphicon glyphicon-plus"></span>  Add Row</button>
+</form>
+
+
+
+
+<script>
+    function addRow() {
+        $("#mainTable").find('tbody').append('<tr><td class="icon"><span class="glyphicon glyphicon-remove"></span></td><td/><td/><td/><td/><td/><td /></tr>');
+        $('#mainTable').editableTableWidget();
+    }
+    $('#mainTable').editableTableWidget();
+    $('.icon').each(function (index) {
+        $(this).on('click', function () {
+            $(this).parent().remove();
+        });
+    });
+</script>
+
+<!-- Reset Button -->
+<form id="saveForm">
+    <input id="reset_page" name="reset" type="hidden" />
+    <button type="submit" style="float:right;"class="btn btn-info btn-sml"><span class="glyphicon glyphicon-refresh"></span>  Reset Demo Table</button>
+</form>
+
 {% endblock %}
 
 
