@@ -1,11 +1,20 @@
 FarmSpot
 ========
 
-Farming management services. Track profitability, monitor field rainfall, bid on the Crop Marketplace, and so much more..
+Farming management services. Track profitability, monitor field rainfall, bid on the Crop Marketplace, and so much more.
+
+Available to test [on Heroku](http://farmspot.herokuapp.com).
+
+![FarmSpot](https://raw.github.com/IPPETAD/agrilytics/master/farm/static/field.jpg)
 
 FarmSpot is a cloud service like no other. Using live data, geolocation services, and open federal data, the sky is the limit. You can use easily manage your farm operations on the field or at the office using our mobile-friendly implementations, or connect with farmers and brokers through our intuitive marketplace.
 
-![FarmSpot](https://raw.github.com/IPPETAD/agrilytics/master/farm/static/field.jpg)
+(This project was written in 48 hours for the [Canadian Open Data Experience](http://canadianopendataexperience.com).)
+
+## Open Data Used
+
+* [Farm product prices, crops, and livestock](http://data.gc.ca/data/en/dataset/666e5421-6909-4ce7-8777-a828b1ba3f95)
+* [Historical climate records](http://climate.weather.gc.ca)
 
 ## Description
 
@@ -35,19 +44,33 @@ Through this page, you can manage your existing listings. There are existing lis
 You can search public listings by crop type. Listing information is provided, and the items are filtered such that your province is displayed first to help you find nearby farms. You can then contact the provider. This helps brokers and farmers connect.
 
 
-#### Contracts
+### Contracts
 
 Manage your contracts and finances! This convenient spreadsheet allows simplified cataloguing of your existing contracts and how they're set. These columns were gathered from real farm elicitations. Add rows, remove rows, then save and share!
 
-####Analytics
+### Analytics
 
 Using open government data, view past and current market trends. These dynamic graphs provide effective visualizations filtered by produce and province.
 
 
-####French Language
+### French Language
 
 We have French translations for everything!
 Except the README. We're sort of writing this last minute.
+
+
+## Tech Stack
+
+* Database: [MongoDB](http://www.mongodb.org)
+* Back-end web: [Python](https://www.python.org) with modules in [requirements.txt](requirements.txt), including:
+ * [Flask](http://flask.pocoo.org) web framework
+ * [WTForms](http://wtforms.readthedocs.org) for form handling
+ * [Babel](http://babel.pocoo.org) for 
+* Front-end web: 
+ * [Bootstrap](http://getbootstrap.com) based CSS theme
+ * [D3.js](http://d3js.org) for interactive visualizations
+ * [jQuery](http://jquery.com) to make JavaScript easier
+ * [Leaflet](http://leafletjs.com) to make pretty maps
 
 ## Initial installation
 
