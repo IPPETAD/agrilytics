@@ -17,8 +17,6 @@ mongo = PyMongo(app)
 babel = Babel(app)
 csrf = CsrfProtect(app)
 
-print babel.list_translations()
-
 def farmer_required(f):
     @wraps(f)
     def func(*args, **kwargs):
