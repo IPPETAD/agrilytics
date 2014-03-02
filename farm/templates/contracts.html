@@ -3,11 +3,32 @@
 {% block title %}FarmSpot - CODE 2014{% endblock %}
 
 {% block content %}
+<script type="text/javascript">
+
+    var csrftoken = "{{ csrf_token() }}"
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        }
+    })
+    
+    function saveTable() {
+        console.log($('#mainTable').tableToJSON())
+            $.post('/contract/',
+                    {rows: JSON.stringify($('#mainTable').tableToJSON())},
+                    function(data){alert(data)})
+    }
+</script>
 
 <script>$("#nav-contract").addClass("active");</script>
 
 <link href="/static/editable-table/index.css" rel="stylesheet">
 <script src="/static/editable-table/mindmup-editabletable.js"></script>
+
+<script src="/static/tableToJson/src/jquery.tabletojson.js"></script>
 
 <!-- Title -->
 <h2>Your Contracts</h2>
@@ -31,7 +52,7 @@
                 <td>{{ contract.company }}</td>
                 <td>{{ contract.tonnes }}</td>
                 <td>{{ contract.fixed }}</td>
-                <td>{{ contract.price_per_tonne }}</td>
+                <td>{{ contract.pricepertonne }}</td>
                 <td>{{ contract.value }}</td>
             </tr>
         {% endfor %}
@@ -39,12 +60,9 @@
 </table>
 
 <!-- Buttons -->
-<!-- Search Dropdown -->
-<form id="saveForm">
-    <input id="search_page" name="save" type="hidden"/>
-    <button type="submit" class="btn btn-success btn-sml"><span class="glyphicon glyphicon-floppy-disk"></span>  Save Table</button>
-    <button type="button" class="btn btn-warning btn-sml" onclick="addRow();"><span class="glyphicon glyphicon-plus"></span>  Add Row</button>
-</form>
+<input id="search_page" name="save" type="hidden"/>
+<button type="submit" onclick='saveTable(true)' class="btn btn-success btn-sml"><span class="glyphicon glyphicon-floppy-disk"></span>  Save Table</button>
+<button type="button" class="btn btn-warning btn-sml" onclick="addRow();"><span class="glyphicon glyphicon-plus"></span>  Add Row</button>
 
 
 
@@ -53,6 +71,11 @@
     function addRow() {
         $("#mainTable").find('tbody').append('<tr><td class="icon"><span class="glyphicon glyphicon-remove"></span></td><td/><td/><td/><td/><td/><td /></tr>');
         $('#mainTable').editableTableWidget();
+        $('.icon').each(function (index) {
+            $(this).on('click', function () {
+                $(this).parent().remove();
+            });
+        });
     }
     $('#mainTable').editableTableWidget();
     $('.icon').each(function (index) {
