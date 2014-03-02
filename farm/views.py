@@ -351,6 +351,7 @@ def login_farmer_on():
 def logout():
     response = make_response(redirect(url_for('index')))
     response.set_cookie('user', '', expires=0)
+    response.set_cookie('province', '', expires=0)
     return response
 
 # For debugging, not production
