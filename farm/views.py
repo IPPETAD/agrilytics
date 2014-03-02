@@ -288,11 +288,6 @@ def harvest_update():
     bins = list(mongo.db.bins.find({"crop" : crop_type}))
     for bin in bins:
         bin['_id'] = str(bin['_id'])
-
-    print field_id
-    print field
-    print crop_type
-    print bins
     
     return json.dumps(bins)
     
