@@ -280,7 +280,6 @@ def harvest_add():
 
 @app.route('/harvest/inc')
 def harvest_update():
-    """Add two numbers server side, ridiculous but well..."""
     field_id = json.loads(request.args.get('value'))['_id']
     field = list(mongo.db.fields.find({"_id": ObjectId(field_id)}))
     crop_type = field[0]['section'][0]['crop']
@@ -291,6 +290,11 @@ def harvest_update():
     
     return json.dumps(bins)
     
+@app.route('/api/_marketprice')
+def current_crop_price():
+    crop_type = request.args.get('crop')
+    # TODO : Not this
+    return render_template('harvests.html')
 
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'
