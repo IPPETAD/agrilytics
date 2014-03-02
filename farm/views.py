@@ -1,6 +1,6 @@
 from farm import app
 from farm import forms
-from flask import render_template, request, url_for, redirect, jsonify
+from flask import render_template, request, url_for, redirect, abort, jsonify
 from flask_wtf.csrf import CsrfProtect
 
 from flask.ext.pymongo import PyMongo
@@ -182,6 +182,67 @@ def bin_edit(bin_id):
         form.size.data = bin['size']
         form.crop.data = bin['crop']
         return render_template('bin_edit.html', form=form)
+
+@app.route('/contract/')
+def contracts():
+    contracts = mongo.db.contracts.find()
+    return render_template('contracts.html', contracts=contracts)
+    
+
+@app.route('/contract/<contract_id>/', methods=['GET', 'POST'])
+def contract(contract_id):
+    contract = mongo.db.contracts.find_one({"_id": ObjectId(contract_id)})
+    form = forms.DeleteForm()
+    if request.method == 'POST':
+        if mongo.db.fields.remove({'_id': ObjectId(contract_id)}):
+            return redirect(url_for('contracts'))
+    else:
+        return render_template('contract.html', contract=contract, form=form)
+
+@app.route('/contract/add/', methods=['GET', 'POST'])
+def contract_add():
+    form = forms.ContractForm()
+    crop_types = list(mongo.db.crop_types.find())
+    choices = [(x['name'],x['label']) for x in crop_types]
+    form.crop.choices = choices
+    if request.method == 'POST':
+        print('Posted')
+        if form.validate_on_submit():
+            print('validated')
+            post = {'crop': form.crop.data, 'company': form.company.data, 'tonnes': form.tonnes.data,
+                    'fixed': form.fixed.data, 'price': form.price_per_tonne.data, 'value': form.contract_value.data}
+            contract_id = mongo.db.contracts.insert(post)
+            return redirect(url_for('contract', contract_id=contract_id))
+        print(form.errors)
+    else:
+        return render_template('contract_add.html', form=form)
+
+@app.route('/contract/<contract_id>/edit/', methods=['GET', 'POST'])
+def contract_edit(contract_id):
+    form = forms.ContractForm()
+    contract = mongo.db.contracts.find_one({'_id': ObjectId(contract_id)})
+    print(contract)
+    crop_types = list(mongo.db.crop_types.find())
+    choices = [(x['name'],x['label']) for x in crop_types]
+    form.crop.choices = choices
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            contract['crop'] = form.crop.data
+            contract['company'] = form.company.data
+            contract['tonnes'] = form.tonnes.data
+            contract['fixed'] = form.fixed.data
+            contract['price'] = form.price_per_tonne.data
+            contract['value'] = form.contract_value.data
+            mongo.db.contracts.save(contract)
+            return redirect(url_for('contract', contract_id=contract_id))
+    else:
+        form.crop.data = contract['crop']
+        form.company.data = contract['company']
+        form.tonnes.data = contract['tonnes']
+        form.fixed.data = contract['fixed']
+        form.price_per_tonne.data = contract['price']
+        form.contract_value.data = contract['value']
+        return render_template('contract_edit.html', form=form)
 
 @app.route('/market/price_history')
 def price_history():
