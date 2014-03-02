@@ -150,24 +150,6 @@ def field_add():
             field_id = mongo.db.fields.insert(post)
             return redirect(url_for('.field', field_id=field_id))
     else:
-        return render_template('field_add.html', form=form)
-
-
-#@app.route('/field/<field_id>/')
-#@farmer_required
-#def field(field_id):
-##    form = forms.DeleteForm()
- #   if request.method == 'POST':
- #       if mongo.db.fields.remove({'_id': ObjectId(field_id)}):
- ##           return redirect(url_for('fields'))
-#    else:
-#        field = mongo.db.fields.find_one({"_id": ObjectId(field_id) })
-#        crops = []
-#        for section in field['section']:
-#            if section['crop'] not in crops:
-#                crops.append(section['crop'].title())
-#        return render_template('field.html', field = field, crops=crops, form=form)
-
 
 @app.route('/field/<field_id>/edit', methods=['GET', 'POST'])
 @farmer_required
