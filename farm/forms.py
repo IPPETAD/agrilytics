@@ -9,7 +9,7 @@ class FieldForm(Form):
 
 class SectionForm(Form):
     name = fields.StringField('Name', [validators.required()])
-    crop = fields.SelectField('Crop', choices=[('rye', 'Rye'), ('oats', 'Oats'), ('canola', 'Canola')])
+    crop = fields.SelectField('Crop', choices=[])
     acres = fields.FloatField('Acres of crop')
 
 class BinForm(Form):

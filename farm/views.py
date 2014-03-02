@@ -158,6 +158,11 @@ def field_edit(field_id):
 @farmer_required
 def section_add(field_id):
     form = forms.SectionForm()
+
+    crop_types = list(mongo.db.crop_types.find())
+    choices = [(x['name'],x['label']) for x in crop_types]
+    form.crop.choices = choices
+
     if request.method == 'POST':
         if form.validate_on_submit():
             field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
