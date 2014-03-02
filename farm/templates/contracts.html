@@ -12,13 +12,39 @@
 
 {% block content %}
 
-<h1>See yo contracts!</h1>
-<ul>
-{% for contract in contracts %}
-    <li><a href="/contract/{{ contract._id }}">{{ contract.company }}</a></li>
-{% endfor %}
-</ul>
-<a href="add/">Add a new contract</a>
+
+<link href="/static/editable-table/index.css" rel="stylesheet">
+<script src="/static/editable-table/mindmup-editabletable.js"></script>
+<script src="/static/editable-table/numeric-input-example.js"></script>
+
+<!-- Title -->
+<h2>Your Contracts</h2>
+<p>Use our Cloud Services to keep track of your contracts. This simple spreadsheet can be easily accessed from your office computer or cellular phone!</p>
+
+
+<!-- Spread Sheet -->
+<table id="mainTable" class="table table-striped">
+    <thead id="headTable"><tr><th>Crop</th><th>Company</th><th>Tonnes</th><th>Fixed</th><th>Price per Tonne</th><th>Contract Value</th></tr></thead>
+    <tbody>
+        {% for contract in contracts %}
+            <tr>
+                <td>{{ contract.crop }}</td>
+                <td>{{ contract.company }}</td>
+                <td>{{ contract.tonnes }}</td>
+                <td>{{ contract.fixed }}</td>
+                <td>{{ contract.price_per_tonne }}</td>
+                <td>{{ contract.value }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<script>
+    $('#mainTable').editableTableWidget();
+</script>
+
+
 {% endblock %}
 
 

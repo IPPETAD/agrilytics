@@ -4,6 +4,17 @@
 
 {% block content %}
 
+<link href="/static/editable-table/index.css" rel="stylesheet">
+<script src="/static/editable-table/mindmup-editabletable.js"></script>
+<script src="/static/editable-table/numeric-input-example.js"></script>
+
+
+<table id="mainTable" class="table table-striped">
+    <thead><tr><th>Crop</th><th>Company</th><th>Tonnes</th><th>Fixed</th><th>Price per Tonne</th><th>Contract Value</th></tr></thead>
+
+
+</table>
+
 <h1>Company {{ form.company.data }} <small>Edit</small></h1>
 <form method="post" action="." role="form">
 	{{ form.hidden_tag() }}
