@@ -187,19 +187,19 @@ def section(field_id, index):
 def section_edit(field_id, index):
     form = forms.SectionForm()
     field = mongo.db.fields.find_one({'_id': ObjectId(field_id)})
-    section = field['section'][index]
+    section = field['section'][int(index)]
     if request.method == 'POST':
         if form.validate_on_submit():
             section['name'] = form.name.data
             section['crop'] = form.crop.data
             section['acres'] = form.acres.data
             mongo.db.fields.save(field)
-            return redirect(url_for('section', field_id=field_id, name=name))
+            return redirect(url_for('section', field_id=field_id, index=index))
     else:
         form.name.data = section['name']
         form.acres.data = section['acres']
         form.crop.data = section['crop']
-        return render_template('section_edit.html', form=form, field_id=field_id, name=name)
+        return render_template('section_edit.html', form=form, field_id=field_id, index=index)
 
 @app.route('/bin/<bin_id>', methods=['GET', 'POST'])
 @farmer_required
