@@ -324,7 +324,7 @@ def price_history():
 	province = request.args["province"]
 	crop = request.args["crop"]
 	history = []
-	history = list ( mongo.db.gov_prices.find({"province": province, "crop": crop}, { "date": 1, "value": 1, "_id":0 }) )
+	history = list ( mongo.db.gov_prices.find({"province": province, "crop": crop}, { "date": 1, "value": 1, "_id":0 }).sort("date", 1) )
 	for month in history:
 		month["month"] = month.pop("date")
 		month["price"] = month.pop("value")
