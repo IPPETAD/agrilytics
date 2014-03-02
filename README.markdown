@@ -11,7 +11,22 @@ FarmSpot is a cloud service like no other. Using live data, geolocation services
 
 Field Management
 
-MarketPlace
+### MarketPlace
+
+The marketplace provides a public crop listing service to find buyers and sellers for your produce. It has functionality to manage your own postings, as well as to search for listings across Canada.
+
+#### Post Listing
+
+You can post your own listing to the MarketPlace. Specify your crop, amount in tonnes, and expected price. 
+The market price for the crop is pulled from national data (and queried to your province) to recommend prices for your quantity. On posting, your listing will be populated with your location and relevant information. It's really that easy!
+
+#### Your Listings
+
+Through this page, you can manage your existing listings. There are existing listings for your viewing. Any items you add or remove will update the listings.
+
+#### Search Listings
+
+You can search public listings by crop type. Listing information is provided, and the items are filtered such that your province is displayed first to help you find nearby farms. You can then contact the provider. This helps brokers and farmers connect.
 
 Contracts
 
