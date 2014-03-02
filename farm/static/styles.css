@@ -73,3 +73,12 @@ p {
 	height:0;
 	clear:both;
 }
+
+
+#footer{
+	text-align: center;
+	color: #999;
+	margin-top: 2em;
+	padding: 1ex;
+	border-top: 1px solid #ccc;
+}
