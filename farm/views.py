@@ -214,6 +214,10 @@ def bin(bin_id):
 @farmer_required
 def bin_add():
     form = forms.BinForm()
+    crop_types = list(mongo.db.crop_types.find())
+    choices = [(x['name'],x['label']) for x in crop_types]
+    form.crop.choices = choices
+    
     if request.method == 'POST':
         post = {"province": g.province, "name": form.name.data, "crop": form.crop.data, "size": form.size.data }
         bin_id = mongo.db.bins.insert(post)
