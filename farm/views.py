@@ -77,10 +77,18 @@ def marketplace_add():
         choices = [(x['name'],x['label']) for x in crop_types]
         form.crop.choices = choices
 
-        return render_template('marketplace_add.html', form=form);
+        return render_template('marketplace_add.html', form=form)
 
+@app.route('/market/user', methods=['GET', 'POST'])
+def marketplace_user():
+    offers = mongo.db.offers.find()
+    crop_types = list(mongo.db.crop_types.find())
+    return render_template('marketplace_user.html', offers = offers, crop_types = crop_types)    
 
-
+@app.route('/marketplace/_delete/<offer_id>', methods=['DELETE'])
+def marketplace_delete(offer_id):
+    if mongo.db.offers.remove({ "_id" : ObjectId(offer_id) }):
+        return jsonify({ 'success': True })
 
 @app.route('/field/add', methods=['GET', 'POST'])
 def field_add():
@@ -278,11 +286,16 @@ def harvest_add():
 @app.route('/harvest/inc')
 def harvest_update():
     """Add two numbers server side, ridiculous but well..."""
-    value = json.loads(request.args.get('value'))['_id']
+    field_id = json.loads(request.args.get('value'))['_id']
+    field = list(mongo.db.fields.find({"_id": ObjectId(field_id)}))
+    crop_type = field[0]['section'][0]['crop']
+
+    bins = list(mongo.db.bins.find({"crop" : crop_type}))
+    for bin in bins:
+        bin['_id'] = str(bin['_id'])
     
-    # TODO : value is ID of selected item.
+    return json.dumps(bins)
     
-    return jsonify("String that goes back")
 
 @app.route('/login/')
 def login():
