@@ -1,10 +1,11 @@
 from flask_wtf import Form
 from wtforms import fields, validators
 from farm import wtforms_extended_selectfield as extfields
+from flask.ext.babel import gettext
 
 class FieldForm(Form):
-    name = fields.StringField('Name', [validators.required()])
-    size = fields.FloatField('Size in Acres', id='map_acres')
+    name = fields.StringField(gettext(u'Name'), [validators.required()])
+    size = fields.FloatField(gettext(u'Size in Acres'), id='map_acres')
     geo_data = fields.HiddenField(id='map_input')
 
 class SectionForm(Form):
