@@ -52,7 +52,7 @@ $( document ).ready(function() {
 			    		drawnItems.addLayer(layer);
 							
 			    		var geojson = layer.toGeoJSON();
-			    		var acres = calculateArea(geojson.features[0]);
+			    		var acres = calculateArea(geojson);
 							
 						$("#map_acres").val(acres);
 						$( "#map_input" ).val( JSON.stringify( geojson ) );
