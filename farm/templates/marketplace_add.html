@@ -33,8 +33,8 @@
     </div>
     <div class="form-group">
         {{ form.price.label(class_='col-sm-3 control-label') }}
-        <h5 class="market_price"></h5>
         <div class="col-sm-6">
+            <h5 class="market_price"></h5>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
                 {{ form.price(class_='form-control') }}
@@ -55,17 +55,21 @@
             crop: $('#crop').val(),
             province: 'Alberta' //TODO ::  Not just Alberta
         }, function (data) {
-            if ($("#tonnes").val() == "")
-                $(".market_price").html("");
+            console.log(data)
+            if ($.isEmptyObject(data))
+                $(".market_price").html("No market data.");
+            else if ($("#tonnes").val() == "")
+                $(".market_price").html("Market price is: $ " + data['value'] + " per tonne.");
             else {
                 var amount = (data['value'] * $("#tonnes").val()).toFixed(2);
-                $(".market_price").html("Market price is: $ " + data['value'] + "/tonne. Suggested cost is $" + amount);
+                $(".market_price").html("Market price is: $ " + data['value'] + " per tonne. Suggested cost is $" + amount);
             }
         });
         return false;
     };
+    $(".market_price").html("Market price is: ${{ price.value }} per tonne.");
     $("#tonnes").bind("change", predictPrice);
-    $("#drop").bind("change", predictPrice);
+    $("#crop").bind("change", predictPrice);
     $("#user").val('{{ user.province }} {{ user.user }}')
 </script>
 

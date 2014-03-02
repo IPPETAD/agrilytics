@@ -21,6 +21,17 @@ TORONTO_WEATHER_DATA = r'http://climate.weather.gc.ca/climateData/bulkdata_e.htm
 
 SMOKY_LAKE_WEATHER_DATA = r'http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=xml&stationID=32456&Year=2013&Month=3&Day=1&timeframe=2&submit=Download+Data'
 
+def getCropPrice(crop_name, province):
+    crop_type = list(mongo.db.crop_types.find( { "name" : crop_name } ))[0]['gov_label']
+    
+    if province == '':
+        gov_row = mongo.db.gov_prices.find({ "crop" : crop_type } ).sort( "date" , -1 ).limit(1)[0]
+    else:
+        gov_row = mongo.db.gov_prices.find({ "province" : province, "crop" : crop_type } ).sort( "date" , -1 ).limit(1)[0]
+    gov_row['_id'] = str(gov_row['_id'])
+
+    return gov_row
+
 def farmer_required(f):
     @wraps(f)
     def func(*args, **kwargs):
@@ -111,8 +122,10 @@ def marketplace_add():
         crop_types = list(mongo.db.crop_types.find())
         choices = [(x['name'],x['label']) for x in crop_types]
         form.crop.choices = choices
+        # NOTE : grab first value, don't just say 'canola'
+        price = getCropPrice('canola', g.province)
 
-        return render_template('marketplace_add.html', form=form, user = g)
+        return render_template('marketplace_add.html', form=form, user = g, price=price)
 
 @app.route('/market/user', methods=['GET', 'POST'])
 @farmer_required
@@ -187,9 +200,12 @@ def field(field_id):
     # Delete field
     if request.method == 'POST' and 'delete' in request.form.keys():
         if mongo.db.fields.remove({"_id": ObjectId(field_id)}):
-            return redirect(url_for('fields'))
+           return redirect(url_for('fields'))
+    print "root"
     # Save field
     if request.method == 'POST':
+        print "post"
+        print form_field.size.data
         if form_field.validate_on_submit():
             field['name'] = form_field.name.data
             field['size'] = form_field.size.data
@@ -443,7 +459,10 @@ def current_crop_price():
     if province == '':
         gov_row = mongo.db.gov_prices.find({ "crop" : crop_type } ).sort( "date" , -1 ).limit(1)[0]
     else:
-        gov_row = mongo.db.gov_prices.find({ "province" : province, "crop" : crop_type } ).sort( "date" , -1 ).limit(1)[0]
+        row = list(mongo.db.gov_prices.find({ "province" : province, "crop" : crop_type } ).sort( "date" , -1 ).limit(1))
+        if len(row) == 0:
+            return json.dumps({});
+        gov_row = row[0]
     gov_row['_id'] = str(gov_row['_id'])
 
     return json.dumps(gov_row)
