@@ -13,18 +13,7 @@
 var geo = {{field.geo|safe or []}};
 
 if (geo) {
-	$( document ).ready(function() {
-		// create a map in the "map" div, set the view to a given place and zoom
-		var map = L.map('mapview').setView([53, -100], 4);
-
-		// add an OpenStreetMap tile layer
-		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-		}).addTo(map);
-		
-		L.geoJson(geo).addTo(map);
-	});
-	
+loadStaticMap(geo);
 	
 }
 
