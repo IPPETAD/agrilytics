@@ -7,6 +7,7 @@ from flask.ext.pymongo import PyMongo
 from bson.objectid import ObjectId
 
 import json
+from datetime import date
 
 app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
 
@@ -267,14 +268,37 @@ def price_history():
 		month["month"] = month.pop("date")
 		month["price"] = month.pop("value")
 	return json.dumps(history)
+
 @app.route('/harvests')
 def harvests():
-    harvests = mongo.db.harvests.find()
-    return render_template('harvests.html', harvests=harvests)
+    harvests = list(mongo.db.harvests.find())
+    bin_ids = [ObjectId(h['bin_to']) for h in harvests]
+    bins = list(mongo.db.bins.find({ '_id': { '$in': bin_ids } }))
+    field_ids = [ObjectId(h['section_from']['_id']) for h in harvests]
+    fields = list(mongo.db.fields.find({ '_id':{ '$in': field_ids } }))
+    
+    for h in harvests:
+        h['date'] = h['date'].strftime('%Y-%m-%d')
+        for f in fields:
+            if str(f['_id']) == h['section_from']['_id']:
+                h['field'] = f
+                break
+        for b in bins:
+            if  str(b['_id']) == h['bin_to']:
+                h['bin'] = b
+                break
+
+    return render_template('harvests.html', harvests = harvests)
 
 @app.route('/harvest/add', methods=['GET', 'POST'])
 def harvest_add():
     form = forms.HarvestForm()
+    if request.method == 'POST':
+        post = { 'section_from': json.loads(form.section_from.data), 'bin_to': form.bin_to.data, 'date': form.date.data, 'amount': form.amount.data }
+        harvest_id = mongo.db.harvests.insert(post)
+        return redirect(url_for('bin', bin_id = form.bin_to.data))
+    
+    form.date.data = date.today()
     fields = mongo.db.fields.find()
     field_choices = [(-1, 'Choose one...')]
     for f in fields:
@@ -295,7 +319,6 @@ def harvest_update():
         bin['_id'] = str(bin['_id'])
     
     return json.dumps(bins)
-    
 
 @app.route('/login/')
 def login():
