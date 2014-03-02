@@ -63,13 +63,13 @@
 			  
 			  
 			  	<ul class="nav navbar-nav navbar-right">
-	          {% if current_user.is_authenticated() %}
-	              <button id="browserid-logout">Logout</button>
+	          {% if g.user %}
+              <li><a href="/logout/">Logout</a></li>
 	          {% else %}        
-	              <button id="browserid-login">Login</button>
+              <li><a href="/login/">Login</a></li>
 	          {% endif %}
 			  
-			            </ul>
+                    </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
 	    </div>

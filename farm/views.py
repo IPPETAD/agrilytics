@@ -1,6 +1,6 @@
 from farm import app
 from farm import forms
-from flask import render_template, request, url_for, redirect, abort, jsonify
+from flask import render_template, request, url_for, redirect, abort, jsonify, make_response, g
 from flask_wtf.csrf import CsrfProtect
 
 from flask.ext.pymongo import PyMongo
@@ -12,6 +12,11 @@ app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/F
 
 mongo = PyMongo(app)
 csrf = CsrfProtect(app)
+
+@app.before_request
+def load_user():
+    g.user = request.cookies.get('user')
+
 
 @app.route('/')
 def index():
@@ -281,11 +286,44 @@ def harvest_add():
 @app.route('/harvest/inc')
 def harvest_update():
     """Add two numbers server side, ridiculous but well..."""
-    value = json.loads(request.args.get('value'))['_id']
+    field_id = json.loads(request.args.get('value'))['_id']
+    field = list(mongo.db.fields.find({"_id": ObjectId(field_id)}))
+    crop_type = field[0]['section'][0]['crop']
+
+    bins = list(mongo.db.bins.find({"crop" : crop_type}))
+    for bin in bins:
+        bin['_id'] = str(bin['_id'])
     
-    # TODO : value is ID of selected item.
+    return json.dumps(bins)
     
-    return jsonify("String that goes back")
+
+@app.route('/login/')
+def login():
+    return render_template('login.html')
+
+@app.route('/login/farmer/')
+def login_farmer():
+    response = make_response(redirect(url_for('index')))
+    response.set_cookie('user', 'farmer')
+    return response
+
+@app.route('/login/buyer/')
+def login_buyer():
+    response = make_response(redirect(url_for('index')))
+    response.set_cookie('user', 'buyer')
+    return response
+
+@app.route('/login/anon/')
+def login_anon():
+    response = make_response(redirect(url_for('index')))
+    response.set_cookie('user', 'anon')
+    return response
+
+@app.route('/logout/')
+def logout():
+    response = make_response(redirect(url_for('index')))
+    response.set_cookie('user', '', expires=0)
+    return response
 
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'
