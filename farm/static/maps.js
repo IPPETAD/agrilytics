@@ -37,7 +37,7 @@ $( document ).ready(function() {
 
 	map.addControl(drawControl);
 	
-	var gmap_layer = new L.Google('SATELLITE');
+	var gmap_layer = new L.Google('HYBRID');
 	map.addLayer(gmap_layer);
 	
 	
@@ -99,7 +99,7 @@ function loadStaticMap(geo){
 		// }).addTo(map);
 		
 		
-		var gmap_layer = new L.Google('SATELLITE');
+		var gmap_layer = new L.Google('HYBRID');
 		map.addLayer(gmap_layer);
 		
 		l = L.geoJson(geo).addTo(map);
