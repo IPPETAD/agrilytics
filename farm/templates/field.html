@@ -12,7 +12,7 @@
     <button type="submit" value="delete" class="btn btn-primary btn-danger" style="float:right;">Delete</button>
 </form>
 
-<h1>Field {{field.name}}</h1>
+<h2>Field {{field.name}}</h2>
 
 <script>
 var geo = {{field.geo|safe or []}};
@@ -50,20 +50,28 @@ loadStaticMap(geo);
 
 <!-- Section data -->
 {% if field.section %}
-<p>This field contains the following sections:</p>
-<ul>
-    {% for section in field.section %}
-    <li><a href="section/{{field.section.index(section)}}">{{ section.name }} -- </a>
-        {% for crop_type in crop_types %}
+<h3>Related Sections   <button class="btn btn-default btn-success" onclick="document.location.href='section/add';">New</button></h3>
+
+{% for section in field.section %}
+<div class="col-lg-6" style="padding-left:0px;">
+    <div class="panel panel-success">
+        <div class="panel-heading"><b>{{ section.name }}</b><button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='section/{{field.section.index(section)}}';">Edit</button></div>
+        <div class="panel-body">
+            {% for crop_type in crop_types %}
             {% if section.crop == crop_type.name %}
-                {{ crop_type.label }}
+            <p><b>Crop:</b> {{crop_type.label}}</p>
             {% endif %}
-        {% endfor %}
-    {% endfor %}</li>
-</ul>
-<a href="section/add">Add another section</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="clearfix"></div>
+
+
 {% else %}
-<p>There are no sections. <a href="section/add">Add one</a></p>
+<p>There are no sections. <a href="section/add">Add one!</a></p>
 {% endif %}
 
 
