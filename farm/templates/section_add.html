@@ -3,6 +3,9 @@
 {% block title %}New Field{% endblock %}
 
 {% block content %}
+
+<script>$("#nav-fields").addClass("active");</script>
+
 <h1>Section <small>New</small></h1>
 
 <form method="post" action="/field/{{ field_id }}/section/add" role="form" class="form-horizontal">

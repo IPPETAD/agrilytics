@@ -108,7 +108,7 @@ def marketplace_add():
         choices = [(x['name'],x['label']) for x in crop_types]
         form.crop.choices = choices
 
-        return render_template('marketplace_add.html', form=form)
+        return render_template('marketplace_add.html', form=form, user = g)
 
 @app.route('/market/user', methods=['GET', 'POST'])
 @farmer_required
