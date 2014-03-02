@@ -9,11 +9,17 @@ FarmSpot is a cloud service like no other. Using live data, geolocation services
 
 ## Description
 
-Field Management
+### Field Management
+
+Manage your fields, bins, and harvests! Add a field by specify the geolocation of your farm, create bins to store and manage your existing produce. Track your harvests through our easy-to-use interface!
+
+Open data is used to track temperature and rain fall data on your fields! Wow, that's pretty cool!
 
 ### MarketPlace
 
 The marketplace provides a public crop listing service to find buyers and sellers for your produce. It has functionality to manage your own postings, as well as to search for listings across Canada.
+
+Open data is used in this section for current market prices!
 
 #### Post Listing
 
@@ -28,11 +34,20 @@ Through this page, you can manage your existing listings. There are existing lis
 
 You can search public listings by crop type. Listing information is provided, and the items are filtered such that your province is displayed first to help you find nearby farms. You can then contact the provider. This helps brokers and farmers connect.
 
-Contracts
 
-Analytics
+#### Contracts
 
-French Language
+Manage your contracts and finances! This convenient spreadsheet allows simplified cataloguing of your existing contracts and how they're set. These columns were gathered from real farm elicitations. Add rows, remove rows, then save and share!
+
+####Analytics
+
+Using open government data, view past and current market trends. These dynamic graphs provide effective visualizations filtered by produce and province.
+
+
+####French Language
+
+We have French translations for everything!
+Except the README. We're sort of writing this last minute.
 
 ## Initial installation
 

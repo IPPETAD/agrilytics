@@ -313,7 +313,7 @@ def bin_edit(bin_id):
         form.crop.data = bin['crop']
         return render_template('bin_edit.html', form=form)
 
-@app.route('/contract/', methods=['GET', 'POST'])
+@app.route('/contract', methods=['GET', 'POST'])
 @farmer_required
 def contracts():
     contracts = mongo.db.contracts.find({'province': g.province})
