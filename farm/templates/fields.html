@@ -25,7 +25,7 @@
 {% for field in fields %}
 <div class="col-lg-6" style="padding-left:0px;">
     <div class="panel panel-success">
-        <div class="panel-heading"><b>{{ field.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{ field._id}}';">Edit</button></b></div>
+        <div class="panel-heading"><b>{{ field.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{ field._id}}/edit';">Edit</button></b></div>
         <div class="panel-body">
             <p>Acres: {{ field.section[0].acres }}</p>
         </div>

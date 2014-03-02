@@ -5,21 +5,32 @@
 {% block content %}
 <h1>Section <small>New</small></h1>
 
-<form method="post" action="/field/{{ field_id }}/section/add" role="form">
-	{{ form.hidden_tag() }}
+<form method="post" action="/field/{{ field_id }}/section/add" role="form" class="form-horizontal">
+    {{ form.hidden_tag() }}
     <div class="form_group">
-        {{ form.name.label }}
-        {{ form.name(class_='form-control') }}
+        {{ form.name.label(class_='col-sm-3 control-label') }}
+        <div class="col-sm-6">
+            {{ form.name(class_='form-control') }}
+        </div>
     </div>
-	<div class="form-group">
-		{{ form.crop.label }}
-		{{ form.crop(class_='form-control') }}
-	</div>
-	<div class="form-group">
-		{{ form.acres.label }}
-		{{ form.acres(class_='form-control') }}
-	</div>
-	<button type="submit" value="confirm" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+        {{ form.crop.label(class_='col-sm-3 control-label') }}
+        <div class="col-sm-6">
+            {{ form.crop(class_='form-control') }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form.acres.label(class_='col-sm-3 control-label') }}
+        <div class="col-sm-6">
+            {{ form.acres(class_='form-control') }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-9">
+            <button type="submit" value="confirm" class="btn btn-primary" style="float:right">Submit</button>
+        </div>
+    </div>
+    <div class="clearfix"></div>
 </form>
 
 {% endblock %}
