@@ -150,6 +150,7 @@ def field_add():
             field_id = mongo.db.fields.insert(post)
             return redirect(url_for('.field', field_id=field_id))
     else:
+        return render_template('field_add.html', form=form)
 
 @app.route('/field/<field_id>/edit', methods=['GET', 'POST'])
 @farmer_required
