@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-03-02 11:39-0700\n"
-"PO-Revision-Date: 2014-03-02 11:39-0700\n"
+"POT-Creation-Date: 2014-03-02 13:20-0700\n"
+"PO-Revision-Date: 2014-03-02 13:20-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
@@ -42,15 +42,16 @@ msgstr "Contrats"
 msgid "Price History"
 msgstr "Analytique"
 
-#: templates/bin.html:14 templates/contract.html:23 templates/field.html:43
+#: templates/bin.html:14 templates/contract.html:23 templates/field.html:12
 #: templates/marketplace_user.html:52 templates/section.html:41
+#: templates/section_edit.html:12
 msgid "Delete"
 msgstr "Supprimer"
 
-#: templates/bin_add.html:33 templates/bin_edit.html:33
+#: templates/bin_add.html:33 templates/bin_edit.html:33 templates/field.html:45
 #: templates/field_add.html:28 templates/field_edit.html:27
 #: templates/harvest_add.html:70 templates/marketplace_add.html:46
-#: templates/section_add.html:33 templates/section_edit.html:32
+#: templates/section_add.html:33 templates/section_edit.html:38
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -58,9 +59,9 @@ msgstr "Soumettre"
 msgid "Bin"
 msgstr "Stock"
 
-#: templates/bin_edit.html:9 templates/contract.html:12 templates/field.html:10
+#: templates/bin_edit.html:9 templates/contract.html:12 templates/field.html:58
 #: templates/field_edit.html:9 templates/fields.html:21
-#: templates/fields.html:43 templates/section_edit.html:9
+#: templates/fields.html:48 templates/section_edit.html:15
 msgid "Edit"
 msgstr "Modifier"
 
@@ -68,12 +69,13 @@ msgstr "Modifier"
 msgid "Contract"
 msgstr "Contrat"
 
-#: templates/contract.html:10 templates/field.html:9 templates/section.html:10
+#: templates/contract.html:10 templates/section.html:10
 msgid "Details"
 msgstr "Détails"
 
 #: templates/contract.html:15 templates/contracts.html:39
-#: templates/fields.html:45 templates/fields.html:64 templates/section.html:36
+#: templates/field.html:62 templates/fields.html:50 templates/fields.html:69
+#: templates/section.html:36
 msgid "Crop"
 msgstr "Culture"
 
@@ -120,37 +122,26 @@ msgstr "Enterprise"
 msgid "Contract Value"
 msgstr Valeur du contrat""
 
-#: templates/field.html:24
-msgid "This field contains the following sections"
-msgstr "Ce champ contient les sections suivantes"
-
-#: templates/field.html:31
-msgid "and the following crops"
-msgstr "et les cultures suivantes"
-
-#: templates/field.html:37
-msgid "Add another section"
-msgstr "Ajouter section"
-
-#: templates/field.html:39
-msgid "There are no sections"
-msgstr "Il n'y a pas de sections"
-
-#: templates/field.html:39
-msgid "Add one"
-msgstr "Ajouter"
-
-#: templates/field_add.html:9 templates/field_edit.html:9
-#: templates/section_edit.html:9
+#: templates/field.html:15 templates/field_add.html:9
+#: templates/field_edit.html:9
 msgid "Field"
-msgstr "Champ"
+msgstr "Chomp"
 
-#: templates/field_add.html:9 templates/harvest_add.html:40
-#: templates/section_add.html:9
+#: templates/field.html:53 templates/field_add.html:9
+#: templates/harvest_add.html:40 templates/section_add.html:9
 msgid "New"
 msgstr "Noveau"
 
-#: templates/field_edit.html:32 templates/section_edit.html:37
+#: templates/field.html:65 templates/fields.html:24 templates/fields.html:26
+#: templates/section.html:37
+msgid "Acres"
+msgstr "Acres"
+
+#: templates/field.html:75
+msgid "Add one"
+msgstr "Ajouter"
+
+#: templates/field_edit.html:32 templates/section_edit.html:43
 msgid "Go Back"
 msgstr "Retour"
 
@@ -170,43 +161,55 @@ msgstr ""
 msgid "Fields"
 msgstr "Champs"
 
-#: templates/fields.html:15 templates/fields.html:37 templates/fields.html:55
+#: templates/fields.html:15 templates/fields.html:42 templates/fields.html:60
 msgid "Add"
 msgstr "Ajouter"
-
-#: templates/fields.html:24 templates/fields.html:26 templates/section.html:37
-msgid "Acres"
-msgstr "Acres"
 
 #: templates/fields.html:26
 msgid "No sections set"
 msgstr "Pas de sections prévues"
 
-#: templates/fields.html:46
+#: templates/fields.html:29
+msgid "Farmer's Almanac"
+msgstr "Almanach du fermier"
+
+#: templates/fields.html:30
+msgid "High"
+msgstr "Haut"
+
+#: templates/fields.html:31
+msgid "Low"
+msgstr "Faible"
+
+#: templates/fields.html:32
+msgid "Total Precipitaion"
+msgstr "Précipitation totale"
+
+#: templates/fields.html:51
 msgid "Size"
 msgstr "Taille"
 
-#: templates/fields.html:54
+#: templates/fields.html:59
 msgid "Your Harvests"
 msgstr "Vos Récoltes"
 
-#: templates/fields.html:63
+#: templates/fields.html:68
 msgid "Amount"
 msgstr "Montant"
 
-#: templates/fields.html:65
+#: templates/fields.html:70
 msgid "From Field"
 msgstr "Du Champ"
 
-#: templates/fields.html:66
+#: templates/fields.html:71
 msgid "From Section"
 msgstr "De la section"
 
-#: templates/fields.html:67
+#: templates/fields.html:72
 msgid "To Bin"
 msgstr "Pour Stockage"
 
-#: templates/fields.html:77 templates/marketplace.html:101
+#: templates/fields.html:82 templates/marketplace.html:101
 msgid "Reset Demo Table"
 msgstr "Réinitialiser Démo tableau"
 
@@ -215,14 +218,19 @@ msgid "Harvest"
 msgstr "Récolte"
 
 #: templates/history.html:10
-msgid "Select a province and commodity to see historical prices"
-msgstr "Choisir une province et des matières premières pour voir les prix historiques "
+msgid ""
+"Select a province and commodity to see historical prices. Please be aware"
+" that price data is not available for all province / crop combinations"
+msgstr ""
+"Choisir une province et des matières premières pour voir les prix"
+" historiques. S'il vous plaît être conscient Que les données sur les prix ne"
+" sont pas disponibles pour toutes les province et cultures"
 
-#: templates/history.html:24 templates/marketplace.html:39
-msgid "Search Public Listings"
-msgstr "Rechercher Offres publiques"
+#: templates/history.html:17
+msgid "Rye"
+msgstr "Seigle"
 
-#: templates/history.html:39
+#: templates/history.html:31
 msgid "Alberta"
 msgstr "Alberta"
 
@@ -249,8 +257,8 @@ msgstr ""
 "actuels et prévus au niveau local et à l'étranger"
 
 #: templates/home.html:26
-msgid "Marketplace"
-msgstr "Marché"
+msgid "Sell"
+msgstr "Vendre"
 
 #: templates/home.html:27
 msgid ""
@@ -263,19 +271,18 @@ msgstr ""
 "ce dont vous avez besoin, ou à consulter vos concurrents"
 
 #: templates/home.html:36
-msgid "Analytics"
-msgstr "Analytique"
+msgid "Analyze"
+msgstr "Analyser"
 
 #: templates/home.html:37
 msgid ""
 "Using government open data, view past market prices on the various crops,"
-" be informed on present market prices, and use our extrapolation services"
-" to predict what to expect in the future"
+" be informed on present market prices, and predict what to expect in the "
+"future"
 msgstr ""
-"En utilisant les données du gouvernement ouvert, voir les prix de marché "
-"passées sur les différentes cultures, être informé sur les prix actuels du "
-"marché, et d'utiliser nos services d'extrapolation de prédire à quoi "
-"s'attendre dans l'avenir "
+"Utilisation de données ouvertes du gouvernement, voir le prix de marché passées sur les différentes cultures," 
+" Être informé sur les prix actuels du marché, et d'utiliser nos services d'extrapolation" 
+" Prédire à quoi s'attendre dans la futur"
 
 #: templates/login.html:6
 msgid "Select a Beta Account"
@@ -320,6 +327,10 @@ msgstr "Liste de poste"
 #: templates/marketplace.html:22
 msgid "Your Listings"
 msgstr "Vos Annonces"
+
+#: templates/marketplace.html:39
+msgid "Search Public Listings"
+msgstr "Rechercher Offres publiques"
 
 #: templates/marketplace.html:60
 msgid "Prev"
