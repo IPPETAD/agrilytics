@@ -72,10 +72,18 @@ def marketplace_add():
         choices = [(x['name'],x['label']) for x in crop_types]
         form.crop.choices = choices
 
-        return render_template('marketplace_add.html', form=form);
+        return render_template('marketplace_add.html', form=form)
 
+@app.route('/market/user', methods=['GET', 'POST'])
+def marketplace_user():
+    offers = mongo.db.offers.find()
+    crop_types = list(mongo.db.crop_types.find())
+    return render_template('marketplace_user.html', offers = offers, crop_types = crop_types)    
 
-
+@app.route('/marketplace/_delete/<offer_id>', methods=['DELETE'])
+def marketplace_delete(offer_id):
+    if mongo.db.offers.remove({ "_id" : ObjectId(offer_id) }):
+        return jsonify({ 'success': True })
 
 @app.route('/field/add', methods=['GET', 'POST'])
 def field_add():
