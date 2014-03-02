@@ -79,6 +79,8 @@ Except the README. We're sort of writing this last minute.
 
 	virtualenv venv
 	source venv/bin/activate
+	
+	mongorestore sample_database
 
 	pip install -r requirements.txt
 	python runserver.py

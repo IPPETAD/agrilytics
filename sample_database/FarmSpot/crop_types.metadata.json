@@ -1,0 +1,1 @@
+{ "options" : { "create" : "crop_types" }, "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "FarmSpot.crop_types", "name" : "_id_" } ] }

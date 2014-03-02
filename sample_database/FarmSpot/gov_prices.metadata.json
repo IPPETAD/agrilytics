@@ -1,0 +1,1 @@
+{ "options" : { "create" : "gov_prices" }, "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "FarmSpot.gov_prices", "name" : "_id_" } ] }
