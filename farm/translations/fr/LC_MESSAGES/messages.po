@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-03-02 10:56-0700\n"
-"PO-Revision-Date: 2014-03-02 10:57-0700\n"
+"POT-Creation-Date: 2014-03-02 11:39-0700\n"
+"PO-Revision-Date: 2014-03-02 11:39-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
@@ -18,9 +18,342 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
+#: templates/base.html:51
+msgid "Toggle navigation"
+msgstr "Basculer la navigation"
+
+#: templates/base.html:56
+msgid "FarmSpot"
+msgstr "FarmSpot"
+
+#: templates/base.html:60
+msgid "Your Farm"
+msgstr "Votre Ferme"
+
+#: templates/base.html:61
+msgid "Market"
+msgstr "Marché"
+
+#: templates/base.html:62
+msgid "Contracts"
+msgstr "Contrats"
+
+#: templates/base.html:63 templates/history.html:9
+msgid "Price History"
+msgstr "Analytique"
+
+#: templates/bin.html:14 templates/contract.html:23 templates/field.html:43
+#: templates/marketplace_user.html:52 templates/section.html:41
+msgid "Delete"
+msgstr "Supprimer"
+
+#: templates/bin_add.html:33 templates/bin_edit.html:33
+#: templates/field_add.html:28 templates/field_edit.html:27
+#: templates/harvest_add.html:70 templates/marketplace_add.html:46
+#: templates/section_add.html:33 templates/section_edit.html:32
+msgid "Submit"
+msgstr "Soumettre"
+
+#: templates/bin_edit.html:9
+msgid "Bin"
+msgstr "Stock"
+
+#: templates/bin_edit.html:9 templates/contract.html:12 templates/field.html:10
+#: templates/field_edit.html:9 templates/fields.html:21
+#: templates/fields.html:43 templates/section_edit.html:9
+msgid "Edit"
+msgstr "Modifier"
+
+#: templates/contract.html:10
+msgid "Contract"
+msgstr "Contrat"
+
+#: templates/contract.html:10 templates/field.html:9 templates/section.html:10
+msgid "Details"
+msgstr "Détails"
+
+#: templates/contract.html:15 templates/contracts.html:39
+#: templates/fields.html:45 templates/fields.html:64 templates/section.html:36
+msgid "Crop"
+msgstr "Culture"
+
+#: templates/contract.html:16 templates/contracts.html:39
+#: templates/marketplace.html:87 templates/marketplace_user.html:53
+msgid "Tonnes"
+msgstr "Tonnes"
+
+#: templates/contract.html:17 templates/contracts.html:39
+msgid "Fixed"
+msgstr "Fixé"
+
+#: templates/contract.html:18 templates/contracts.html:39
+msgid "Price per Tonne"
+msgstr "Prix per Tonne"
+
+#: templates/contract.html:19
+msgid "Total Value"
+msgstr "Valeur totale"
+
+#: templates/contract.html:26
+msgid "Back to your contracts"
+msgstr "Retour à vos contrats"
+
+#: templates/contracts.html:34
+msgid "Your Contracts"
+msgstr "Vos Contrats"
+
+#: templates/contracts.html:35
+msgid ""
+"Use our Cloud Services to keep track of your contracts. This simple "
+"spreadsheet can be easily accessed from your office computer or cellular "
+"phone!"
+msgstr ""
+"Utilisez nos services Cloud pour garder une trace de vos contrats . Cette simple "
+"feuille de calcul peut être facilement accessible à partir de votre ordinateur de "
+"bureau ou un téléphone cellulaire!"
+
+#: templates/contracts.html:39
+msgid "Company"
+msgstr "Enterprise"
+
+#: templates/contracts.html:39
+msgid "Contract Value"
+msgstr Valeur du contrat""
+
+#: templates/field.html:24
+msgid "This field contains the following sections"
+msgstr "Ce champ contient les sections suivantes"
+
+#: templates/field.html:31
+msgid "and the following crops"
+msgstr "et les cultures suivantes"
+
+#: templates/field.html:37
+msgid "Add another section"
+msgstr "Ajouter section"
+
+#: templates/field.html:39
+msgid "There are no sections"
+msgstr "Il n'y a pas de sections"
+
+#: templates/field.html:39
+msgid "Add one"
+msgstr "Ajouter"
+
+#: templates/field_add.html:9 templates/field_edit.html:9
+#: templates/section_edit.html:9
+msgid "Field"
+msgstr "Champ"
+
+#: templates/field_add.html:9 templates/harvest_add.html:40
+#: templates/section_add.html:9
+msgid "New"
+msgstr "Noveau"
+
+#: templates/field_edit.html:32 templates/section_edit.html:37
+msgid "Go Back"
+msgstr "Retour"
+
+#: templates/fields.html:10
+msgid "Your Fields and Bins"
+msgstr "Vos Champs et Stockages"
+
+#: templates/fields.html:11
+msgid ""
+"Managing your fields and bins has never been easier! Start off by drawing"
+" a new field of your own or browse some of the existing fields"
+msgstr ""
+"Gestion de vos champs et des stocks n'a jamais été aussi facile! Commencez "
+"par dessiner un nouveau champ de votre propre ou voir des champs existants"
+
+#: templates/fields.html:14
+msgid "Fields"
+msgstr "Champs"
+
+#: templates/fields.html:15 templates/fields.html:37 templates/fields.html:55
+msgid "Add"
+msgstr "Ajouter"
+
+#: templates/fields.html:24 templates/fields.html:26 templates/section.html:37
+msgid "Acres"
+msgstr "Acres"
+
+#: templates/fields.html:26
+msgid "No sections set"
+msgstr "Pas de sections prévues"
+
+#: templates/fields.html:46
+msgid "Size"
+msgstr "Taille"
+
+#: templates/fields.html:54
+msgid "Your Harvests"
+msgstr "Vos Récoltes"
+
+#: templates/fields.html:63
+msgid "Amount"
+msgstr "Montant"
+
+#: templates/fields.html:65
+msgid "From Field"
+msgstr "Du Champ"
+
+#: templates/fields.html:66
+msgid "From Section"
+msgstr "De la section"
+
+#: templates/fields.html:67
+msgid "To Bin"
+msgstr "Pour Stockage"
+
+#: templates/fields.html:77 templates/marketplace.html:101
+msgid "Reset Demo Table"
+msgstr "Réinitialiser Démo tableau"
+
+#: templates/harvest_add.html:40
+msgid "Harvest"
+msgstr "Récolte"
+
+#: templates/history.html:10
+msgid "Select a province and commodity to see historical prices"
+msgstr "Choisir une province et des matières premières pour voir les prix historiques "
+
+#: templates/history.html:24 templates/marketplace.html:39
+msgid "Search Public Listings"
+msgstr "Rechercher Offres publiques"
+
+#: templates/history.html:39
+msgid "Alberta"
+msgstr "Alberta"
+
 #: templates/home.html:8
 msgid ""
 "Track profitability, monitor field rainfall, connect through the "
 "Marketplace, and so much more... "
 msgstr ""
+"La rentabilité de la piste, champ de moniteur précipitations, "
+"se connecter via le marché, et encore plus…"
+
+#: templates/home.html:17
+msgid "Manage"
+msgstr "Gérer"
+
+#: templates/home.html:18
+msgid ""
+"FarmSpot helps you manage your produce and contracts from anywhere. Stay "
+"informed on rainfall in your area. View the current and expected market "
+"prices locally and abroad"
+msgstr ""
+"FarmSpot vous aide à gérer vos produits et contrats de n'importe où. Restez "
+"informé sur les précipitations dans votre région. Voir les prix de marché "
+"actuels et prévus au niveau local et à l'étranger"
+
+#: templates/home.html:26
+msgid "Marketplace"
+msgstr "Marché"
+
+#: templates/home.html:27
+msgid ""
+"Sell your produce or browse for what you need. Our marketplace is easily "
+"filterable by crop type and location to help you find what you need, or "
+"to check out your competitors"
+msgstr ""
+"Vendre vos produits ou parcourir pour ce que vous avez besoin. Notre marché "
+"est facile à filtrer par type de culture et le lieu de vous aider à trouver "
+"ce dont vous avez besoin, ou à consulter vos concurrents"
+
+#: templates/home.html:36
+msgid "Analytics"
+msgstr "Analytique"
+
+#: templates/home.html:37
+msgid ""
+"Using government open data, view past market prices on the various crops,"
+" be informed on present market prices, and use our extrapolation services"
+" to predict what to expect in the future"
+msgstr ""
+"En utilisant les données du gouvernement ouvert, voir les prix de marché "
+"passées sur les différentes cultures, être informé sur les prix actuels du "
+"marché, et d'utiliser nos services d'extrapolation de prédire à quoi "
+"s'attendre dans l'avenir "
+
+#: templates/login.html:6
+msgid "Select a Beta Account"
+msgstr "Sélectionnez un compte de Beta"
+
+#: templates/login.html:7
+msgid ""
+"Log in using one of our beta accounts to navigate the site. This service "
+"uses Open Data resources to provide information specific to your area. "
+"You can still add and edit the existing data -- these accounts just help "
+"you get started on the right foot"
+msgstr ""
+"Connected avec nos comptes bêta pour naviguer sur le site. Ce service "
+"utilise les données ouvertes pour fournir des informations spécifiques à "
+"votre région. Vous pouvez toujours ajouter et modifier les données existantes"
+" - ces comptes vous aident a commencé du bon pied."
+
+#: templates/login.html:12 templates/login.html:15
+msgid "Albertan Farmer"
+msgstr "Albertain agriculteur"
+
+#: templates/login.html:13 templates/login.html:16
+msgid "Ontario Farmer"
+msgstr "Ontarienne agriculteur"
+
+#: templates/marketplace.html:9 templates/marketplace_add.html:9
+msgid "Welcome to the MarketPlace"
+msgstr "Bienvenue sur le MarketPlace"
+
+#: templates/marketplace.html:10
+msgid ""
+"Browse available produce on the marketplace or post your own! The market "
+"is waiting for you"
+msgstr ""
+"Parcourir les produits disponibles sur le marché, ou les poster votre "
+"propre! Le marché est en attente pour vous"
+
+#: templates/marketplace.html:16
+msgid "Post Listing"
+msgstr "Liste de poste"
+
+#: templates/marketplace.html:22
+msgid "Your Listings"
+msgstr "Vos Annonces"
+
+#: templates/marketplace.html:60
+msgid "Prev"
+msgstr "Préc"
+
+#: templates/marketplace.html:69
+msgid "Next"
+msgstr "Suivant"
+
+#: templates/marketplace.html:88
+msgid "User"
+msgstr "Utilisateur"
+
+#: templates/marketplace.html:89 templates/marketplace_user.html:54
+msgid "Price"
+msgstr "Prix"
+
+#: templates/marketplace.html:90
+msgid "Province"
+msgstr "Province"
+
+#: templates/marketplace_add.html:24
+msgid "tonnes"
+msgstr "tonnes"
+
+#: templates/marketplace_user.html:36
+msgid "Your Marketplace Listings"
+msgstr "Votre Listes marché"
+
+#: templates/section.html:10 templates/section_add.html:9
+msgid "Section"
+msgstr "Section"
+
+#: templates/section.html:44
+msgid "Back to your field"
+msgstr "Retour à votre champ"
 

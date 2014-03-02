@@ -5,6 +5,7 @@ from flask import render_template, request, url_for, redirect, abort, jsonify, m
 from flask_wtf.csrf import CsrfProtect
 
 from flask.ext.pymongo import PyMongo
+from flask.ext.babel import Babel
 from bson.objectid import ObjectId
 
 import json
@@ -13,7 +14,10 @@ from datetime import date
 app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
 
 mongo = PyMongo(app)
+babel = Babel(app)
 csrf = CsrfProtect(app)
+
+print babel.list_translations()
 
 def farmer_required(f):
     @wraps(f)

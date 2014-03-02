@@ -6,7 +6,7 @@
 
 <script>$("#nav-fields").addClass("active");</script>
 
-<h1>Section <small>New</small></h1>
+<h1>{% trans %}Section{% endtrans %} <small>{% trans %}New{% endtrans %}</small></h1>
 
 <form method="post" action="/field/{{ field_id }}/section/add" role="form" class="form-horizontal">
     {{ form.hidden_tag() }}
@@ -30,7 +30,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-9">
-            <button type="submit" value="confirm" class="btn btn-primary" style="float:right">Submit</button>
+            <button type="submit" value="confirm" class="btn btn-primary" style="float:right">{% trans %}Submit{% endtrans %}</button>
         </div>
     </div>
     <div class="clearfix"></div>

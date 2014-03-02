@@ -33,7 +33,7 @@
 
 </script>
 
-<h1>Your Marketplace Listings</h1>
+<h1>{% trans %}Your Marketplace Listings{% endtrans %}</h1>
 
 <!-- List Offers -->
 {% for offer in offers %}
@@ -49,9 +49,9 @@
             {% endfor %}
         </b></div>
         <div class="panel-body">
-            <button style="float:right;" class="btn btn-danger" onclick="deleteOffer('{{ offer._id }}')">Delete</button>
-            <p><b>Tonnes:</b> {{offer.tonnes}}</p>
-            <p><b>Price:</b> {{offer.price}}</p>
+            <button style="float:right;" class="btn btn-danger" onclick="deleteOffer('{{ offer._id }}')">{% trans %}Delete{% endtrans %}</button>
+            <p><b>{% trans %}Tonnes{% endtrans %}:</b> {{offer.tonnes}}</p>
+            <p><b>{% trans %}Price{% endtrans %}:</b> {{offer.price}}</p>
         </div>
     </div>
 </div>

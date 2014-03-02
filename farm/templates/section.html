@@ -7,7 +7,7 @@
 <script>$("#nav-fields").addClass("active");</script>
 
 <div class='page-header'>
-    <h1>Section {{ section.name }} <small>Details</small></h1>
+    <h1>{% trans %}Section{% endtrans %} {{ section.name }} <small>{% trans %}Details{% endtrans %}</small></h1>
 </div>
 <h3><a href="edit">Edit</a></h3>
 <div id="mapview" style="height: 400px;"></div>
@@ -33,13 +33,13 @@ if (geo) {
 
 </script>
 <ul>
-    <li>Crop: {{ section.crop.title() }}</li>
-    <li>Acres: {{ section.acres }}</li>
+    <li>{% trans %}Crop{% endtrans %}: {{ section.crop.title() }}</li>
+    <li>{% trans %}Acres{% endtrans %}: {{ section.acres }}</li>
 </ul>
 <form method="post" role="form" onsubmit="return confim('Are you sure you want to delete this field? It cannot be undone.')">
     {{ form.hidden_tag() }}
-    <button type="submit" value="confirm" class="btn btn-primary">Delete</button>
+    <button type="submit" value="confirm" class="btn btn-primary">{% trans %}Delete{% endtrans %}</button>
 </form>
 <br />
-<a href="/field/{{ field._id }}">Back to your field</a>
+<a href="/field/{{ field._id }}">{% trans %}Back to your field{% endtrans %}</a>
 {% endblock %}

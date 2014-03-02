@@ -7,23 +7,23 @@
 <script>$("#nav-fields").addClass("active");</script>
 
 <!-- Title -->
-<h2>Your Fields and Bins</h2>
-<p>Managing your fields and bins has never been easier! Start off by drawing a new field of your own or browse some of the existing fields.</p>
+<h2>{% trans %}Your Fields and Bins{% endtrans %}</h2>
+<p>{% trans %}Managing your fields and bins has never been easier! Start off by drawing a new field of your own or browse some of the existing fields{% endtrans %}.</p>
 
 <!-- Fields -->
-<h3>Fields</h3>
-<button type="button" class="btn btn-warning btn-sml" onclick="document.location.href = '/field/add';"><span class="glyphicon glyphicon-plus"></span>  Add</button>
+<h3>{% trans %}Fields{% endtrans %}</h3>
+<button type="button" class="btn btn-warning btn-sml" onclick="document.location.href = '/field/add';"><span class="glyphicon glyphicon-plus"></span>  {% trans %}Add{% endtrans %}</button>
 
 <div class="clearfix"></div>
 {% for field in fields %}
 <div class="col-lg-6" style="padding-left:0px;">
     <div class="panel panel-success">
-        <div class="panel-heading"><b><a style="color: #3c763d" href="/field/{{field._id}}">{{ field.name }}</a><button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{ field._id}}/edit';">Edit</button></b></div>
+        <div class="panel-heading"><b><a style="color: #3c763d" href="/field/{{field._id}}">{{ field.name }}</a><button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{ field._id}}/edit';">{% trans %}Edit{% endtrans %}</button></b></div>
         <div class="panel-body">
             {% if field.section %}
-            <p><b>Acres:</b> {{ field.section[0].acres }}</p>
+            <p><b>{% trans %}Acres{% endtrans %}:</b> {{ field.section[0].acres }}</p>
             {% else %}
-            <p><b>Acres:</b> No sections set</p>
+            <p><b>{% trans %}Acres{% endtrans %}:</b> {% trans %}No sections set{% endtrans %}</p>
             {% endif %}
         </div>
     </div>
@@ -34,16 +34,16 @@
 
 <!-- Bins -->
 <h3>Bins</h3>
-<button type="button" class="btn btn-warning btn-sml" onclick="document.location.href='/bin/add';"><span class="glyphicon glyphicon-plus"></span>  Add</button>
+<button type="button" class="btn btn-warning btn-sml" onclick="document.location.href='/bin/add';"><span class="glyphicon glyphicon-plus"></span>  {% trans %}Add{% endtrans %}</button>
 
 <div class="clearfix"></div>
 {% for bin in bins %}
 <div class="col-lg-6" style="padding-left:0px;">
     <div class="panel panel-success">
-        <div class="panel-heading"><b>{{ bin.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='/bin/edit/{{ bin._id}}';">Edit</button></b></div>
+        <div class="panel-heading"><b>{{ bin.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='/bin/edit/{{ bin._id}}';">{% trans %}Edit{% endtrans %}</button></b></div>
         <div class="panel-body">
-            <p><b>Crop:</b> {{ bin.crop }}</p>
-            <p><b>Size:</b> {{ bin.size }}</p>
+            <p><b>{% trans %}Crop{% endtrans %}:</b> {{ bin.crop }}</p>
+            <p><b>{% trans %}Size{% endtrans %}:</b> {{ bin.size }}</p>
         </div>
     </div>
 </div>
@@ -51,8 +51,8 @@
 <div class="clearfix"></div>
 
 <!-- Harvests -->
-<h3>Your Harvests</h3>
-<button type="button" class="btn btn-warning btn-sml" onclick="document.location.href='/harvest/add';"><span class="glyphicon glyphicon-plus"></span>  Add</button>
+<h3>{% trans %}Your Harvests{% endtrans %}</h3>
+<button type="button" class="btn btn-warning btn-sml" onclick="document.location.href='/harvest/add';"><span class="glyphicon glyphicon-plus"></span>  {% trans %}Add{% endtrans %}</button>
 
 <div class="clearfix"></div>
 {% for harvest in harvests %}
@@ -60,11 +60,11 @@
     <div class="panel panel-success">
         <div class="panel-heading"><b>{{ harvest.date }}</b></div>
         <div class="panel-body">
-            <p><b>Amount:</b> {{ harvest.amount }} tonnes</p>
-            <p><b>Crop:</b> {{ harvest.bin.crop }}</p>
-            <p><b>From Field:</b> {{ harvest.field.name }}</p>
-            <p><b>From Section:</b> {{ harvest.field.section[harvest.section_from.i].name }}</p>
-            <p><b>To Bin:</b> {{ harvest.bin.name }}</p>
+            <p><b>{% trans %}Amount{% endtrans %}:</b> {{ harvest.amount }} tonnes</p>
+            <p><b>{% trans %}Crop{% endtrans %}:</b> {{ harvest.bin.crop }}</p>
+            <p><b>{% trans %}From Field{% endtrans %}:</b> {{ harvest.field.name }}</p>
+            <p><b>{% trans %}From Section{% endtrans %}:</b> {{ harvest.field.section[harvest.section_from.i].name }}</p>
+            <p><b>{% trans %}To Bin{% endtrans %}:</b> {{ harvest.bin.name }}</p>
         </div>
     </div>
 </div>
@@ -74,7 +74,7 @@
 <!-- Reset Button -->
 <form id="saveForm">
     <input id="reset_page" name="reset" type="hidden" />
-    <button type="submit" style="float:right;" class="btn btn-info btn-sml"><span class="glyphicon glyphicon-refresh"></span>  Reset Demo Table</button>
+    <button type="submit" style="float:right;" class="btn btn-info btn-sml"><span class="glyphicon glyphicon-refresh"></span>  {% trans %}Reset Demo Table{% endtrans %}</button>
 </form>
 
 {% endblock %}

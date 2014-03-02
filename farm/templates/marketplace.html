@@ -6,20 +6,20 @@
 
 <script>$("#nav-market").addClass("active");</script>
 
-<h2>Welcome to the MarketPlace!</h2>
-<p>Browse available produce on the marketplace or post your own! The market is waiting for you.</p>
+<h2>{% trans %}Welcome to the MarketPlace{% endtrans %}!</h2>
+<p>{% trans %}Browse available produce on the marketplace or post your own! The market is waiting for you{% endtrans %}.</p>
 
 <br />
 
 <!-- New Listing Button -->
 <button type="button" class="btn btn-default" onclick="document.location.href = '/market/new';">
-    <span class="glyphicon glyphicon-plus"></span>    Post Listing
+    <span class="glyphicon glyphicon-plus"></span>    {% trans %}Post Listing{% endtrans %}
 </button>
 
 <!-- Edit Listings Button -->
 {% if edits > 0 %}
     <button type="button" class="btn btn-default" onclick="document.location.href = '/market/user';">
-        <span class="glyphicon glyphicon-pencil"></span>    Your Listings
+        <span class="glyphicon glyphicon-pencil"></span>    {% trans %}Your Listings{% endtrans %}
     </button>
 {% endif %}
 
@@ -36,7 +36,7 @@
         {% endif %}
         {% endfor %}
         {% else %}
-        Search Public Listings
+        {% trans %}Search Public Listings{% endtrans %}
         {% endif %}
         <span class="caret"></span>
     </button>
@@ -57,7 +57,7 @@
         <input class="span2" id="search_type" name="crop" type="hidden" value="{{crop}}">
         <input class="span2" id="search_page" name="page" type="hidden" value="{{page-1}}" />
         <button type="submit" class="btn btn-default">
-            <span class="glyphicon glyphicon-chevron-left"></span>Prev
+            <span class="glyphicon glyphicon-chevron-left"></span>{% trans %}Prev{% endtrans %}
         </button>
     </form>
     {% endif %}
@@ -66,7 +66,7 @@
         <input class="span2" id="search_type" name="crop" type="hidden" value="{{crop}}">
         <input class="span2" id="search_page" name="page" type="hidden" value="{{page+1}}" />
         <button type="submit" class="btn btn-default">
-            Next<span class="glyphicon glyphicon-chevron-right"></span>
+            {% trans %}Next{% endtrans %}<span class="glyphicon glyphicon-chevron-right"></span>
         </button>
     </form>
     {% endif %}
@@ -84,10 +84,10 @@
         {% endfor %}
         <div class="panel-body">
             <button style="float: right; padding: 1px 12px;" class="btn btn-default btn-info" onclick="alert('Contact User');">Contact</button>
-            <p><b>Tonnes:</b> {{offer.tonnes}}</p>
-            <p><b>User:</b> {{offer.user}}</p>
-            <p><b>Price:</b> ${{offer.price}}</p>
-            <p><b>Province:</b> {{offer.province}}</p>
+            <p><b>{% trans %}Tonnes{% endtrans %}:</b> {{offer.tonnes}}</p>
+            <p><b>{% trans %}User{% endtrans %}:</b> {{offer.user}}</p>
+            <p><b>{% trans %}Price{% endtrans %}:</b> ${{offer.price}}</p>
+            <p><b>{% trans %}Province{% endtrans %}:</b> {{offer.province}}</p>
         </div>
     </div>
 </div>
@@ -98,7 +98,7 @@
 <!-- Reset Button -->
 <form id="saveForm">
     <input id="reset_page" name="reset" type="hidden" />
-    <button type="submit" style="float:right;" class="btn btn-info btn-sml"><span class="glyphicon glyphicon-refresh"></span>  Reset Demo Table</button>
+    <button type="submit" style="float:right;" class="btn btn-info btn-sml"><span class="glyphicon glyphicon-refresh"></span>  {% trans %}Reset Demo Table{% endtrans %}</button>
 </form>
 
 
