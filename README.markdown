@@ -22,9 +22,11 @@ The market price for the crop is pulled from national data (and queried to your 
 
 #### Your Listings
 
-Through this page, you can manage your existing listings. 
+Through this page, you can manage your existing listings. There are existing listings for your viewing. Any items you add or remove will update the listings.
 
 #### Search Listings
+
+You can search public listings by crop type. Listing information is provided, and the items are filtered such that your province is displayed first to help you find nearby farms. You can then contact the provider. This helps brokers and farmers connect.
 
 Contracts
 
