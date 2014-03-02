@@ -37,7 +37,9 @@ p {
 .nav>li.active a{
 		color: #fff;
 }
-	
+.navbar-toggle {
+    background-color: #6b3;
+}	
 .nav>li>a:hover{
 		color: #ff0;
 		background: none;
