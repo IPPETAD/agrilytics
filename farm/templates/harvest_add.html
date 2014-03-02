@@ -25,7 +25,45 @@
             {{ form.amount(class_='form-control') }}
         </div>
     </div>
+    <div class="form-group">
+        {{ form.bin_to.label(class_='col-sm-3 control-label') }}
+        <div class="col-sm-6">
+            {{ form.bin_to(class_='form-control') }}
+        </div>
+    </div>
     <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
 </form>
 
-{% endblock %}
+<script type=text/javascript>
+    $(function () {
+        var submit_form = function (e) {
+            $.getJSON($SCRIPT_ROOT + '/harvest/inc', {
+                //a: $('input[name="a"]').val(),
+                value: $('#section_from').val()
+            }, function (data) {
+                $('#result').text(data.result);
+                $('input[name=a]').focus().select();
+            });
+            return false;
+        };
+
+        $('a#calculate').bind('click', submit_form);
+
+        $('input[type=text]').bind('keydown', function (e) {
+            if (e.keyCode == 13) {
+                submit_form(e);
+            }
+        });
+
+        $('input[name=a]').focus();
+    });
+</script>
+<h1>jQuery Example</h1>
+<p>
+    <input type=text size=5 name=a> +
+    <input type=text size=5 name=b> =
+    <span id=result>?</span>
+<p>
+    <a href=# id=calculate>calculate server side</a>
+
+    {% endblock %}

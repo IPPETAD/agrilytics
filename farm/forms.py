@@ -39,5 +39,5 @@ class ContractForm(Form):
 class HarvestForm(Form):
     date = fields.DateTimeField('Date', format='%Y-%m-%d', validators=[validators.required()])
     section_from = extfields.ExtendedSelectField('From Field Section', id='section_from', validators=[validators.required()])
-    bin_to = fields.SelectField('To Bin', id='bin_to', validators=[validators.required()])
+    bin_to = fields.SelectField('To Bin', id='bin_to', choices=[], validators=[validators.required()])
     amount = fields.FloatField('Size in tonnes', validators=[validators.required()])
