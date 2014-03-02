@@ -9,7 +9,11 @@ FarmSpot is a cloud service like no other. Using live data, geolocation services
 
 ## Description
 
-Field Management
+### Field Management
+
+Manage your fields, bins, and harvests! Add a field by specify the geolocation of your farm, create bins to store and manage your existing produce. Track your harvests through our easy-to-use interface!
+
+Open data is used to track temperature and rain fall data on your fields! Wow, that's pretty cool!
 
 ### MarketPlace
 
