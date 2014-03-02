@@ -20,7 +20,6 @@
 <h2>Your Contracts</h2>
 <p>Use our Cloud Services to keep track of your contracts. This simple spreadsheet can be easily accessed from your office computer or cellular phone!</p>
 
-
 <!-- Spread Sheet -->
 <table id="mainTable" class="table table-striped">
     <thead id="headTable"><tr><th class="symbol"</th><th>Crop</th><th>Company</th><th>Tonnes</th><th>Fixed</th><th>Price per Tonne</th><th>Contract Value</th></tr></thead>
@@ -70,6 +69,11 @@
     });
 </script>
 
+<!-- Reset Button -->
+<form id="saveForm">
+    <input id="reset_page" name="reset" type="hidden" />
+    <button type="submit" style="float:right;"class="btn btn-info btn-sml"><span class="glyphicon glyphicon-refresh"></span>  Reset Demo Table</button>
+</form>
 
 {% endblock %}
 
