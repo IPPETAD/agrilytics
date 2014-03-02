@@ -185,9 +185,12 @@ def field(field_id):
     # Delete field
     if request.method == 'POST' and 'delete' in request.form.keys():
         if mongo.db.fields.remove({"_id": ObjectId(field_id)}):
-            return redirect(url_for('fields'))
+           return redirect(url_for('fields'))
+    print "root"
     # Save field
     if request.method == 'POST':
+        print "post"
+        print form_field.size.data
         if form_field.validate_on_submit():
             field['name'] = form_field.name.data
             field['size'] = form_field.size.data
