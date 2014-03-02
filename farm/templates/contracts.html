@@ -60,10 +60,9 @@
 </table>
 
 <!-- Buttons -->
-<!-- Search Dropdown -->
-    <input id="search_page" name="save" type="hidden"/>
-    <button type="submit" onclick='saveTable(true)' class="btn btn-success btn-sml"><span class="glyphicon glyphicon-floppy-disk"></span>  Save Table</button>
-    <button type="button" class="btn btn-warning btn-sml" onclick="addRow();"><span class="glyphicon glyphicon-plus"></span>  Add Row</button>
+<input id="search_page" name="save" type="hidden"/>
+<button type="submit" onclick='saveTable(true)' class="btn btn-success btn-sml"><span class="glyphicon glyphicon-floppy-disk"></span>  Save Table</button>
+<button type="button" class="btn btn-warning btn-sml" onclick="addRow();"><span class="glyphicon glyphicon-plus"></span>  Add Row</button>
 
 
 
@@ -72,6 +71,11 @@
     function addRow() {
         $("#mainTable").find('tbody').append('<tr><td class="icon"><span class="glyphicon glyphicon-remove"></span></td><td/><td/><td/><td/><td/><td /></tr>');
         $('#mainTable').editableTableWidget();
+        $('.icon').each(function (index) {
+            $(this).on('click', function () {
+                $(this).parent().remove();
+            });
+        });
     }
     $('#mainTable').editableTableWidget();
     $('.icon').each(function (index) {
