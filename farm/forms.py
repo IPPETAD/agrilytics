@@ -25,10 +25,19 @@ class OfferForm(Form):
     crop = fields.SelectField('Crop', choices=[])
     tonnes = fields.FloatField('Size in Tonnes')
     user = fields.StringField('User')
+    price = fields.StringField('Price')
+
+class ContractForm(Form):
+    crop = fields.SelectField('Crop', choices=[])
+    company = fields.StringField('Company', [validators.required()])
+    tonnes = fields.FloatField('Tonnes')
+    fixed = fields.FloatField('Fixed')
+    price_per_tonne = fields.FloatField('Price per Tonne')
+    contract_value = fields.FloatField('Contract Value')
     price = fields.FloatField('Price')
 
 class HarvestForm(Form):
     date = fields.DateTimeField('Date', format='%Y-%m-%d', validators=[validators.required()])
     section_from = extfields.ExtendedSelectField('From Field Section', id='section_from', validators=[validators.required()])
-    bin_to = fields.SelectField('To Bin', id='bin_to', validators=[validators.required()])
+    bin_to = fields.SelectField('To Bin', id='bin_to', choices=[], validators=[validators.required()])
     amount = fields.FloatField('Size in tonnes', validators=[validators.required()])

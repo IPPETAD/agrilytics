@@ -12,12 +12,13 @@
 
 {% block content %}
 
-<h1>See yo fields!</h1>
-
-{% for field in fields %}
-    <li><a href="/field/{{ field._id }}">{{ field.name}}</a></li>
+<h1>See yo contracts!</h1>
+<ul>
+{% for contract in contracts %}
+    <li><a href="/contract/{{ contract._id }}">{{ contract.company }}</a></li>
 {% endfor %}
-<a href="/field/new">Add a new field</a>
+</ul>
+<a href="add/">Add a new contract</a>
 {% endblock %}
 
 
