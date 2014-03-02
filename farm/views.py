@@ -10,8 +10,11 @@ from bson.objectid import ObjectId
 import requests
 import json
 from datetime import date
+import os
 
-app.config['MONGO_URI'] = 'mongodb://farmspot:farmspot@troup.mongohq.com:10058/FarmSpot'
+
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI', 'mongodb://localhost/FarmSpot')
+
 
 mongo = PyMongo(app)
 babel = Babel(app)

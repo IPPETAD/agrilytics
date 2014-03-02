@@ -1,0 +1,1 @@
+{ "options" : { "create" : "harvests", "size" : "", "max" : "", "capped" : false }, "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "FarmSpot.harvests", "name" : "_id_" } ] }
