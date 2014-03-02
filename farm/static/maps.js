@@ -6,59 +6,57 @@ $( document ).ready(function() {
 	
 	
 
-
+	
 	var drawnItems = new L.FeatureGroup();
-	if ($( "#map_input" ).val()) {
-			drawnItems = L.geoJson( jQuery.parseJSON( $( "#map_input" ).val() ) );
-		}
+	
+	
+	
 
-	
-	
-	
-	
-	
-	var drawControl = new L.Control.Draw({
-	    draw: {
-	        polygon: true,
-	        marker: false,
-					rectangle: false,
-					polyline: false,
-					circle: false
-	    },
-	    edit: {
-	        featureGroup: drawnItems,
-	        edit: true
-	    }
-	});
 	
 	// create a map in the "map" div, set the view to a given place and zoom
 	var map = L.map('mapeditorview').setView([53, -100], 4);
 
 
-	map.addControl(drawControl);
 	
 	var gmap_layer = new L.Google('HYBRID');
 	map.addLayer(gmap_layer);
 	
+	if ($( "#map_input" ).val()) {
+			drawnItems = L.geoJson( jQuery.parseJSON( $( "#map_input" ).val() ) );
+			map.fitBounds(drawnItems.getBounds());
+		}
 	
-	map.addLayer(drawnItems);
-	map.fitBounds(drawnItems.getBounds());
+			map.addLayer(drawnItems);
 			
+		var drawControl = new L.Control.Draw({
+		    draw: {
+		        polygon: true,
+		        marker: false,
+						rectangle: false,
+						polyline: false,
+						circle: false
+		    },
+		    edit: {
+		        featureGroup: drawnItems,
+		        edit: true
+		    }
+		});
+		
+		
+			map.addControl(drawControl);
 			
 			map.on('draw:created', function (e) {
 			    var type = e.layerType,
 			        layer = e.layer;
-
-			    drawnItems.addLayer(layer);
+							console.log(layer);
+			    		drawnItems.addLayer(layer);
 					
 					$( "#map_input" ).val( JSON.stringify( layer.toGeoJSON() ) );
 			});	
 			
-			map.on('draw:editstop', function (e) {
-			    var type = e.layerType,
-			        layer = e.layer;
-					
-					$( "#map_input" ).val( JSON.stringify( layer.toGeoJSON() ) );
+			map.on('draw:editstop', function () {
+				$( "#map_input" ).val( JSON.stringify( drawnItems.toGeoJSON() ) );
+
 			});	
 				
 		}
