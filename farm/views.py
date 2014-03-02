@@ -297,12 +297,17 @@ def harvest_update():
     
 @app.route('/api/_marketprice')
 def current_crop_price():
-    crop_type = request.args.get('crop')
-    amount = request.args.get('amount')
+    crop_name = request.args.get('crop')
+    crop_type = list(mongo.db.crop_types.find( { "name" : crop_name } ))[0]['gov_label']
+    province = request.args.get('province')
+    
+    if province == '':
+        gov_row = mongo.db.gov_prices.find({ "crop" : crop_type } ).sort( "date" , -1 ).limit(1)[0]
+    else:
+        gov_row = mongo.db.gov_prices.find({ "province" : province, "crop" : crop_type } ).sort( "date" , -1 ).limit(1)[0]
+    gov_row['_id'] = str(gov_row['_id'])
 
-
-
-    return render_template('harvests.html')
+    return json.dumps(gov_row)
 
 @app.route('/login/')
 def login():

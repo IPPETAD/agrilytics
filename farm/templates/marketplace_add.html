@@ -22,7 +22,10 @@
     </div>
     <div class="form-group">
         {{ form.tonnes.label }}
-        {{ form.tonnes(class_='form-control') }}
+        <div class="input-group">
+            {{ form.tonnes(class_='form-control') }}
+            <span class="input-group-addon">tonnes</span>
+        </div>
     </div>
     <div class="form-group">
         {{ form.user.label }}
@@ -30,23 +33,33 @@
     </div>
     <div class="form-group">
         {{ form.price.label }}
-        <h5 class="market_price">Market price is: </h5>
-        {{ form.price(class_='form-control') }}
+        <h5 class="market_price"></h5>
+        <div class="input-group">
+            <span class="input-group-addon">$</span>
+            {{ form.price(class_='form-control') }}
+        </div>
+        
     </div>
     <button type="submit" value="confirm" class="btn btn-primary">Submit</button>
 </form>
 
 <script>
-    $("#tonnes").bind("change", function () {
+    function predictPrice() {
         $.getJSON($SCRIPT_ROOT + "/api/_marketprice", {
             crop: $('#crop').val(),
-            amount: $('#tonnes').val(),
             province: 'Alberta' //TODO ::  Not just Alberta
         }, function (data) {
-            console.log(data);
+            if ($("#tonnes").val() == "")
+                $(".market_price").html("");
+            else {
+                var amount = (data['value'] * $("#tonnes").val()).toFixed(2);
+                $(".market_price").html("Market price is: $ " + data['value'] + "/tonne. Suggested cost is $" + amount);
+            }
         });
         return false;
-    });
+    };
+    $("#tonnes").bind("change", predictPrice);
+    $("#crop").bind("change", predictPrice);
 </script>
 
 
