@@ -1,6 +1,6 @@
 from farm import app
 from farm import forms
-from flask import render_template, request, url_for, redirect
+from flask import render_template, request, url_for, redirect, jsonify
 from flask_wtf.csrf import CsrfProtect
 
 from flask.ext.pymongo import PyMongo
@@ -209,6 +209,14 @@ def harvest_add():
     form.section_from.choices = field_choices
     return render_template('harvest_add.html', form=form)
 
+@app.route('/harvest/inc')
+def harvest_update():
+    """Add two numbers server side, ridiculous but well..."""
+    value = json.loads(request.args.get('value'))['_id']
+    
+    # TODO : value is ID of selected item.
+    
+    return jsonify("String that goes back")
 
 # For debugging, not production
 app.secret_key = '\xe2t\xebJ\xb7\xf0r\xef\xe7\xe6\\\xf5_G\x0b\xd5B\x94\x815\xc1\xec\xda,'
