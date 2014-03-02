@@ -55,14 +55,14 @@ loadStaticMap(geo);
 {% for section in field.section %}
 <div class="col-lg-6" style="padding-left:0px;">
     <div class="panel panel-success">
-        <div class="panel-heading"><b>{{ section.name }}</b><button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='section/{{field.section.index(section)}}';">Edit</button></div>
+        <div class="panel-heading"><b>{{ section.name }}</b><button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href='section/{{field.section.index(section)}}/edit';">Edit</button></div>
         <div class="panel-body">
             {% for crop_type in crop_types %}
             {% if section.crop == crop_type.name %}
             <p><b>Crop:</b> {{crop_type.label}}</p>
             {% endif %}
             {% endfor %}
-            <p><b>Acres: </b>{{ section.acres }}</p>
+            <p><b>Acres:</b> {{section.acres}}</p>
         </div>
     </div>
 </div>
