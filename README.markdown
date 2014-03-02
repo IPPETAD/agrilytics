@@ -6,10 +6,10 @@ Farming management services. Track profitability, monitor field rainfall, bid on
 Available to test [on Heroku](http://farmspot.herokuapp.com).
 
 ![FarmSpot](https://raw.github.com/IPPETAD/agrilytics/master/farm/static/field.jpg)
-![Add Farm](http://i.imgur.com/QTvmqYx)
-![Marketplace](http://i.imgur.com/e5ENZdu)
+![Add Farm](http://i.imgur.com/QTvmqYx.png)
+![Marketplace](http://i.imgur.com/e5ENZdu.png)
 ![Contracts](http://i.imgur.com/ZWIL3W3.png)
-![French Analytics](http://i.imgur.com/4foidbH)
+![French Analytics](http://i.imgur.com/4foidbH.png)
 
 FarmSpot is a cloud service like no other. Using live data, geolocation services, and open federal data, the sky is the limit. You can use easily manage your farm operations on the field or at the office using our mobile-friendly implementations, or connect with farmers and brokers through our intuitive marketplace.
 
