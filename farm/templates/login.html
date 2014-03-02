@@ -9,11 +9,11 @@
 
 
 {% if next %}
-    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab?next={{ next }}';">Albertan Farmer</button></div>
-    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on?next={{ next }}';">Ontario Farmer</button></div>
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab?next={{ next }}';">Albertan Farmer</button>
+    <button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on?next={{ next }}';">Ontario Farmer</button></div>
 {% else %}
-    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab';">Albertan Farmer</button></div>
-    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on';">Ontario Farmer</button></div>
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab';">Albertan Farmer</button>
+    <button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on';">Ontario Farmer</button></div>
 {% endif %}
   
 
