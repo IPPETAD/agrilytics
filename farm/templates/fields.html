@@ -6,7 +6,6 @@
 <li><a href="/">Home</a></li>
 <li class="active"><a href="/fields">Fields</a></li>
 <li><a href="/market">Market</a></li>
-<li><a href="/harvests">Harvests</a></li>
 <li><a href="/contract">Contract</a></li>
 <li><a href="/history">Price History</a></li>
 {% endblock %}
@@ -52,7 +51,26 @@
 </div>
 {% endfor %}
 
+<!-- Harvests -->
+<h3>Your Harvests</h3>
+<button type="button" class="btn btn-warning btn-sml" onclick="document.location.href='/harvest/add';"><span class="glyphicon glyphicon-plus"></span>  Add</button>
+
+<div class="clearfix"></div>
+{% for harvest in harvests %}
+<div class="col-lg-6" style="padding-left:0px;">
+    <div class="panel panel-success">
+        <div class="panel-heading"><b>{{ harvest.date }}</b></div>
+        <div class="panel-body">
+            <p>Amount: {{ harvest.amount }} tonnes</p>
+            <p>Crop: {{ harvest.bin.crop }}</p>
+            <p>From Field: {{ harvest.field.name }}</p>
+            <p>From Section: {{ harvest.field.section[harvest.section_from.i].name }}</p>
+            <p>To Bin: {{ harvest.bin.name }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div class="clearfix"></div>
+
+
 {% endblock %}
-
-
-
