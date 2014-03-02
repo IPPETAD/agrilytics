@@ -35,16 +35,16 @@ Through this page, you can manage your existing listings. There are existing lis
 You can search public listings by crop type. Listing information is provided, and the items are filtered such that your province is displayed first to help you find nearby farms. You can then contact the provider. This helps brokers and farmers connect.
 
 
-## Contracts
+#### Contracts
 
 Manage your contracts and finances! This convenient spreadsheet allows simplified cataloguing of your existing contracts and how they're set. These columns were gathered from real farm elicitations. Add rows, remove rows, then save and share!
 
-##Analytics
+####Analytics
 
 Using open government data, view past and current market trends. These dynamic graphs provide effective visualizations filtered by produce and province.
 
 
-##French Language
+####French Language
 
 We have French translations for everything!
 Except the README. We're sort of writing this last minute.
