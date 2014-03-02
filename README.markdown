@@ -69,7 +69,7 @@ Except the README. We're sort of writing this last minute.
 * Back-end web: [Python](https://www.python.org) with modules in [requirements.txt](requirements.txt), including:
  * [Flask](http://flask.pocoo.org) web framework
  * [WTForms](http://wtforms.readthedocs.org) for form handling
- * [Babel](http://babel.pocoo.org) for 
+ * [Babel](http://babel.pocoo.org) for localizations
 * Front-end web: 
  * [Bootstrap](http://getbootstrap.com) based CSS theme
  * [D3.js](http://d3js.org) for interactive visualizations
