@@ -7,7 +7,8 @@
 <li><a href="/fields">Fields</a></li>
 <li><a href="/bins">Bins</a></li>
 <li class="active"><a href="/market">Market</a></li>
-<li><a href="/contract">Contact</a></li>
+<li><a href="/contract">Contract</a></li>
+<li><a href="/history">Price History</a></li>
 {% endblock %}
 
 {% block content %}
@@ -92,13 +93,12 @@
         <p>Tonnes: {{offer.tonnes}}</p>
         <p>User: {{offer.user}}</p>
         <p>Price: {{offer.price}}</p>
+        <p>Province: {{offer.province}}</p>
         <button onclick="alert('Contact User');">Contact</button>
     </div>
 {% endfor %}
 
 
-<div id="chart"></div>
-<script src="/static/graphs.js" type="text/javascript"></script>
 
 {% endblock %}
 
