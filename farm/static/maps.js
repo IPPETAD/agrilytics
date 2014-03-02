@@ -61,23 +61,12 @@ $( document ).ready(function() {
 			map.on('draw:editstop', function () {
 				$( "#map_input" ).val( JSON.stringify( drawnItems.toGeoJSON() ) );
 
-			    drawnItems.addLayer(layer);
-			    var geojson = layer.toGeoJSON();
-
-			    $("#map_acres").val(calculateArea(geojson));
+			    var geojson = drawnItems.toGeoJSON();
+					
+			    $("#map_acres").val(calculateArea(geojson.features[0]));
 					$("#map_input").val( JSON.stringify( geojson ) );
 			});	
 			
-			map.on('draw:editstop', function (e) {
-			    var type = e.layerType,
-			        layer = e.layer;
-				
-			    var geojson = drawnItems.toGeoJSON();
-
-			    $("#map_acres").val(calculateArea(geojson));
-					$("#map_input").val( JSON.stringify( geojson ) );
-
-			});	
 				
 		}
 			
@@ -85,16 +74,15 @@ $( document ).ready(function() {
 
 function calculateArea(geojson) {
     var path = new Array();
-    for (var p in geojson.geometry.coordinates) {
-        for (var c in p) {
-            path.push(new google.maps.LatLng(c[1], c[0]));
-        }
-    }
+		var coordinate = geojson.geometry.coordinates[0];
+
+    coordinate.forEach( function(c) {
+    	path.push(new google.maps.LatLng(c[1], c[0]));
+		});
 
     var area_m2 = google.maps.geometry.spherical.computeArea(path);
     var acres = area_m2 * 0.000247105;
-
-    console.log('Calculated ares: ' + acres);
+		
     return acres;
 }
 
