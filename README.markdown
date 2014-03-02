@@ -7,6 +7,18 @@ FarmSpot is a cloud service like no other. Using live data, geolocation services
 
 ![FarmSpot](https://raw.github.com/IPPETAD/agrilytics/master/farm/static/field.jpg)
 
+## Description
+
+Field Management
+
+MarketPlace
+
+Contracts
+
+Analytics
+
+French Language
+
 ## Initial installation
 
 	git clone git@github.com:IPPETAD/agrilytics.git
