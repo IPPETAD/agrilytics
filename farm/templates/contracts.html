@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}FarmSpot - CODE 2014{% endblock %}
+
+{% block navbar %}
+<li><a href="/">Home</a></li>
+<li class="active"><a href="/fields">Fields</a></li>
+<li><a href="/bins">Bins</a></li>
+<li><a href="/market">Market</a></li>
+{% endblock %}
+
+{% block content %}
+
+<h1>See yo contracts!</h1>
+<ul>
+{% for contract in contracts %}
+    <li><a href="/contract/{{ contract._id }}">{{ contract.company }}</a></li>
+{% endfor %}
+</ul>
+<a href="add/">Add a new contract</a>
+{% endblock %}
+
+
+

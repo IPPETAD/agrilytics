@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Contract {{ contract.company }}{% endblock %}
+
+{% block content %}
+<div class='page-header'>
+    <h1>Contract {{ contract.company }} <small>Details</small></h1>
+</div>
+<h3><a href="edit">Edit</a></h3>
+
+<ul>
+    <li>Crop: {{ contract.crop.title() }}</li>
+    <li>Tonnes: {{ contract.tonnes }}</li>
+    <li>Fixed: {{ contract.fixed }}</li>
+    <li>Price per Tonne: {{ contract.price }}</li>
+    <li>Total Value: {{ contract.value }}</li>
+</ul>
+<form method="post" role="form" onsubmit="return confim('Are you sure you want to delete this field? It cannot be undone.')">
+    {{ form.hidden_tag() }}
+    <button type="submit" value="confirm" class="btn btn-primary">Delete</button>
+</form>
+<br />
+<a href="/contract/" >Back to your contracts</a>
+{% endblock %}
