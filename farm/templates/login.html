@@ -3,11 +3,18 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="page-header"><h1>Select an Account</h1></div>
+<h2>Select a Beta Account</h2>
+<p>Log in using one of our beta accounts to navigate the site. This service uses Open Data resources to provide information specific to your area. You can still add and edit the existing data -- these accounts just help you get started on the right foot!</p>
 
-<ul>
-    <li><a href="farmer_ab">Demo Albertan Farmer</a></li>
-    <li><a href="farmer_on">Demo Ontarian Famer</a></li>
-</ul>
+
+
+{% if next %}
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab?next={{ next }}';">Albertan Farmer</button></div>
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on?next={{ next }}';">Ontario Farmer</button></div>
+{% else %}
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_ab';">Albertan Farmer</button></div>
+    <div><button type="button" class="btn btn-success btn-sml" onclick="document.location.href='farmer_on';">Ontario Farmer</button></div>
+{% endif %}
+  
 
 {% endblock %}

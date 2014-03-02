@@ -7,16 +7,18 @@
 
     {% block head %}
 	  
-	  <!-- Bootstrap -->
-	  <!-- Latest compiled and minified CSS -->
-	  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<!-- Bootstrap -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-	  <!-- Optional theme -->
-	  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <!-- Optional theme -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
   	<script src="/static/jquery-2.1.0.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
+
 	
     <link rel="stylesheet" href="/static/styles.css" />  
 	
@@ -26,10 +28,11 @@
     <link href="/static/datepicker.css" rel="stylesheet" />
     <script src="/static/bootstrap-datepicker.js"></script>
 	
-	
-<script src="/static/maps.js" type="text/javascript"></script>
+	<script src="/static/maps.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="/static/leaflet.draw/leaflet.draw.css" />
-<script src="/static/leaflet.draw/leaflet.draw.js" type="text/javascript"></script>
+	<script src="/static/leaflet.draw/leaflet.draw.js" type="text/javascript"></script>
+	<script src="/static/google_maps.js"></script>
+	
       <script type=text/javascript>
           var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
       </script>
@@ -88,7 +91,6 @@
 
     <div id="footer">
         {% block footer %}
-        A hackathon app.
         {% endblock %}
     </div>
   

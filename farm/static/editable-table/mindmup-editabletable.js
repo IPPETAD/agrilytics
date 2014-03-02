@@ -1,6 +1,6 @@
 /*global $, window*/
 $.fn.editableTableWidget = function (options) {
-	'use strict';
+    'use strict';
 	return $(this).each(function () {
 		var activeOptions = $.extend($.fn.editableTableWidget.defaultOptions, options),
 			ARROW_LEFT = 37, ARROW_UP = 38, ARROW_RIGHT = 39, ARROW_DOWN = 40, ENTER = 13, ESC = 27, TAB = 9,
@@ -8,7 +8,8 @@ $.fn.editableTableWidget = function (options) {
 			editor = activeOptions.editor.css('position', 'absolute').hide().appendTo(element.parent()),
 			active,
 			showEditor = function (select) {
-				active = element.find('td:focus');
+			    active = element.find('td:focus');
+			    if (active.attr('class') != 'icon' && active.attr('class') != 'dropdown') {
 				if (active.length) {
 					editor.val(active.text())
 						.removeClass('error')
@@ -22,6 +23,7 @@ $.fn.editableTableWidget = function (options) {
 						editor.select();
 					}
 				}
+			    }
 			},
 			setActiveText = function () {
 				var text = editor.val(),
@@ -87,6 +89,7 @@ $.fn.editableTableWidget = function (options) {
 		element.on('click keypress dblclick', showEditor)
 		.css('cursor', 'pointer')
 		.keydown(function (e) {
+		    console.log("keydown");
 			var prevent = true,
 				possibleMove = movement($(e.target), e.which);
 			if (possibleMove.length > 0) {

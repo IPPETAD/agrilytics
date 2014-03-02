@@ -46,8 +46,11 @@ $(document).ready( function() {
 svg = d3.select("#chart").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+		.attr("viewBox", "0 0 960 500")
+  	.attr("preserveAspectRatio", "xMidYMid")
     .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
 	
 
 d3.json("/market/price_history?province=Alberta&crop=Rye", function(error, data) {
@@ -81,8 +84,21 @@ d3.json("/market/price_history?province=Alberta&crop=Rye", function(error, data)
       .attr("class", "line")
       .attr("d", line);
 });
+
+
+
+$(window).resize( function() {
+	var aspect = 960 / 500;
+	 chart = $("#chart svg");
+    var targetWidth = chart.parent().width();
+    chart.attr("width", targetWidth);
+    chart.attr("height", targetWidth / aspect);
+});
+
+$(window).trigger('resize');
 	
 });
+	
 	
 window.province = "Alberta";
 window.crop = "Rye";

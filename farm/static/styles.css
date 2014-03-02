@@ -24,16 +24,23 @@ p {
     background-color: #faf59c;
 }
 .navbar {
-	background: #030;
+	background: #020;
 }
 
 .navbar a{
-	color: #ff0;
+	color: #6b3;
 }
 
+.nav>li.active{
+	background: #040;
+}
+.nav>li.active a{
+		color: #fff;
+}
+	
 .nav>li>a:hover{
-	background: #ff0;
-	color: #000;
+		color: #ff0;
+		background: none;
 }
 
 .banner {

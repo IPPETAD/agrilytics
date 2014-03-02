@@ -4,7 +4,7 @@ from farm import wtforms_extended_selectfield as extfields
 
 class FieldForm(Form):
     name = fields.StringField('Name', [validators.required()])
-    size = fields.FloatField('Size in Acres')
+    size = fields.FloatField('Size in Acres', id='map_acres')
     geo_data = fields.HiddenField(id='map_input')
 
 class SectionForm(Form):
@@ -14,7 +14,7 @@ class SectionForm(Form):
 
 class BinForm(Form):
     name = fields.StringField('Name', [validators.required()])
-    crop = fields.SelectField('Crop', choices=[('rye', 'Rye'), ('oats', 'Oats'), ('canola', 'Canola')])
+    crop = fields.SelectField('Crop', choices=[])
     size = fields.FloatField('Size in tonnes')
 
 class DeleteForm(Form):
