@@ -65,15 +65,12 @@
         {% endfor %}
     </tbody>
 </table>
-<button onclick='saveTable(true)' class='btn btn-primary'>Save</button>
 
 <!-- Buttons -->
 <!-- Search Dropdown -->
-<form id="saveForm">
     <input id="search_page" name="save" type="hidden"/>
-    <button type="submit" class="btn btn-success btn-sml"><span class="glyphicon glyphicon-floppy-disk"></span>  Save Table</button>
+    <button type="submit" onclick='saveTable(true)' class="btn btn-success btn-sml"><span class="glyphicon glyphicon-floppy-disk"></span>  Save Table</button>
     <button type="button" class="btn btn-warning btn-sml" onclick="addRow();"><span class="glyphicon glyphicon-plus"></span>  Add Row</button>
-</form>
 
 
 
