@@ -83,7 +83,7 @@ def marketplace_user():
 @app.route('/marketplace/_delete/<offer_id>', methods=['DELETE'])
 def marketplace_delete(offer_id):
     if mongo.db.offers.remove({ "_id" : ObjectId(offer_id) }):
-        return jsonify(True)
+        return jsonify({ 'success': True })
 
 @app.route('/field/add', methods=['GET', 'POST'])
 def field_add():
