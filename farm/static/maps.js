@@ -3,7 +3,7 @@
 $( document ).ready(function() {
 	if ($( "#map_input" ).length ) {
 	$( "#map_input" ).parent().after('<div id="mapeditorview" style="height:400px"></div>');
-	
+	$('#map_acres').prop('disabled', true);
 	
 
 	
@@ -48,14 +48,34 @@ $( document ).ready(function() {
 			map.on('draw:created', function (e) {
 			    var type = e.layerType,
 			        layer = e.layer;
-							console.log(layer);
+
 			    		drawnItems.addLayer(layer);
+							
+					    var geojson = layer.toGeoJSON();
+							
+							$("#map_acres").val(calculateArea(geojson));
+							$( "#map_input" ).val( JSON.stringify( geojson ) );
 					
-					$( "#map_input" ).val( JSON.stringify( layer.toGeoJSON() ) );
 			});	
 			
 			map.on('draw:editstop', function () {
 				$( "#map_input" ).val( JSON.stringify( drawnItems.toGeoJSON() ) );
+
+			    drawnItems.addLayer(layer);
+			    var geojson = layer.toGeoJSON();
+
+			    $("#map_acres").val(calculateArea(geojson));
+					$("#map_input").val( JSON.stringify( geojson ) );
+			});	
+			
+			map.on('draw:editstop', function (e) {
+			    var type = e.layerType,
+			        layer = e.layer;
+				
+			    var geojson = drawnItems.toGeoJSON();
+
+			    $("#map_acres").val(calculateArea(geojson));
+					$("#map_input").val( JSON.stringify( geojson ) );
 
 			});	
 				
@@ -63,6 +83,20 @@ $( document ).ready(function() {
 			
 });
 
+function calculateArea(geojson) {
+    var path = new Array();
+    for (var p in geojson.geometry.coordinates) {
+        for (var c in p) {
+            path.push(new google.maps.LatLng(c[1], c[0]));
+        }
+    }
+
+    var area_m2 = google.maps.geometry.spherical.computeArea(path);
+    var acres = area_m2 * 0.000247105;
+
+    console.log('Calculated ares: ' + acres);
+    return acres;
+}
 
 
 function loadStaticMap(geo){
