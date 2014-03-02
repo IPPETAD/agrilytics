@@ -26,7 +26,11 @@
     <div class="panel panel-success">
         <div class="panel-heading"><b>{{ field.name }}<button style="float: right; padding: 1px 12px;" class="btn btn-default btn-warning" onclick="document.location.href = '/field/{{ field._id}}/edit';">Edit</button></b></div>
         <div class="panel-body">
+            {% if field.section %}
             <p><b>Acres:</b> {{ field.section[0].acres }}</p>
+            {% else %}
+            <p><b>Acres:</b> No sections set</p>
+            {% endif %}
         </div>
     </div>
 </div>
